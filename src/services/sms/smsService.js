@@ -1,6 +1,8 @@
-import { sendSMS } from "../../utils/firebase";
-import { appointmentObjectToAdd } from "../../utils/firebase";
-import { updateDocument } from "../../utils/firebase";
+import {
+  sendSMS,
+  appointmentObjectToAdd,
+  updatedDocument,
+} from "../../util/firebase";
 
 const showAddOns = (cart) => {
   if (cart.addOns.length === 0) return "";

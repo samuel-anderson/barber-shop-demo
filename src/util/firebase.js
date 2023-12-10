@@ -7,6 +7,8 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  getReactNativePersistence,
+  initializeAuth,
 } from "firebase/auth";
 
 import {
@@ -21,14 +23,17 @@ import {
   getDoc,
   writeBatch,
 } from "firebase/firestore";
-
+import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
 import moment from "moment";
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 
-export const auth = getAuth(); //singleton, authentication memory base
+//export const auth = getAuth(); //singleton, authentication memory base
+export const auth = initializeAuth(app, {
+  persistence: getReactNativePersistence(ReactNativeAsyncStorage),
+});
 
 export const fetchDocument = async (documentName) => {
   const collectionRef = collection(db, "barber_shop");

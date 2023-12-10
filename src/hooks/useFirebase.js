@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 const useFirebase = () => {
   useEffect(() => {
-    //firebaseService.createDocument("barber_shop", BARBER_SHOP_DATA);
+    firebaseService.createDocument("barber_shop", BARBER_SHOP_DATA);
     //firebaseApi.updateDoc("barber_shop", "appointments", objectUpdate);
   });
 

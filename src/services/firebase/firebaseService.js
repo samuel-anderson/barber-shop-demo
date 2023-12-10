@@ -4,7 +4,7 @@ import {
   deleteDocument,
   updateDocument,
   fetchDocument,
-} from "../../utils/firebase";
+} from "../../util/firebase";
 
 export const getCollection = async (collectionName) => {
   const items = await fetchCollection(collectionName);

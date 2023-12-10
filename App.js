@@ -1,7 +1,9 @@
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-import { Text, View } from "react-native";
-
 import React from "react";
+import { AppRegistry } from "react-native";
+
+import { Provider } from "react-redux";
+import store from "./src/redux/store";
 
 import { ThemeProvider } from "styled-components/native"; //Styled component theme
 
@@ -29,9 +31,11 @@ export default function App() {
   }
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <Navigation />
-      </ThemeProvider>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <Navigation />
+        </ThemeProvider>
+      </Provider>
       <ExpoStatusBar style="auto" />
     </>
   );
