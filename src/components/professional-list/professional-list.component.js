@@ -11,7 +11,7 @@ export const ProfessionalList = ({ professionals, navigation }) => {
   const dispatch = useDispatch();
 
   return (
-    <SafeArea style={{ flexDirection: "row" }}>
+    <SafeArea>
       <ProfessionalCardList
         data={professionals}
         renderItem={({ item }) => {
