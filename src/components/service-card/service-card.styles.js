@@ -1,15 +1,7 @@
 import styled from "styled-components/native";
-import { FlatList } from "react-native";
 import { Dimensions } from "react-native";
 
 const { width } = Dimensions.get("window");
-
-export const ServiceList = styled(FlatList).attrs({
-  contentContainerStyle: {
-    padding: 5,
-    justifyContent: "center",
-  },
-})``;
 
 export const Icon = styled.View`
   background-color: rgb(224, 224, 224);
@@ -36,8 +28,7 @@ export const Service = styled.View`
   ${(props) =>
     props.isSelectedService ? "background-color: rgb(0, 131, 255);" : ""}
 
-  ${(props) =>
-    props.isSelectedAddOn ? "background-color: rgb(224, 224, 224);" : ""}
+  ${(props) => (props.isAddOn ? "background-color: rgb(224, 224, 224);" : "")}
 `;
 
 export const Title = styled.Text`
