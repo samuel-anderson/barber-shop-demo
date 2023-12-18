@@ -9,7 +9,16 @@ import {
   showOrderTotal,
   showAddOnsMobile,
 } from "../../../util/cart";
-import { Content, Professional, Service, AddOns } from "../cart.styles";
+import {
+  Content,
+  Professional,
+  Service,
+  AddOns,
+  Name,
+  Total,
+  ServiceTitle,
+  ServicePrice,
+} from "../cart.styles";
 
 export const CartContent = () => {
   const { professional, service, addOns } = useSelector((state) => state.cart);
@@ -19,20 +28,12 @@ export const CartContent = () => {
   return (
     <Content>
       <Professional>
-        <Text style={{ color: "white", fontWeight: "bold" }}>
-          {showProfessional(professional)}
-        </Text>
-        <Text style={{ color: "white", fontWeight: "bold" }}>
-          {showOrderTotal(orderTotal)}
-        </Text>
+        <Name>{showProfessional(professional)}</Name>
+        <Total>{showOrderTotal(orderTotal)}</Total>
       </Professional>
       <Service>
-        <Text style={{ color: "white", fontWeight: "bold" }}>
-          {service && service.title.toUpperCase()}
-        </Text>
-        <Text style={{ color: "white", fontWeight: "bold" }}>
-          ${service && service.price}
-        </Text>
+        <ServiceTitle>{service && service.title.toUpperCase()}</ServiceTitle>
+        <ServicePrice>${service && service.price}</ServicePrice>
       </Service>
       {addOns.length > 0 && (
         <AddOns>

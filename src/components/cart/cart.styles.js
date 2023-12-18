@@ -4,16 +4,18 @@ const standardStyling = `
 flex-direction: row;
 justify-content: space-between;
 `;
+
 export const CartContainer = styled.View`
-  padding: 20px;
+  padding: 5px 20px;
   color: white;
 `;
 export const Header = styled.View`
   ${standardStyling}
+  align-items: center;
 `;
 
 export const Title = styled.Text`
-  font-size: 15px;
+  font-size: 18px;
   color: white;
   font-weight: bold;
 `;
@@ -24,18 +26,46 @@ export const Duration = styled.Text`
 `;
 
 export const Content = styled.View`
-  margin-top: 10px;
+  margin-top: 20px;
   color: white;
 `;
 
 export const Professional = styled.View`
   ${standardStyling}
+  margin-left: 30px;
 `;
+
+export const Name = styled.Text`
+  color: white;
+  font-weight: bold;
+`;
+
+export const Total = styled.Text`
+  color: white;
+  font-weight: bold;
+`;
+
+export const ServiceTitle = styled.Text`
+  color: white;
+  font-weight: bold;
+`;
+
+export const ServicePrice = styled.Text`
+  color: white;
+  font-weight: bold;
+`;
+
 export const Service = styled.View`
   ${standardStyling}
+  margin-left: 50px;
 `;
 
 export const AddOns = styled.View`
   ${standardStyling}
-  margin-left: 20px;
+  margin-left: 50px;
+`;
+
+export const ExpandIcon = styled.View`
+  background-color: rgb(58, 58, 60);
+  border-radius: 50px;
 `;
