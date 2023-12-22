@@ -5,7 +5,6 @@ import { Provider } from "react-redux";
 import store from "./src/redux/store";
 
 import { ThemeProvider } from "styled-components/native"; //Styled component theme
-
 import {
   useFonts as useOswald,
   Oswald_400Regular,

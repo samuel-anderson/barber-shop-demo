@@ -3,12 +3,12 @@ import { useSelector } from "react-redux";
 import {
   selectAddOnTotal,
   selectOrderTotal,
-} from "../../../redux/cart/cartSelector";
+} from "../../redux/cart/cartSelector";
 import {
   showProfessional,
   showOrderTotal,
   showAddOnsMobile,
-} from "../../../util/cart";
+} from "../../util/cart";
 import {
   Content,
   Professional,
@@ -18,7 +18,7 @@ import {
   Total,
   ServiceTitle,
   ServicePrice,
-} from "../cart.styles";
+} from "./cart.styles";
 
 export const CartContent = () => {
   const { professional, service, addOns } = useSelector((state) => state.cart);

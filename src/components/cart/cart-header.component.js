@@ -1,15 +1,13 @@
-import { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 
-import { selectDurationTotal } from "../../../redux/cart/cartSelector";
-import { showDurationTotal } from "../../../util/cart";
-import { Header, Duration, Title, ExpandIcon } from "../cart.styles";
+import { selectDurationTotal } from "../../redux/cart/cartSelector";
+import { showDurationTotal } from "../../util/cart";
+import { Header, Duration, Title, ExpandIcon } from "./cart.styles";
 import { MaterialIcons } from "@expo/vector-icons";
 
 export const CartHeader = ({ cartIndex, expandHandler }) => {
   const durationTotal = useSelector(selectDurationTotal);
-  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <Header>

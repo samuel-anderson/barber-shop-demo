@@ -29,7 +29,10 @@ export const ClientNavigator = () => {
   }, [dispatch]);
 
   return (
-    <ClientStack.Navigator screenOptions={{ headerBackTitle: "Back" }}>
+    <ClientStack.Navigator
+      screenOptions={{ headerBackTitle: "Back" }}
+      safeAreaInsets={{ top: 0 }}
+    >
       <ClientStack.Screen name="Main" component={MainScreen} />
 
       {/* Appointment Details */}
