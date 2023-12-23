@@ -1,7 +1,7 @@
 import {
   sendSMS,
   appointmentObjectToAdd,
-  updatedDocument,
+  updateDocument,
 } from "../../util/firebase";
 
 const showAddOns = (cart) => {
