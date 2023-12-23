@@ -5,6 +5,9 @@ import {
   DateContainer,
   Date,
   DateLabel,
+  DateText,
+  DateLabelText,
+  DateBefore,
 } from "./calendar.styles";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -48,9 +51,11 @@ export const Calendar = ({ clickHandler }) => {
         <Text>{displayDate}</Text>
       </View>
       <DateContainer>
-        {generateNext14Days().map((item) => {
+        {generateNext14Days().map((item, idx) => {
           return (
             <TouchableOpacity
+              key={idx}
+              disabled={getClass(item.value) === "notAvailable"}
               onPress={() => {
                 if (getClass(item.value) !== "notAvailable") {
                   setDisplayedDate(item.displayDate);
@@ -59,11 +64,12 @@ export const Calendar = ({ clickHandler }) => {
                 }
               }}
             >
-              <Date className={getClass(item.value)}>
-                <Text style={{ color: "white" }}>{item.date}</Text>
+              <Date class={getClass(item.value)}>
+                <DateBefore class={getClass(item.value)} />
+                <DateText>{item.date}</DateText>
               </Date>
               <DateLabel>
-                <Text>{item.day}</Text>
+                <DateLabelText>{item.day}</DateLabelText>
               </DateLabel>
             </TouchableOpacity>
           );
