@@ -1,11 +1,10 @@
 import { SafeArea } from "../utility/safe-area.component";
 import { Calendar } from "./components/calendar.component";
 import { TimeSlot } from "./components/time-slot.component";
-
 import { useSelector } from "react-redux";
-
 import moment from "moment";
 import { DAYSOFWEEK } from "../../util/date";
+import { View, Text } from "react-native";
 
 export const Availability = () => {
   const selectedDate = useSelector((state) => state.cart.serviceDate);
@@ -34,7 +33,14 @@ export const Availability = () => {
   return (
     <SafeArea>
       <Calendar clickHandler={checkProfessionalSchedule} />
-      <TimeSlot />
+      {schedule && (
+        <TimeSlot schedule={schedule} selectedDayofWeek={selectedDayofWeek} />
+      )}
+      {!schedule && (
+        <View>
+          <Text>NO SCHEDULE</Text>
+        </View>
+      )}
     </SafeArea>
   );
 };
