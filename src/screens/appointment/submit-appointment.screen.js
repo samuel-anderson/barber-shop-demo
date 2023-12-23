@@ -14,6 +14,9 @@ const defaultFormFields = {
 //on success navigate to summary success page
 //from there you can navigate to main
 
+//clean up css and passing props
+//refactor into components
+
 export const SubmitAppointmentScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
