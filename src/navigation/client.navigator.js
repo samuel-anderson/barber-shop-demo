@@ -19,6 +19,17 @@ import useFirebase from "../hooks/useFirebase";
 
 const ClientStack = createStackNavigator();
 
+export const ClientNav_Screens = {
+  main: "Main",
+  chooseBarber: "Choose Barber",
+  chooseService: "Choose Service",
+  chooseTime: "Choose Time",
+  submitAppointment: "Submit Appointment",
+  barberAccess: "Barber Access",
+  login: "Login",
+  register: "Register",
+};
+
 export const ClientNavigator = () => {
   const dispatch = useDispatch();
   useFirebase();
@@ -33,25 +44,31 @@ export const ClientNavigator = () => {
       screenOptions={{ headerBackTitle: "Back" }}
       safeAreaInsets={{ top: 0 }}
     >
-      <ClientStack.Screen name="Main" component={MainScreen} />
+      <ClientStack.Screen
+        name={ClientNav_Screens.main}
+        component={MainScreen}
+      />
 
       {/* Appointment Details */}
       <ClientStack.Group>
         <ClientStack.Screen
-          name="Choose Barber"
+          name={ClientNav_Screens.chooseBarber}
           component={ChooseBarberScreen}
         />
         <ClientStack.Screen
-          name="Choose Service"
+          name={ClientNav_Screens.chooseService}
           component={ChooseServiceScreen}
         />
-        <ClientStack.Screen name="Choose Time" component={ChooseTimeScreen} />
+        <ClientStack.Screen
+          name={ClientNav_Screens.chooseTime}
+          component={ChooseTimeScreen}
+        />
       </ClientStack.Group>
 
       {/* Appointment Submission */}
       <ClientStack.Group>
         <ClientStack.Screen
-          name="Submit Appointment"
+          name={ClientNav_Screens.submitAppointment}
           component={SubmitAppointmentScreen}
         />
       </ClientStack.Group>
@@ -59,11 +76,17 @@ export const ClientNavigator = () => {
       {/* Authentication */}
       <ClientStack.Group>
         <ClientStack.Screen
-          name="Barber Access"
+          name={ClientNav_Screens.barberAccess}
           component={BarberAccessScreen}
         />
-        <ClientStack.Screen name="Login" component={LoginScreen} />
-        <ClientStack.Screen name="Register" component={RegisterScreen} />
+        <ClientStack.Screen
+          name={ClientNav_Screens.login}
+          component={LoginScreen}
+        />
+        <ClientStack.Screen
+          name={ClientNav_Screens.register}
+          component={RegisterScreen}
+        />
       </ClientStack.Group>
     </ClientStack.Navigator>
   );
