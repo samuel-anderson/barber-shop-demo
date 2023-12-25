@@ -1,23 +1,17 @@
 import { View, Text, Modal, StyleSheet, TouchableOpacity } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SafeArea } from "../../components/utility/safe-area.component";
 import { sendSMSStart } from "../../redux/sms/smsSlice";
 import styled from "styled-components/native";
 import { AppointmentSummary } from "../../components/appointment-summary/appointment-summary.component";
+
 const defaultFormFields = {
   firstName: "",
   lastName: "",
   phoneNumber: "",
 };
-
-//add phone error
-//on success navigate to summary success page
-//from there you can navigate to main
-
-//clean up css and passing props
-//refactor into components
 
 const ErrorText = styled.Text`
   color: red;
@@ -27,6 +21,7 @@ const ErrorText = styled.Text`
 
 export const SubmitAppointmentScreen = ({ navigation }) => {
   const dispatch = useDispatch();
+
   const cart = useSelector((state) => state.cart);
   const sms = useSelector((state) => state.sms);
 
@@ -37,7 +32,11 @@ export const SubmitAppointmentScreen = ({ navigation }) => {
   const [firstNameError, setFirstNameError] = useState(null);
   const [lastNameError, setLastNameError] = useState(null);
 
-  const [isModalVisible, setModalVisible] = useState(true);
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    if (cart.isFinished) setModalVisible(true);
+  }, [cart]);
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -161,27 +160,29 @@ export const SubmitAppointmentScreen = ({ navigation }) => {
         </>
       )}
 
-      {!cart.isFinished && (
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={isModalVisible}
-          onRequestClose={() => {}}
-        >
-          <View style={styles.modal}>
-            <View style={styles.modalContent}>
-              <Text>Modal Content</Text>
-              <TouchableOpacity
-                onPress={() => {
-                  setModalVisible(false);
-                }}
-              >
-                <Text>Close Modal</Text>
-              </TouchableOpacity>
-            </View>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isModalVisible}
+        onRequestClose={() => {}}
+      >
+        <View style={styles.modal}>
+          <View style={styles.modalContent}>
+            <AppointmentSummary />
+
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible(false);
+                navigation.navigate("Main");
+              }}
+            >
+              <Button style={styles.button}>
+                <Text style={styles.closeBtn}>Close</Text>
+              </Button>
+            </TouchableOpacity>
           </View>
-        </Modal>
-      )}
+        </View>
+      </Modal>
     </SafeArea>
   );
 };
@@ -199,9 +200,17 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modalContent: {
-    backgroundColor: "white",
+    backgroundColor: "black",
     padding: 20,
     borderRadius: 10,
     elevation: 5,
+  },
+  button: {
+    width: "100%",
+    marginTop: 20,
+    backgroundColor: "rgb(0, 131, 255)",
+  },
+  closeBtn: {
+    color: "white",
   },
 });

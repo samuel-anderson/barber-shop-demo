@@ -50,7 +50,7 @@ export const TimeSlot = ({ schedule }) => {
         {schedule.map((day) => {
           return generateTimeSlots(day.start, day.end)
             .filter(filterTimeSlots)
-            .map((slot, idx) => <TimeSlotCell idx={idx} slot={slot} />);
+            .map((slot, idx) => <TimeSlotCell key={idx} slot={slot} />);
         })}
       </SlotContainer>
     </ScrollView>

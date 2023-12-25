@@ -5,7 +5,7 @@ flex-direction: row;
 justify-content: space-between;
 `;
 
-export const CartContainer = styled.View`
+export const Summary = styled.View`
   padding: 5px 20px;
 `;
 
@@ -32,7 +32,7 @@ export const Content = styled.View`
 
 export const Professional = styled.View`
   ${standardStyling}
-  margin-left: 30px;
+  margin-left: 15px;
 `;
 
 export const Name = styled.Text`
@@ -57,15 +57,10 @@ export const ServicePrice = styled.Text`
 
 export const Service = styled.View`
   ${standardStyling}
-  margin-left: 50px;
+  margin-left: 35px;
 `;
 
 export const AddOns = styled.View`
   ${standardStyling}
-  margin-left: 50px;
-`;
-
-export const ExpandIcon = styled.View`
-  background-color: rgb(58, 58, 60);
-  border-radius: 50px;
+  margin-left: 35px;
 `;

@@ -1,21 +1,65 @@
 import { View, Text } from "react-native";
 import { useSelector } from "react-redux";
-import { showDurationTotal } from "../../util/cart";
-import { selectDurationTotal } from "../../redux/cart/cartSelector";
-import { showProfessional } from "../../util/cart";
-import { showOrderTotal } from "../../util/cart";
-import { selectOrderTotal } from "../../redux/cart/cartSelector";
+import {
+  showDurationTotal,
+  showOrderTotal,
+  showProfessional,
+  showAddOnsMobile,
+} from "../../util/cart";
+import {
+  selectDurationTotal,
+  selectOrderTotal,
+  selectAddOnTotal,
+} from "../../redux/cart/cartSelector";
+import {
+  Summary,
+  Header,
+  Title,
+  Professional,
+  AddOns,
+  Service,
+  ServiceTitle,
+  ServicePrice,
+  Duration,
+  Content,
+  Name,
+  Total,
+} from "./appointment-summary.styles";
+
 export const AppointmentSummary = () => {
-  const { professional, service } = useSelector((state) => state.cart);
+  const { professional, service, addOns } = useSelector((state) => state.cart);
   const durationTotal = useSelector(selectDurationTotal);
   const orderTotal = useSelector(selectOrderTotal);
+  const addOnTotal = useSelector(selectAddOnTotal);
 
   return (
-    <View>
-      <Text>Estimated Time: {showDurationTotal(durationTotal)}</Text>
-      <Text>Professional: {showProfessional(professional)}</Text>
-      <Text>Service: {service.title.toUpperCase()}</Text>
-      <Text>Total: {showOrderTotal(orderTotal)}</Text>
-    </View>
+    <Summary>
+      <Header>
+        <Title>
+          Your Order <Duration>{showDurationTotal(durationTotal)}</Duration>
+        </Title>
+      </Header>
+
+      <Content>
+        <Professional>
+          <Name>{showProfessional(professional)}</Name>
+          <Total>{showOrderTotal(orderTotal)}</Total>
+        </Professional>
+        <Service>
+          <ServiceTitle>{service && service.title.toUpperCase()}</ServiceTitle>
+          <ServicePrice>${service && service.price}</ServicePrice>
+        </Service>
+        {addOns.length > 0 && (
+          <AddOns>
+            <Text style={{ color: "white", fontWeight: "bold" }}>
+              {showAddOnsMobile(addOns).replace("with", "+")}
+            </Text>
+            <Text style={{ color: "white", fontWeight: "bold" }}>
+              ${addOnTotal}
+            </Text>
+          </AddOns>
+        )}
+      </Content>
+    </Summary>
   );
 };

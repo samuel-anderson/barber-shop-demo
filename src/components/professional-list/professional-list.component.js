@@ -6,7 +6,6 @@ import { setProfessional } from "../../redux/cart/cartSlice";
 import { FadeInView } from "../animations/fade.animation";
 import { Spacer } from "../spacer/spacer.component";
 import { SafeArea } from "../utility/safe-area.component";
-import { ClientNav_Screens } from "../../navigation/client.navigator";
 
 export const ProfessionalList = ({ professionals, navigation }) => {
   const dispatch = useDispatch();
@@ -20,7 +19,7 @@ export const ProfessionalList = ({ professionals, navigation }) => {
             <TouchableOpacity
               onPress={() => {
                 dispatch(setProfessional({ professional: item }));
-                navigation.navigate(ClientNav_Screens.chooseService);
+                navigation.navigate("Service");
               }}
             >
               <Spacer position="bottom" size="large">

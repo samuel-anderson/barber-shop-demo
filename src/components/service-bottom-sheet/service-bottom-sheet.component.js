@@ -52,7 +52,7 @@ export const ServiceBottomSheet = () => {
       <TouchableOpacity
         onPress={() => {
           dispatch(setEstimatedDuration(durationTotal));
-          navigation.navigate("Choose Time");
+          navigation.navigate("Time");
         }}
       >
         <CartButton>
