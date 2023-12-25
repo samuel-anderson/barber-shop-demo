@@ -5,6 +5,11 @@ export const CalendarContainer = styled.View`
   margin-bottom: 10px;
 `;
 
+export const DisplayDate = styled.Text`
+  font-size: ${({ theme }) => theme.fontSizes.title};
+  font-weight: bold;
+`;
+
 export const DateContainer = styled.View`
   flex-wrap: wrap;
   align-content: flex-start;

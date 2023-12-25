@@ -8,11 +8,12 @@ import {
   DateText,
   DateLabelText,
   DateBefore,
+  DisplayDate,
 } from "./calendar.styles";
 import { useDispatch, useSelector } from "react-redux";
 
 import { setServiceDate, setStartTime } from "../../../redux/cart/cartSlice";
-import { Text, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 
 export const Calendar = ({ clickHandler }) => {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ export const Calendar = ({ clickHandler }) => {
   return (
     <CalendarContainer>
       <View style={{ marginBottom: 10, marginTop: 10 }}>
-        <Text>{displayDate}</Text>
+        <DisplayDate>{displayDate}</DisplayDate>
       </View>
       <DateContainer>
         {generateNext14Days().map((item, idx) => {

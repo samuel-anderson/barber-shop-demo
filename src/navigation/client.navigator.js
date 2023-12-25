@@ -16,12 +16,14 @@ import { RegisterScreen } from "../screens/auth/register.sreen";
 import { fetchShopDataStart } from "../redux/shop/shopSlice";
 import { checkUserSession } from "../redux/user/userSlice";
 import useFirebase from "../hooks/useFirebase";
+import { useTheme } from "styled-components";
 
 const ClientStack = createStackNavigator();
 
 export const ClientNavigator = () => {
   const dispatch = useDispatch();
   useFirebase();
+  const theme = useTheme();
 
   useEffect(() => {
     dispatch(checkUserSession());
@@ -30,8 +32,16 @@ export const ClientNavigator = () => {
 
   return (
     <ClientStack.Navigator
-      screenOptions={{ headerBackTitle: "Back" }}
-      safeAreaInsets={{ top: 0 }}
+      screenOptions={{
+        headerBackTitle: "Back",
+        headerStyle: {
+          backgroundColor: theme.colors.bg.tertiary,
+        },
+        headerTintColor: theme.colors.text.inverse,
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+      }}
     >
       <ClientStack.Screen name={"Main"} component={MainScreen} />
 
