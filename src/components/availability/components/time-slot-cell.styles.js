@@ -20,6 +20,6 @@ export const CellText = styled.Text`
   color: rgb(0, 0, 0);
 
   ${(props) => {
-    if (props.class === "selected") return "color: white;";
+    if (props.class === "selected") return `color: #FFFFFF;`;
   }}
 `;

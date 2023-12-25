@@ -1,4 +1,3 @@
-import { View, Text } from "react-native";
 import { useSelector } from "react-redux";
 import {
   showDurationTotal,
@@ -25,6 +24,12 @@ import {
   Name,
   Total,
 } from "./appointment-summary.styles";
+import styled from "styled-components/native";
+
+const Text = styled.Text`
+  color: ${({ theme }) => theme.colors.text.inverse};
+  font-weight: bold;
+`;
 
 export const AppointmentSummary = () => {
   const { professional, service, addOns } = useSelector((state) => state.cart);
@@ -51,12 +56,8 @@ export const AppointmentSummary = () => {
         </Service>
         {addOns.length > 0 && (
           <AddOns>
-            <Text style={{ color: "white", fontWeight: "bold" }}>
-              {showAddOnsMobile(addOns).replace("with", "+")}
-            </Text>
-            <Text style={{ color: "white", fontWeight: "bold" }}>
-              ${addOnTotal}
-            </Text>
+            <Text>{showAddOnsMobile(addOns).replace("with", "+")}</Text>
+            <Text>${addOnTotal}</Text>
           </AddOns>
         )}
       </Content>

@@ -1,7 +1,8 @@
 import { useRef, useMemo, useEffect, useState, useCallback } from "react";
+import styled, { useTheme } from "styled-components";
 
 import { Cart } from "../cart/cart.component";
-import { TouchableOpacity, Text } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { selectDurationTotal } from "../../redux/cart/cartSelector";
@@ -10,8 +11,14 @@ import { setEstimatedDuration } from "../../redux/cart/cartSlice";
 import { CartButton } from "./service-bottom-sheet.styles";
 import BottomSheet from "@gorhom/bottom-sheet";
 
+const Text = styled.Text`
+  color: ${({ theme }) => theme.colors.text.inverse};
+  font-weight: bold;
+`;
+
 export const ServiceBottomSheet = () => {
   const dispatch = useDispatch();
+  const theme = useTheme();
   const selectedService = useSelector((state) => state.cart.service);
   const [cartIndex, setCartIndex] = useState(-1);
   const durationTotal = useSelector(selectDurationTotal);
@@ -45,7 +52,7 @@ export const ServiceBottomSheet = () => {
       index={cartIndex}
       snapPoints={snapPoints}
       onChange={handleSheetChanges}
-      backgroundStyle={{ backgroundColor: "black" }}
+      backgroundStyle={{ backgroundColor: theme.colors.bg.tertiary }}
     >
       <Cart handleIconClick={handleIconClick} cartIndex={cartIndex} />
 
@@ -56,9 +63,7 @@ export const ServiceBottomSheet = () => {
         }}
       >
         <CartButton>
-          <Text style={{ color: "white", fontWeight: "bold" }}>
-            Choose Time
-          </Text>
+          <Text>Choose Time</Text>
         </CartButton>
       </TouchableOpacity>
     </BottomSheet>

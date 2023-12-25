@@ -16,18 +16,18 @@ export const Header = styled.View`
 
 export const Title = styled.Text`
   font-size: 18px;
-  color: white;
+  color: ${({ theme }) => theme.colors.text.inverse};
   font-weight: bold;
 `;
 
 export const Duration = styled.Text`
   font-size: 13px;
-  color: gray;
+  color: ${({ theme }) => theme.colors.text.secondary};
 `;
 
 export const Content = styled.View`
   margin-top: 20px;
-  color: white;
+  color: ${({ theme }) => theme.colors.text.inverse};
 `;
 
 export const Professional = styled.View`
@@ -36,22 +36,22 @@ export const Professional = styled.View`
 `;
 
 export const Name = styled.Text`
-  color: white;
+  color: ${({ theme }) => theme.colors.text.inverse};
   font-weight: bold;
 `;
 
 export const Total = styled.Text`
-  color: white;
+  color: ${({ theme }) => theme.colors.text.inverse};
   font-weight: bold;
 `;
 
 export const ServiceTitle = styled.Text`
-  color: white;
+  color: ${({ theme }) => theme.colors.text.inverse};
   font-weight: bold;
 `;
 
 export const ServicePrice = styled.Text`
-  color: white;
+  color: ${({ theme }) => theme.colors.text.inverse};
   font-weight: bold;
 `;
 
