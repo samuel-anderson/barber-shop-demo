@@ -20,7 +20,7 @@ export const DateContainer = styled.View`
 export const DateBefore = styled.View`
   ${(props) => {
     if (props.class === "selected")
-      return `content: ""; position: absolute; width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgb(0, 0, 0); background-color: #000000; box-sizing: border-box;`;
+      return `content: ""; position: absolute; width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgb(0, 0, 0); background-color: rgba(0, 0, 0, 0); box-sizing: border-box;`;
   }}
 `;
 

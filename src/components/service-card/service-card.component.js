@@ -9,7 +9,7 @@ import {
   removeService,
 } from "../../redux/cart/cartSlice";
 import { Service, Title, Duration, Price, Icon } from "./service-card.styles";
-import { Entypo } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 export const ServiceCard = ({ service }) => {
   const dispatch = useDispatch();
@@ -39,8 +39,8 @@ export const ServiceCard = ({ service }) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        if (isSelectedService) return;
-        clickHandler(service);
+        if (isSelectedService) onClearHandler();
+        else clickHandler(service);
       }}
     >
       <Service isSelectedService={isSelectedService} isAddOn={isAddOn}>
@@ -54,9 +54,7 @@ export const ServiceCard = ({ service }) => {
 
         {isSelectedService && (
           <Icon>
-            <TouchableOpacity onPress={onClearHandler}>
-              <Entypo name="cross" size={22} />
-            </TouchableOpacity>
+            <Ionicons name="checkmark" size={22} color="white" />
           </Icon>
         )}
       </Service>

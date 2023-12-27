@@ -50,13 +50,11 @@ export const TimeBottomSheet = () => {
         <TouchableOpacity
           onPress={() => {
             dispatch(setEstimatedDuration(durationTotal));
-            navigation.navigate("Submit");
+            navigation.navigate("Book");
           }}
         >
           <CartButton>
-            <Text style={{ color: "white", fontWeight: "bold" }}>
-              Submit Appointment
-            </Text>
+            <Text style={{ color: "white", fontWeight: "bold" }}>I'm done</Text>
           </CartButton>
         </TouchableOpacity>
       )}

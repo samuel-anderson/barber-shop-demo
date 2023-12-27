@@ -45,7 +45,12 @@ export const TimeSlot = ({ schedule }) => {
   };
 
   return (
-    <ScrollView style={{ marginBottom: 50, marginTop: 20 }}>
+    <ScrollView
+      style={{
+        marginBottom: 50,
+        marginTop: 20,
+      }}
+    >
       <SlotContainer>
         {schedule.map((day) => {
           return generateTimeSlots(day.start, day.end)

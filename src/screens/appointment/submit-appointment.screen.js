@@ -19,6 +19,19 @@ const ErrorText = styled.Text`
   font-style: italic;
 `;
 
+const Title = styled.Text`
+  font-size: ${({ theme }) => theme.fontSizes.title};
+  font-weight: bold;
+`;
+
+const BookingBtn = styled(Button)`
+  background-color: black;
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  padding: 10px;
+`;
+
 export const SubmitAppointmentScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
@@ -44,7 +57,7 @@ export const SubmitAppointmentScreen = ({ navigation }) => {
 
   const validatePhoneNumber = () => {
     if (phoneNumber.length !== 14) {
-      setPhoneError("Please enter a valid phone number.");
+      setPhoneError("Please enter a valid PHONE NUMBER.");
       return false;
     } else {
       setPhoneError(null);
@@ -54,7 +67,7 @@ export const SubmitAppointmentScreen = ({ navigation }) => {
 
   const validateFirstName = () => {
     if (firstName === "") {
-      setFirstNameError("Please enter your first name");
+      setFirstNameError("Please enter your FIRST NAME");
       return false;
     } else {
       setFirstNameError(null);
@@ -64,7 +77,7 @@ export const SubmitAppointmentScreen = ({ navigation }) => {
 
   const validateLastName = () => {
     if (lastName === "") {
-      setLastNameError("Please enter your last name");
+      setLastNameError("Please enter your LAST NAME");
       return false;
     } else {
       setLastNameError(null);
@@ -123,6 +136,9 @@ export const SubmitAppointmentScreen = ({ navigation }) => {
   };
   return (
     <SafeArea style={{ gap: 10, margin: 10 }}>
+      <View>
+        <Title>Enter information</Title>
+      </View>
       {!cart.isFinished && (
         <>
           <TextInput
@@ -154,9 +170,13 @@ export const SubmitAppointmentScreen = ({ navigation }) => {
           {lastNameError && <ErrorText>{lastNameError}</ErrorText>}
           {phoneError && <ErrorText>{phoneError}</ErrorText>}
 
-          <Button onPress={submitHandler} loading={sms.loading}>
-            Submit
-          </Button>
+          <BookingBtn
+            onPress={submitHandler}
+            loading={sms.loading}
+            labelStyle={{ color: "white" }}
+          >
+            Book Appointment
+          </BookingBtn>
         </>
       )}
 

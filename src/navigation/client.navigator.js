@@ -54,10 +54,7 @@ export const ClientNavigator = () => {
 
       {/* Appointment Submission */}
       <ClientStack.Group>
-        <ClientStack.Screen
-          name={"Submit"}
-          component={SubmitAppointmentScreen}
-        />
+        <ClientStack.Screen name={"Book"} component={SubmitAppointmentScreen} />
       </ClientStack.Group>
 
       {/* Authentication */}

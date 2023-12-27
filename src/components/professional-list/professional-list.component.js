@@ -14,7 +14,7 @@ export const ProfessionalList = ({ professionals, navigation }) => {
     <SafeArea>
       <ProfessionalCardList
         data={professionals}
-        renderItem={({ item }) => {
+        renderItem={({ item, index }) => {
           return (
             <TouchableOpacity
               onPress={() => {
@@ -24,7 +24,7 @@ export const ProfessionalList = ({ professionals, navigation }) => {
             >
               <Spacer position="bottom" size="large">
                 <FadeInView>
-                  <ProfessionalInfo professional={item} />
+                  <ProfessionalInfo professional={item} index={index} />
                 </FadeInView>
               </Spacer>
             </TouchableOpacity>

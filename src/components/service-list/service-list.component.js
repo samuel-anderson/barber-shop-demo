@@ -2,8 +2,16 @@ import { SafeArea } from "../utility/safe-area.component";
 import { ServiceCard } from "../service-card/service-card.component";
 import { ServiceCardList } from "./service-list.styles";
 import { useSelector } from "react-redux";
+import { View } from "react-native";
+import { Spacer } from "../spacer/spacer.component";
+import styled from "styled-components/native";
 
-export const ServiceList = ({ services, navigation }) => {
+const Title = styled.Text`
+  font-size: ${({ theme }) => theme.fontSizes.title};
+  font-weight: bold;
+`;
+
+export const ServiceList = ({ services }) => {
   const selectedProfessional = useSelector((state) => state.cart.professional);
   const selectedService = useSelector((state) => state.cart.service);
 
@@ -37,6 +45,14 @@ export const ServiceList = ({ services, navigation }) => {
   return (
     <SafeArea>
       {selectedService && <ServiceCard service={selectedService} />}
+
+      <Spacer />
+      {selectedService && (
+        <View style={{ margin: 15 }}>
+          <Title>Anything you wish to add?</Title>
+        </View>
+      )}
+
       <ServiceCardList
         data={filteredList}
         renderItem={({ item }) => {
@@ -45,6 +61,8 @@ export const ServiceList = ({ services, navigation }) => {
         keyExtractor={(item) => item.title}
         numColumns={2}
       />
+
+      <Spacer size="xxl" />
     </SafeArea>
   );
 };

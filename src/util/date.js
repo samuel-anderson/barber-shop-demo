@@ -53,3 +53,16 @@ export const isBetweenTimes = (
   }
   return keepTimeSlot;
 };
+
+export const isBeforeNoon = (timeString) => {
+  const parsedTime = moment(timeString, "h:mm A");
+  const beforeNoon = parsedTime.isBefore(moment("12:00 PM", "h:mm A"));
+  return beforeNoon;
+};
+
+export const isBetweenNoonAndFive = (timeString) => {
+  const parsedTime = moment(timeString, "h:mm A");
+  const afterNoon = parsedTime.isSameOrAfter(moment("12:00 PM", "h:mm A"));
+  const beforeFive = parsedTime.isBefore(moment("5:00 PM", "h:mm A"));
+  return afterNoon && beforeFive;
+};

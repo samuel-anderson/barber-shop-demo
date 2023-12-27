@@ -4,7 +4,7 @@ import { Dimensions } from "react-native";
 const { width } = Dimensions.get("window");
 
 export const Icon = styled.View`
-  background-color: rgb(224, 224, 224);
+  background-color: ${({ theme }) => theme.colors.bg.tertiary};
   width: 32px;
   height: 32px;
   border-radius: 50%;
