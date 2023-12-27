@@ -161,6 +161,7 @@ export const SubmitAppointmentScreen = ({ navigation }) => {
             label="Phone Number"
             value={phoneNumber}
             error={!!phoneError}
+            keyboardType="numeric"
             onChangeText={(text) =>
               handleChange({ name: "phoneNumber", value: text })
             }
