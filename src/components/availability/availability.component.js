@@ -4,7 +4,8 @@ import { TimeSlot } from "./components/time-slot.component";
 import { useSelector } from "react-redux";
 import moment from "moment";
 import { DAYSOFWEEK } from "../../util/date";
-import { View, Text } from "react-native";
+import { View } from "react-native";
+import { TotalAvailable } from "./components/time-slot.component";
 
 export const Availability = () => {
   const selectedDate = useSelector((state) => state.cart.serviceDate);
@@ -37,8 +38,8 @@ export const Availability = () => {
         <TimeSlot schedule={schedule} selectedDayofWeek={selectedDayofWeek} />
       )}
       {!schedule && (
-        <View>
-          <Text>NO SCHEDULE</Text>
+        <View style={{ marginBottom: 10, marginTop: 10 }}>
+          <TotalAvailable>0 available spots</TotalAvailable>
         </View>
       )}
     </SafeArea>

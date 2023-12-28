@@ -169,7 +169,7 @@ export const SubmitAppointmentScreen = ({ navigation }) => {
             loading={sms.loading}
             labelStyle={{ color: "white" }}
           >
-            Book Appointment
+            Book Now
           </BookingBtn>
         </>
       )}

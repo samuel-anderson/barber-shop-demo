@@ -26,7 +26,7 @@ export const SummaryModal = () => {
 
   const closeModal = () => {
     setModalVisible(false);
-    navigation.navigate("Main");
+    navigation.navigate("Home");
   };
   const requestAccessToCalendar = async () => {
     const { status } = await Calendar.requestCalendarPermissionsAsync();
@@ -99,7 +99,7 @@ export const SummaryModal = () => {
             <TouchableOpacity
               onPress={() => {
                 setModalVisible(false);
-                navigation.navigate("Main");
+                navigation.navigate("Home");
               }}
             >
               <Button style={styles.button}>

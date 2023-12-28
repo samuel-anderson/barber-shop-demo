@@ -55,7 +55,7 @@ export const MainScreen = ({ navigation }) => {
       <Container>
         <Image source={require("../../assets/legacy.png")} />
 
-        <Touchable onPress={() => navigation.navigate("Barber")}>
+        <Touchable onPress={() => navigation.navigate("Choose a Barber")}>
           <IconText>Book Appointment</IconText>
         </Touchable>
         <Spacer />

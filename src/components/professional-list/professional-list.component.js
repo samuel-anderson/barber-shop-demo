@@ -19,7 +19,7 @@ export const ProfessionalList = ({ professionals, navigation }) => {
             <TouchableOpacity
               onPress={() => {
                 dispatch(setProfessional({ professional: item }));
-                navigation.navigate("Service");
+                navigation.navigate("Choose a Service");
               }}
             >
               <Spacer position="bottom" size="large">

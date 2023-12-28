@@ -43,18 +43,30 @@ export const ClientNavigator = () => {
         },
       }}
     >
-      <ClientStack.Screen name={"Main"} component={MainScreen} />
+      <ClientStack.Screen name={"Home"} component={MainScreen} />
 
       {/* Appointment Details */}
       <ClientStack.Group>
-        <ClientStack.Screen name={"Barber"} component={ChooseBarberScreen} />
-        <ClientStack.Screen name={"Service"} component={ChooseServiceScreen} />
-        <ClientStack.Screen name={"Time"} component={ChooseTimeScreen} />
+        <ClientStack.Screen
+          name={"Choose a Barber"}
+          component={ChooseBarberScreen}
+        />
+        <ClientStack.Screen
+          name={"Choose a Service"}
+          component={ChooseServiceScreen}
+        />
+        <ClientStack.Screen
+          name={"Choose a Time"}
+          component={ChooseTimeScreen}
+        />
       </ClientStack.Group>
 
       {/* Appointment Submission */}
       <ClientStack.Group>
-        <ClientStack.Screen name={"Book"} component={SubmitAppointmentScreen} />
+        <ClientStack.Screen
+          name={"Book Appointment"}
+          component={SubmitAppointmentScreen}
+        />
       </ClientStack.Group>
 
       {/* Authentication */}
