@@ -21,6 +21,7 @@ export const Cell = styled.View`
 export const CellText = styled.Text`
   color: rgb(0, 0, 0);
   margin-left: 5px;
+  font-weight: bold;
 
   ${(props) => {
     if (props.class === "selected")
