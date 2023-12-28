@@ -26,8 +26,7 @@ const Title = styled.Text`
 
 const BookingBtn = styled(Button)`
   background-color: black;
-  position: absolute;
-  bottom: 20px;
+  margin-top: 20px;
   width: 100%;
   padding: 10px;
 `;
@@ -135,9 +134,9 @@ export const SubmitAppointmentScreen = ({ navigation }) => {
     return formattedValue;
   };
   return (
-    <SafeArea style={{ gap: 10, margin: 10 }}>
+    <SafeArea style={{ gap: 10, margin: 10, flex: 1 }}>
       <View>
-        <Title>Enter information</Title>
+        <Title>Enter Contact Information</Title>
       </View>
       {!cart.isFinished && (
         <>

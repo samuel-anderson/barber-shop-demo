@@ -9,21 +9,26 @@ const Container = styled.View`
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
 `;
 
 const Touchable = styled.TouchableOpacity`
-  background-color: ${({ theme }) => theme.colors.bg.tertiary};
+  background-color: rgba(255, 255, 255, 0.6);
   border-radius: 10px;
-  padding: 20px;
+  padding: 15px;
   margin: 5px;
   justify-content: center;
   align-items: center;
-  width: 45%;
+  width: 40%;
 `;
 
 const IconText = styled.Text`
-  color: ${({ theme }) => theme.colors.text.inverse};
+  color: ${({ theme }) => theme.colors.text.primary};
   font-weight: bold;
+  font-size: 24px;
+  text-align: center;
 `;
 
 const AnimationWrapper = styled.View`
@@ -33,41 +38,50 @@ const AnimationWrapper = styled.View`
   top: 30px;
   padding: ${(props) => props.theme.space[2]};
 `;
+const Background = styled.ImageBackground.attrs({
+  source: require("../../assets/home.jpg"),
+})`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
 
 export const MainScreen = ({ navigation }) => {
   const theme = useTheme();
 
   return (
-    <Container>
-      <AnimationWrapper>
-        <LottieView
-          key="animation"
-          autoPlay
-          loop
-          resizeMode="cover"
-          source={require("../../assets/barbershop.json")}
-        />
-      </AnimationWrapper>
+    <Background>
+      <Container>
+        {/* <AnimationWrapper>
+          <LottieView
+            key="animation"
+            autoPlay
+            loop
+            resizeMode="cover"
+            source={require("../../assets/barbershop.json")}
+          />
+        </AnimationWrapper> */}
 
-      <Touchable onPress={() => navigation.navigate("Barber")}>
-        <IconText>Book Appointment</IconText>
-        <IconButton
-          icon="calendar-month"
-          iconColor={theme.colors.text.inverse}
-          size={75}
-        />
-      </Touchable>
-      <Spacer />
-      <Spacer />
+        <Touchable onPress={() => navigation.navigate("Barber")}>
+          <IconText>Book Appointment</IconText>
+          <IconButton
+            icon="calendar-month"
+            iconColor={theme.colors.text.primary}
+            size={50}
+          />
+        </Touchable>
+        <Spacer />
+        <Spacer />
 
-      <Touchable onPress={() => navigation.navigate("Access")}>
-        <IconText>Barber Access</IconText>
-        <IconButton
-          icon="account"
-          iconColor={theme.colors.text.inverse}
-          size={75}
-        />
-      </Touchable>
-    </Container>
+        <Touchable onPress={() => navigation.navigate("Access")}>
+          <IconText>Barber Access</IconText>
+          <IconButton
+            icon="account"
+            iconColor={theme.colors.text.primary}
+            size={50}
+          />
+        </Touchable>
+      </Container>
+    </Background>
   );
 };
