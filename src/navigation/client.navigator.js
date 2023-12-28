@@ -22,7 +22,7 @@ const ClientStack = createStackNavigator();
 
 export const ClientNavigator = () => {
   const dispatch = useDispatch();
-  useFirebase();
+  useFirebase(); //remove in production
   const theme = useTheme();
 
   useEffect(() => {

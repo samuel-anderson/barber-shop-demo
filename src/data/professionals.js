@@ -14,6 +14,12 @@ export const professionals = [
       friday: [{ start: "8:00 AM", end: "8:00 PM" }],
       saturday: [{ start: "8:00 AM", end: "8:00 PM" }],
     },
+    socialMedia: [
+      {
+        id: "instagram",
+        username: "george_the_barber",
+      },
+    ],
   },
   {
     id: "kari_anderson",
@@ -45,7 +51,7 @@ export const professionals = [
     socialMedia: [
       {
         id: "instagram",
-        link: "https://www.instagram.com/pana_papito/",
+        username: "pana_papito",
       },
     ],
     schedule: {

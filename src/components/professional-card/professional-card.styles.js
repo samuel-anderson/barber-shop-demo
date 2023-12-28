@@ -24,6 +24,9 @@ export const Address = styled.Text`
 
 export const Info = styled.View`
   padding: ${(props) => props.theme.space[3]};
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const Rating = styled.View`

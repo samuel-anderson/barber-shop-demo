@@ -1,14 +1,12 @@
-import { IconButton } from "react-native-paper";
-import { useTheme } from "styled-components";
 import { Spacer } from "../components/spacer/spacer.component";
 import styled from "styled-components/native";
-import LottieView from "lottie-react-native";
+import { Platform } from "react-native";
 
 const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
+
   width: 100%;
   height: 100%;
   background-color: rgba(255, 255, 255, 0.2);
@@ -21,23 +19,17 @@ const Touchable = styled.TouchableOpacity`
   margin: 5px;
   justify-content: center;
   align-items: center;
-  width: 40%;
+  flex-direction: row;
 `;
 
 const IconText = styled.Text`
   color: ${({ theme }) => theme.colors.text.primary};
   font-weight: bold;
-  font-size: 24px;
+  font-size: 20px;
   text-align: center;
+  width: 80%;
 `;
 
-const AnimationWrapper = styled.View`
-  width: 100%;
-  height: 40%;
-  position: absolute;
-  top: 30px;
-  padding: ${(props) => props.theme.space[2]};
-`;
 const Background = styled.ImageBackground.attrs({
   source: require("../../assets/home.jpg"),
 })`
@@ -46,40 +38,30 @@ const Background = styled.ImageBackground.attrs({
   justify-content: center;
 `;
 
+const CompactImage = styled.Image`
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  top: 0;
+`;
+
+const isAndroid = Platform.OS === "android";
+
 export const MainScreen = ({ navigation }) => {
-  const theme = useTheme();
+  const Image = isAndroid ? CompactWebview : CompactImage;
 
   return (
     <Background>
       <Container>
-        {/* <AnimationWrapper>
-          <LottieView
-            key="animation"
-            autoPlay
-            loop
-            resizeMode="cover"
-            source={require("../../assets/barbershop.json")}
-          />
-        </AnimationWrapper> */}
+        <Image source={require("../../assets/legacy.png")} />
 
         <Touchable onPress={() => navigation.navigate("Barber")}>
           <IconText>Book Appointment</IconText>
-          <IconButton
-            icon="calendar-month"
-            iconColor={theme.colors.text.primary}
-            size={50}
-          />
         </Touchable>
         <Spacer />
         <Spacer />
-
         <Touchable onPress={() => navigation.navigate("Access")}>
           <IconText>Barber Access</IconText>
-          <IconButton
-            icon="account"
-            iconColor={theme.colors.text.primary}
-            size={50}
-          />
         </Touchable>
       </Container>
     </Background>
