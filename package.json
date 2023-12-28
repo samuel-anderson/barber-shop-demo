@@ -20,6 +20,7 @@
     "@reduxjs/toolkit": "^2.0.1",
     "camelize": "^1.0.1",
     "expo": "~49.0.15",
+    "expo-calendar": "~11.3.2",
     "expo-font": "~11.4.0",
     "expo-status-bar": "~1.6.0",
     "expo-updates": "~0.18.18",
