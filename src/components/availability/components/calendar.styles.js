@@ -24,6 +24,17 @@ export const DateBefore = styled.View`
   }}
 `;
 
+export const DateAfter = styled.View`
+  content: " ";
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background-color: white;
+  border-radius: 50%;
+`;
+
 export const Date = styled.View`
   width: 40px;
   height: 40px;

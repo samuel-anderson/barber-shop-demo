@@ -9,6 +9,7 @@ import {
   DateLabelText,
   DateBefore,
   DisplayDate,
+  DateAfter,
 } from "./calendar.styles";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -53,6 +54,8 @@ export const Calendar = ({ clickHandler }) => {
       </View>
       <DateContainer>
         {generateNext14Days().map((item, idx) => {
+          let today = moment().dayOfYear() === moment(item.value).dayOfYear();
+
           return (
             <TouchableOpacity
               key={idx}
@@ -68,6 +71,7 @@ export const Calendar = ({ clickHandler }) => {
               <Date class={getClass(item.value)}>
                 <DateBefore class={getClass(item.value)} />
                 <DateText>{item.date}</DateText>
+                {today && <DateAfter />}
               </Date>
               <DateLabel>
                 <DateLabelText>{item.day}</DateLabelText>

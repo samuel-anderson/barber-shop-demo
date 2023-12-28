@@ -62,7 +62,7 @@ export const professionals = [
         { start: "4:00 PM", end: "8:00 PM" },
       ],
       wednesday: [{ start: "4:00 PM", end: "8:00 PM" }],
-      thursday: null,
+      thursday: [{ start: "4:00 PM", end: "8:00 PM" }],
       friday: [
         { start: "12:00 PM", end: "3:00 PM" },
         { start: "6:00 PM", end: "7:00 PM" },
