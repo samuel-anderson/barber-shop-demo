@@ -4,6 +4,7 @@ import {
   fetchShopDataSuccess,
   fetchShopDataFailure,
 } from "./shopSlice";
+import { fetchProfileImagesStart } from "../profile-images/profileImagesSlice";
 
 import { setProfessionals } from "../professionals/professionalsSlice";
 import { setServices } from "../services/servicesSlice";
@@ -24,7 +25,11 @@ function* fetchShopWorker() {
       return document.id === "services";
     });
 
+    yield put(fetchProfileImagesStart(professionals.data.items));
+
     yield put(setProfessionals(professionals.data.items));
+    yield put(fetchProfileImagesStart(professionals.data.items));
+
     yield put(setServices(services.data.items));
   } catch (error) {
     yield put(fetchShopDataFailure(error.message));

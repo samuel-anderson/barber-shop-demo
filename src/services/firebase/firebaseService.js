@@ -4,8 +4,15 @@ import {
   deleteDocument,
   updateDocument,
   fetchDocument,
+  fecthStorage,
 } from "../../util/firebase";
 
+export const getStorage = async (professionalIds) => {
+  const ids = professionalIds.payload.map((obj) => obj.id);
+
+  const items = await fecthStorage(ids);
+  return items;
+};
 export const getCollection = async (collectionName) => {
   const items = await fetchCollection(collectionName);
   return items;

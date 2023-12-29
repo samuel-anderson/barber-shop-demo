@@ -10,11 +10,23 @@ import {
 import { FontAwesome } from "@expo/vector-icons";
 import { IconButton } from "react-native-paper";
 import { usePhotoBottomSheet } from "../../contexts/PhotoBottomSheet.context";
+import { useSelector } from "react-redux";
 
 export const ProfessionalInfo = ({ professional = {}, index = 1 }) => {
   const [instagramHandle, setInstagramHandle] = useState(null);
-  const [hasImages, setHasImages] = useState(true);
-  const { openBottomSheet, setHandle } = usePhotoBottomSheet();
+  const [images, setImages] = useState(null);
+  const { openBottomSheet, setHandle, setProfileImages } =
+    usePhotoBottomSheet();
+  const { profileImages } = useSelector((state) => state.profileImages);
+
+  useEffect(() => {
+    if (
+      profileImages[professional.id] &&
+      profileImages[professional.id].length > 0
+    ) {
+      setImages(profileImages[professional.id]);
+    }
+  });
 
   useEffect(() => {
     let obj =
@@ -34,6 +46,12 @@ export const ProfessionalInfo = ({ professional = {}, index = 1 }) => {
   };
 
   const getImageUrl = (index) => {
+    let profile =
+      profileImages &&
+      profileImages[professional.id].find((url) => url.includes("profile.jpg"));
+
+    if (profile) return { uri: profile };
+
     switch (index) {
       case 0:
         return require(`../../../assets/profile-image-1.jpg`);
@@ -46,6 +64,7 @@ export const ProfessionalInfo = ({ professional = {}, index = 1 }) => {
 
   const handleCameraPress = () => {
     setHandle(instagramHandle);
+    setProfileImages(images);
     openBottomSheet();
   };
   return (
@@ -60,7 +79,7 @@ export const ProfessionalInfo = ({ professional = {}, index = 1 }) => {
         <Text variant="label">{professional.name}</Text>
 
         <View style={{ flexDirection: "row" }}>
-          {hasImages && (
+          {images && (
             <TouchableOpacity onPress={handleCameraPress}>
               <IconButton
                 icon={() => (

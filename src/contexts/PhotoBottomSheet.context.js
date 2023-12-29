@@ -24,6 +24,7 @@ export const PhotoBottomSheetProvider = ({ children }) => {
   const bottomSheetRef = useRef();
   const theme = useTheme();
   const [handle, setHandle] = useState(null);
+  const [profileImages, setProfileImages] = useState(null);
 
   const handleInstagramPress = () => {
     const instagramURL = `https://www.instagram.com/${handle}/`;
@@ -43,7 +44,9 @@ export const PhotoBottomSheetProvider = ({ children }) => {
   };
 
   return (
-    <PhotoBottomSheetContext.Provider value={{ openBottomSheet, setHandle }}>
+    <PhotoBottomSheetContext.Provider
+      value={{ openBottomSheet, setHandle, setProfileImages }}
+    >
       {children}
       <BottomSheet
         ref={bottomSheetRef}
@@ -56,13 +59,18 @@ export const PhotoBottomSheetProvider = ({ children }) => {
           <FontAwesome name="close" size={24} color="gray" />
         </IconButton>
         <View style={styles.container}>
-          {[1, 2, 3, 4, 5, 6].map((val) => (
-            <Image
-              key={val}
-              style={styles.thumbnail}
-              source={require("../../assets/profile-image-3.jpg")}
-            />
-          ))}
+          {profileImages &&
+            profileImages.map((url, idx) => {
+              if (url.includes("display")) {
+                return (
+                  <Image
+                    key={idx}
+                    style={styles.thumbnail}
+                    source={{ uri: url }}
+                  />
+                );
+              }
+            })}
         </View>
         {handle && (
           <TouchableOpacity onPress={handleInstagramPress}>

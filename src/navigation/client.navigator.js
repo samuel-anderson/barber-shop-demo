@@ -17,6 +17,7 @@ import { fetchShopDataStart } from "../redux/shop/shopSlice";
 import { checkUserSession } from "../redux/user/userSlice";
 import useFirebase from "../hooks/useFirebase";
 import { useTheme } from "styled-components";
+import { fecthStorage } from "../util/firebase";
 
 const ClientStack = createStackNavigator();
 

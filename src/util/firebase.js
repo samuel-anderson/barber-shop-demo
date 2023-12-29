@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getStorage, ref, getDownloadURL, list } from "firebase/storage";
 import { firebaseConfig } from "../config/firebase";
 import {
   signInWithEmailAndPassword,
@@ -24,33 +25,54 @@ import {
   writeBatch,
 } from "firebase/firestore";
 import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
+import Constants from "expo-constants";
+
 import moment from "moment";
+
+const { REACT_APP_FIREBASE_DB, REACT_APP_FIREBASE_SMS_URL } =
+  Constants.expoConfig;
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
+const storage = getStorage();
 
 //export const auth = getAuth(); //singleton, authentication memory base
 export const auth = initializeAuth(app, {
   persistence: getReactNativePersistence(ReactNativeAsyncStorage),
 });
 
-export const fetchDocument = async (documentName) => {
-  const collectionRef = collection(db, "barber_shop");
-  const q = query(collectionRef);
+export const fecthStorage = async (ids) => {
+  let imageObj = {};
 
-  const querySnapshot = await getDocs(q);
-  const items = querySnapshot.docs
-    .filter((docSnapshot) => {
-      return docSnapshot.id === "appointments";
+  // Use Promise.all to wait for all promises to resolve
+  await Promise.all(
+    ids.map(async (professional_id) => {
+      imageObj[professional_id] = [];
+      let path = `profile_images/${professional_id}/`;
+      const imagesRef = ref(storage, `${path}/`);
+
+      try {
+        const imagesList = await list(imagesRef);
+
+        await Promise.all(
+          imagesList.items.map(async (imageRef) => {
+            try {
+              const url = await getDownloadURL(imageRef);
+
+              imageObj[professional_id].push(url);
+            } catch (error) {
+              console.log("Error getting image URL:", error);
+            }
+          })
+        );
+      } catch (error) {
+        console.log("Error listing images:", error);
+      }
     })
-    .map((docSnapshot) => {
-      return {
-        id: docSnapshot.id,
-        data: docSnapshot.data(),
-      };
-    });
-  return items;
+  );
+
+  return imageObj;
 };
 
 export const fetchCollection = async (collectionName) => {
@@ -123,19 +145,16 @@ export const sendSMS = async ({
   clientPhoneNumber,
 }) => {
   try {
-    return fetch(
-      "https://us-central1-crwn-clothing-db-b150d.cloudfunctions.net/sendSMS",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          to: professionalPhoneNumber,
-          body: `You have an appt with ${clientName} - ${date} from ${startTime}-${endTime}. ${service}. Client Phone Number - ${clientPhoneNumber}`,
-        }),
-      }
-    )
+    return fetch(REACT_APP_FIREBASE_SMS_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        to: professionalPhoneNumber,
+        body: `You have an appt with ${clientName} - ${date} from ${startTime}-${endTime}. ${service}. Client Phone Number - ${clientPhoneNumber}`,
+      }),
+    })
       .then((response) => response.json())
       .then((data) => data)
       .catch((error) => console.error(error));

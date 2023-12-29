@@ -7,6 +7,7 @@ import serviceReducer from "./services/servicesSlice";
 import appointementReducer from "./appointments/appointmentsSlice";
 import smsReducer from "./sms/smsSlice";
 import userReducer from "./user/userSlice";
+import profileImagesReducer from "./profile-images/profileImagesSlice";
 
 const rootReducer = combineReducers({
   step: stepReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   appointments: appointementReducer,
   sms: smsReducer,
   user: userReducer,
+  profileImages: profileImagesReducer,
 });
 
 export default rootReducer;
