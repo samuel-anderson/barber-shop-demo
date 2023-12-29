@@ -9,9 +9,12 @@ import {
 // import { SvgXml } from "react-native-svg";
 import { FontAwesome } from "@expo/vector-icons";
 import { IconButton } from "react-native-paper";
+import { usePhotoBottomSheet } from "../../contexts/PhotoBottomSheet.context";
 
 export const ProfessionalInfo = ({ professional = {}, index = 1 }) => {
   const [instagramHandle, setInstagramHandle] = useState(null);
+  const [hasImages, setHasImages] = useState(true);
+  const { openBottomSheet, setHandle } = usePhotoBottomSheet();
 
   useEffect(() => {
     let obj =
@@ -40,6 +43,11 @@ export const ProfessionalInfo = ({ professional = {}, index = 1 }) => {
         return require(`../../../assets/profile-image-3.jpg`);
     }
   };
+
+  const handleCameraPress = () => {
+    setHandle(instagramHandle);
+    openBottomSheet();
+  };
   return (
     <ProfessionalCard elevation={2}>
       <View>
@@ -51,15 +59,26 @@ export const ProfessionalInfo = ({ professional = {}, index = 1 }) => {
       <Info>
         <Text variant="label">{professional.name}</Text>
 
-        {instagramHandle && (
-          <TouchableOpacity onPress={handleInstagramPress}>
-            <IconButton
-              icon={() => (
-                <FontAwesome name="instagram" size={28} color="black" />
-              )}
-            />
-          </TouchableOpacity>
-        )}
+        <View style={{ flexDirection: "row" }}>
+          {hasImages && (
+            <TouchableOpacity onPress={handleCameraPress}>
+              <IconButton
+                icon={() => (
+                  <FontAwesome name="camera-retro" size={28} color="black" />
+                )}
+              />
+            </TouchableOpacity>
+          )}
+          {instagramHandle && (
+            <TouchableOpacity onPress={handleInstagramPress}>
+              <IconButton
+                icon={() => (
+                  <FontAwesome name="instagram" size={28} color="black" />
+                )}
+              />
+            </TouchableOpacity>
+          )}
+        </View>
       </Info>
     </ProfessionalCard>
   );
