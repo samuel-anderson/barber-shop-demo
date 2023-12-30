@@ -25,10 +25,12 @@ import {
   Total,
 } from "./appointment-summary.styles";
 import styled from "styled-components/native";
+import { Spacer } from "../spacer/spacer.component";
+import { Text } from "../typography/text.component";
 
-const Text = styled.Text`
+const AddOnsText = styled(Text)`
   color: ${({ theme }) => theme.colors.text.inverse};
-  font-weight: bold;
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
 
 export const AppointmentSummary = () => {
@@ -44,23 +46,34 @@ export const AppointmentSummary = () => {
           Your Order <Duration>{showDurationTotal(durationTotal)}</Duration>
         </Title>
       </Header>
-
-      <Content>
-        <Professional>
-          <Name>{showProfessional(professional)}</Name>
-          <Total>{showOrderTotal(orderTotal)}</Total>
-        </Professional>
-        <Service>
-          <ServiceTitle>{service && service.title.toUpperCase()}</ServiceTitle>
-          <ServicePrice>${service && service.price}</ServicePrice>
-        </Service>
-        {addOns.length > 0 && (
-          <AddOns>
-            <Text>{showAddOnsMobile(addOns).replace("with", "+")}</Text>
-            <Text>${addOnTotal}</Text>
-          </AddOns>
-        )}
-      </Content>
+      <Spacer position="top" size="large">
+        <Content>
+          <Spacer position="left" size="large">
+            <Professional>
+              <Name>{showProfessional(professional)}</Name>
+              <Total>{showOrderTotal(orderTotal)}</Total>
+            </Professional>
+          </Spacer>
+          <Spacer position="left" size="xl">
+            <Service>
+              <ServiceTitle>
+                {service && service.title.toUpperCase()}
+              </ServiceTitle>
+              <ServicePrice>${service && service.price}</ServicePrice>
+            </Service>
+          </Spacer>
+          {addOns.length > 0 && (
+            <Spacer position="left" size="xl">
+              <AddOns>
+                <AddOnsText>
+                  {showAddOnsMobile(addOns).replace("with", "+")}
+                </AddOnsText>
+                <AddOnsText>${addOnTotal}</AddOnsText>
+              </AddOns>
+            </Spacer>
+          )}
+        </Content>
+      </Spacer>
     </Summary>
   );
 };

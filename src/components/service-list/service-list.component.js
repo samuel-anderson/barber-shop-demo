@@ -6,8 +6,9 @@ import { View } from "react-native";
 import { Spacer } from "../spacer/spacer.component";
 import styled from "styled-components/native";
 import { FadeInView } from "../animations/fade.animation";
+import { Text } from "../typography/text.component";
 
-const Title = styled.Text`
+const Title = styled(Text)`
   font-size: ${({ theme }) => theme.fontSizes.title};
   font-weight: bold;
 `;

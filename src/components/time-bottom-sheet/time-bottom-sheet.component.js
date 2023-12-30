@@ -1,7 +1,7 @@
 import { useRef, useMemo, useEffect, useState, useCallback } from "react";
 
 import { Cart } from "../cart/cart.component";
-import { TouchableOpacity, Text } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { selectDurationTotal } from "../../redux/cart/cartSelector";
@@ -9,6 +9,14 @@ import { setEstimatedDuration } from "../../redux/cart/cartSlice";
 
 import { CartButton } from "./time-bottom-sheet.styles";
 import BottomSheet from "@gorhom/bottom-sheet";
+import { Spacer } from "../spacer/spacer.component";
+import { Text } from "../typography/text.component";
+import styled from "styled-components/native";
+
+const BtnText = styled(Text)`
+  color: ${({ theme }) => theme.colors.text.inverse};
+  font-weight: bold;
+`;
 
 export const TimeBottomSheet = () => {
   const dispatch = useDispatch();
@@ -53,9 +61,11 @@ export const TimeBottomSheet = () => {
             navigation.navigate("Book Appointment");
           }}
         >
-          <CartButton>
-            <Text style={{ color: "white", fontWeight: "bold" }}>I'm done</Text>
-          </CartButton>
+          <Spacer position="top" size="xl">
+            <CartButton>
+              <BtnText>I'm done</BtnText>
+            </CartButton>
+          </Spacer>
         </TouchableOpacity>
       )}
     </BottomSheet>

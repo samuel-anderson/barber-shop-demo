@@ -6,6 +6,9 @@ import { SafeArea } from "../../components/utility/safe-area.component";
 import { sendSMSStart } from "../../redux/sms/smsSlice";
 import styled from "styled-components/native";
 import { SummaryModal } from "../../components/summary-modal/summary-modal.component";
+import { Text } from "../../components/typography/text.component";
+import { Spacer } from "../../components/spacer/spacer.component";
+import { useTheme } from "styled-components/native";
 
 const defaultFormFields = {
   firstName: "",
@@ -13,26 +16,25 @@ const defaultFormFields = {
   phoneNumber: "",
 };
 
-const ErrorText = styled.Text`
-  color: red;
-  font-size: 12px;
+const ErrorText = styled(Text)`
+  font-size: ${({ theme }) => theme.fontSizes.caption};
   font-style: italic;
 `;
 
-const Title = styled.Text`
+const Title = styled(Text)`
   font-size: ${({ theme }) => theme.fontSizes.title};
-  font-weight: bold;
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
 
 const BookingBtn = styled(Button)`
-  background-color: black;
-  margin-top: 20px;
+  background-color: ${({ theme }) => theme.colors.bg.tertiary};
   width: 100%;
   padding: 10px;
 `;
 
 export const SubmitAppointmentScreen = ({ navigation }) => {
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   const cart = useSelector((state) => state.cart);
   const sms = useSelector((state) => state.sms);
@@ -128,7 +130,7 @@ export const SubmitAppointmentScreen = ({ navigation }) => {
     return formattedValue;
   };
   return (
-    <SafeArea style={{ gap: 10, margin: 10, flex: 1 }}>
+    <SafeArea style={{ gap: 10, flex: 1 }}>
       <View>
         <Title>Enter Contact Information</Title>
       </View>
@@ -160,17 +162,18 @@ export const SubmitAppointmentScreen = ({ navigation }) => {
             }
           />
 
-          {firstNameError && <ErrorText>{firstNameError}</ErrorText>}
-          {lastNameError && <ErrorText>{lastNameError}</ErrorText>}
-          {phoneError && <ErrorText>{phoneError}</ErrorText>}
-
-          <BookingBtn
-            onPress={submitHandler}
-            loading={sms.loading}
-            labelStyle={{ color: "white" }}
-          >
-            Book Now
-          </BookingBtn>
+          {firstNameError && (
+            <ErrorText variant="error">{firstNameError}</ErrorText>
+          )}
+          {lastNameError && (
+            <ErrorText variant="error">{lastNameError}</ErrorText>
+          )}
+          {phoneError && <ErrorText variant="error">{phoneError}</ErrorText>}
+          <Spacer position="top" size="large">
+            <BookingBtn onPress={submitHandler} loading={sms.loading}>
+              <Text style={{ color: theme.colors.text.inverse }}>Book Now</Text>
+            </BookingBtn>
+          </Spacer>
         </>
       )}
 

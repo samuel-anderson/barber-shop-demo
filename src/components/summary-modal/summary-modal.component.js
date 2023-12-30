@@ -1,5 +1,5 @@
 import { AppointmentSummary } from "../appointment-summary/appointment-summary.component";
-import { TouchableOpacity, View, StyleSheet, Modal, Text } from "react-native";
+import { TouchableOpacity, View, StyleSheet, Modal } from "react-native";
 import { Button } from "react-native-paper";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
@@ -7,10 +7,14 @@ import * as Calendar from "expo-calendar";
 import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
 import moment from "moment";
+import Constants from "expo-constants";
+import { Text } from "../typography/text.component";
 
-const Done = styled.Text`
-  color: white;
-  font-size: 20px;
+const { eventDetails } = Constants.expoConfig;
+
+const Done = styled(Text)`
+  color: ${({ theme }) => theme.colors.text.inverse};
+  font-size: ${({ theme }) => theme.fontSizes.title};
 `;
 
 export const SummaryModal = () => {
@@ -53,19 +57,19 @@ export const SummaryModal = () => {
       "YYYY-MM-DD h:mm A"
     ).toDate();
 
-    const eventDetails = {
-      title: "Legacy Barbershop Appointment",
+    const event = {
+      title: eventDetails.title,
       startDate,
       endDate,
-      timeZone: "PST", // Adjust based on your event's time zone
-      location: "4690 W. Ann Rd.  Suite 1 North Las Vegas",
-      notes: "Check us out on social media!",
+      timeZone: eventDetails.timeZone, // Adjust based on your event's time zone
+      location: eventDetails.location,
+      notes: eventDetails.notes,
     };
 
     try {
       const response = await Calendar.createEventAsync(
         defaultCalendar.id,
-        eventDetails
+        event
       );
 
       setIsAppointmentAdded(response);

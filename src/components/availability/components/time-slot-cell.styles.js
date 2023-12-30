@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import { Text } from "../../typography/text.component";
 
 export const Cell = styled.View`
   flex-direction: row;
@@ -10,7 +11,7 @@ export const Cell = styled.View`
   background-color: rgba(255, 255, 255, 0);
   border-radius: 12px;
   border: 1px solid rgb(202, 202, 202);
-  font-weight: bold;
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
 
   ${(props) => {
     if (props.class === "selected")
@@ -18,13 +19,12 @@ export const Cell = styled.View`
   }}
 `;
 
-export const CellText = styled.Text`
+export const CellText = styled(Text)`
   color: rgb(0, 0, 0);
   margin-left: 5px;
-  font-weight: bold;
-
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
   ${(props) => {
     if (props.class === "selected")
       return `color:  ${props.theme.colors.text.inverse};`;
-  }}
+  }};
 `;

@@ -10,8 +10,10 @@ import { setEstimatedDuration } from "../../redux/cart/cartSlice";
 
 import { CartButton } from "./service-bottom-sheet.styles";
 import BottomSheet from "@gorhom/bottom-sheet";
+import { Text } from "../typography/text.component";
+import { Spacer } from "../spacer/spacer.component";
 
-const Text = styled.Text`
+const BtnText = styled(Text)`
   color: ${({ theme }) => theme.colors.text.inverse};
   font-weight: bold;
 `;
@@ -62,9 +64,11 @@ export const ServiceBottomSheet = () => {
           navigation.navigate("Choose a Time");
         }}
       >
-        <CartButton>
-          <Text>Choose Time</Text>
-        </CartButton>
+        <Spacer position="top" size="xl">
+          <CartButton>
+            <BtnText>Choose Time</BtnText>
+          </CartButton>
+        </Spacer>
       </TouchableOpacity>
     </BottomSheet>
   );

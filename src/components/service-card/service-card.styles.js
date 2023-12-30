@@ -1,5 +1,6 @@
 import styled from "styled-components/native";
 import { Dimensions } from "react-native";
+import { Text } from "../typography/text.component";
 
 const { width } = Dimensions.get("window");
 
@@ -31,20 +32,16 @@ export const Service = styled.View`
   ${(props) => (props.isAddOn ? "background-color: rgb(224, 224, 224);" : "")}
 `;
 
-export const Title = styled.Text`
-  margin: 0px;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 16px;
-  color: rgb(0, 0, 0);
+export const Title = styled(Text)`
+  font-size: ${({ theme }) => theme.fontSizes.title};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
 
   ${(props) => (props.isSelectedService ? "color:black" : " ")}
 `;
 
-export const Duration = styled.Text`
-  margin: 0px;
-  font-size: 13px;
-  font-weight: normal;
+export const Duration = styled(Text)`
+  font-size: ${({ theme }) => theme.fontSizes.caption};
+  font-weight: ${({ theme }) => theme.fontWeights.regular};
   line-height: 15px;
   letter-spacing: -0.08px;
   color: rgba(60, 60, 67, 0.6);
@@ -52,17 +49,16 @@ export const Duration = styled.Text`
   ${(props) => (props.isSelectedService ? "color:black" : "")}
 `;
 
-export const Price = styled.Text`
+export const Price = styled(Text)`
   position: absolute;
   right: 0px;
   bottom: 16px;
   padding: 4px 12px;
   border-radius: 8px 0px 0px 8px;
-  margin: 0px;
-  font-size: 12px;
-  font-weight: 600;
+
+  font-size: ${({ theme }) => theme.fontSizes.caption};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
   line-height: 16px;
-  color: black;
   background-color: rgba(186, 186, 186, 0.5);
 
   ${(props) =>

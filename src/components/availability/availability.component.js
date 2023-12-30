@@ -6,6 +6,7 @@ import moment from "moment";
 import { DAYSOFWEEK } from "../../util/date";
 import { View } from "react-native";
 import { TotalAvailable } from "./components/time-slot.component";
+import { Spacer } from "../spacer/spacer.component";
 
 export const Availability = () => {
   const selectedDate = useSelector((state) => state.cart.serviceDate);
@@ -38,9 +39,9 @@ export const Availability = () => {
         <TimeSlot schedule={schedule} selectedDayofWeek={selectedDayofWeek} />
       )}
       {!schedule && (
-        <View style={{ marginBottom: 10, marginTop: 10 }}>
+        <Spacer position="top" size="large">
           <TotalAvailable>0 available spots</TotalAvailable>
-        </View>
+        </Spacer>
       )}
     </SafeArea>
   );

@@ -13,11 +13,13 @@ import { usePhotoBottomSheet } from "../../contexts/PhotoBottomSheet.context";
 import { useSelector } from "react-redux";
 
 export const ProfessionalInfo = ({ professional = {}, index = 1 }) => {
+  const { profileImages } = useSelector((state) => state.profileImages);
+
   const [instagramHandle, setInstagramHandle] = useState(null);
   const [images, setImages] = useState(null);
+
   const { openBottomSheet, setHandle, setProfileImages } =
     usePhotoBottomSheet();
-  const { profileImages } = useSelector((state) => state.profileImages);
 
   useEffect(() => {
     if (
@@ -47,19 +49,11 @@ export const ProfessionalInfo = ({ professional = {}, index = 1 }) => {
 
   const getImageUrl = (index) => {
     let profile =
-      profileImages &&
+      images &&
       profileImages[professional.id].find((url) => url.includes("profile.jpg"));
 
     if (profile) return { uri: profile };
-
-    switch (index) {
-      case 0:
-        return require(`../../../assets/profile-image-1.jpg`);
-      case 1:
-        return require(`../../../assets/profile-image-2.jpg`);
-      default:
-        return require(`../../../assets/profile-image-3.jpg`);
-    }
+    else return require(`../../../assets/profile-image-1.jpg`);
   };
 
   const handleCameraPress = () => {
@@ -76,14 +70,14 @@ export const ProfessionalInfo = ({ professional = {}, index = 1 }) => {
         />
       </View>
       <Info>
-        <Text variant="label">{professional.name}</Text>
+        <Text variant="label">{professional.name.toUpperCase()}</Text>
 
         <View style={{ flexDirection: "row" }}>
           {images && (
             <TouchableOpacity onPress={handleCameraPress}>
               <IconButton
                 icon={() => (
-                  <FontAwesome name="camera-retro" size={28} color="black" />
+                  <FontAwesome name="camera-retro" size={25} color="black" />
                 )}
               />
             </TouchableOpacity>
@@ -92,7 +86,7 @@ export const ProfessionalInfo = ({ professional = {}, index = 1 }) => {
             <TouchableOpacity onPress={handleInstagramPress}>
               <IconButton
                 icon={() => (
-                  <FontAwesome name="instagram" size={28} color="black" />
+                  <FontAwesome name="instagram" size={25} color="black" />
                 )}
               />
             </TouchableOpacity>

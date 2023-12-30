@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import { Text } from "../typography/text.component";
 
 const standardStyling = `
 flex-direction: row;
@@ -14,53 +15,49 @@ export const Header = styled.View`
   align-items: center;
 `;
 
-export const Title = styled.Text`
-  font-size: 18px;
+export const Title = styled(Text)`
+  font-size: ${({ theme }) => theme.fontSizes.title};
   color: ${({ theme }) => theme.colors.text.inverse};
-  font-weight: bold;
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
 
-export const Duration = styled.Text`
-  font-size: 13px;
+export const Duration = styled(Text)`
+  font-size: ${({ theme }) => theme.fontSizes.button};
   color: ${({ theme }) => theme.colors.text.secondary};
 `;
 
 export const Content = styled.View`
-  margin-top: 20px;
   color: ${({ theme }) => theme.colors.text.inverse};
 `;
 
 export const Professional = styled.View`
   ${standardStyling}
-  margin-left: 15px;
 `;
 
-export const Name = styled.Text`
+export const Name = styled(Text)`
   color: ${({ theme }) => theme.colors.text.inverse};
-  font-weight: bold;
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
 
-export const Total = styled.Text`
+export const Total = styled(Text)`
   color: ${({ theme }) => theme.colors.text.inverse};
-  font-weight: bold;
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
 
-export const ServiceTitle = styled.Text`
+export const ServiceTitle = styled(Text)`
   color: ${({ theme }) => theme.colors.text.inverse};
-  font-weight: bold;
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
 
-export const ServicePrice = styled.Text`
+export const ServicePrice = styled(Text)`
   color: ${({ theme }) => theme.colors.text.inverse};
-  font-weight: bold;
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
 
 export const Service = styled.View`
   ${standardStyling}
-  margin-left: 35px;
 `;
 
 export const AddOns = styled.View`
   ${standardStyling}
-  margin-left: 35px;
 `;

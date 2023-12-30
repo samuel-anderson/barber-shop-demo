@@ -1,13 +1,13 @@
 import styled from "styled-components/native";
+import { Text } from "../../typography/text.component";
 
 export const CalendarContainer = styled.View`
   justify-content: center;
-  margin-bottom: 10px;
 `;
 
-export const DisplayDate = styled.Text`
+export const DisplayDate = styled(Text)`
   font-size: ${({ theme }) => theme.fontSizes.title};
-  font-weight: bold;
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
 
 export const DateContainer = styled.View`
@@ -31,7 +31,7 @@ export const DateAfter = styled.View`
   left: 50%;
   width: 4px;
   height: 4px;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.bg.primary};
   border-radius: 50%;
 `;
 
@@ -51,7 +51,7 @@ export const Date = styled.View`
   }}
 `;
 
-export const DateText = styled.Text`
+export const DateText = styled(Text)`
   color: ${({ theme }) => theme.colors.text.inverse};
 
   ${(props) => {
@@ -67,7 +67,7 @@ export const DateLabel = styled.View`
   align-items: center;
 `;
 
-export const DateLabelText = styled.Text`
+export const DateLabelText = styled(Text)`
   color: rgba(60, 60, 67, 0.6);
-  font-size: 12px;
+  font-size: ${({ theme }) => theme.fontSizes.caption};
 `;

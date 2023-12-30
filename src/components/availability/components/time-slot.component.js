@@ -12,10 +12,12 @@ import { SlotContainer } from "./time-slot.styles";
 import { TimeSlotCell } from "./time-slot-cell.component";
 import moment from "moment";
 import styled from "styled-components/native";
+import { Spacer } from "../../spacer/spacer.component";
+import { Text } from "../../typography/text.component";
 
-export const TotalAvailable = styled.Text`
+export const TotalAvailable = styled(Text)`
   font-size: ${({ theme }) => theme.fontSizes.title};
-  font-weight: bold;
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
 
 export const TimeSlot = ({ schedule }) => {
@@ -57,24 +59,20 @@ export const TimeSlot = ({ schedule }) => {
   const availableSpotsList = [].concat(...availableSpots);
   return (
     <>
-      <View style={{ marginBottom: 10, marginTop: 10 }}>
+      <Spacer position="top" size="large">
         <TotalAvailable>
           {availableSpotsList.length} available spots
         </TotalAvailable>
-      </View>
-
-      <ScrollView
-        style={{
-          marginBottom: 50,
-          marginTop: 20,
-        }}
-      >
-        <SlotContainer>
-          {availableSpotsList.map((slot, idx) => (
-            <TimeSlotCell key={idx} slot={slot} />
-          ))}
-        </SlotContainer>
-      </ScrollView>
+      </Spacer>
+      <Spacer position="top" size="large">
+        <ScrollView style={{ height: "62%" }}>
+          <SlotContainer>
+            {availableSpotsList.map((slot, idx) => (
+              <TimeSlotCell key={idx} slot={slot} />
+            ))}
+          </SlotContainer>
+        </ScrollView>
+      </Spacer>
     </>
   );
 };

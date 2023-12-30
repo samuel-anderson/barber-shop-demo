@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { setServiceDate, setStartTime } from "../../../redux/cart/cartSlice";
 import { TouchableOpacity, View } from "react-native";
+import { Spacer } from "../../spacer/spacer.component";
 
 export const Calendar = ({ clickHandler }) => {
   const dispatch = useDispatch();
@@ -49,37 +50,39 @@ export const Calendar = ({ clickHandler }) => {
 
   return (
     <CalendarContainer>
-      <View style={{ marginBottom: 10, marginTop: 10 }}>
+      <Spacer position="top" size="large">
         <DisplayDate>{displayDate}</DisplayDate>
-      </View>
-      <DateContainer>
-        {generateNext14Days().map((item, idx) => {
-          let today = moment().dayOfYear() === moment(item.value).dayOfYear();
+      </Spacer>
+      <Spacer position="top" size="large">
+        <DateContainer>
+          {generateNext14Days().map((item, idx) => {
+            let today = moment().dayOfYear() === moment(item.value).dayOfYear();
 
-          return (
-            <TouchableOpacity
-              key={idx}
-              disabled={getClass(item.value) === "notAvailable"}
-              onPress={() => {
-                if (getClass(item.value) !== "notAvailable") {
-                  setDisplayedDate(item.displayDate);
-                  dispatch(setServiceDate(item.value));
-                  dispatch(setStartTime(null));
-                }
-              }}
-            >
-              <Date class={getClass(item.value)}>
-                <DateBefore class={getClass(item.value)} />
-                <DateText>{item.date}</DateText>
-                {today && <DateAfter />}
-              </Date>
-              <DateLabel>
-                <DateLabelText>{item.day}</DateLabelText>
-              </DateLabel>
-            </TouchableOpacity>
-          );
-        })}
-      </DateContainer>
+            return (
+              <TouchableOpacity
+                key={idx}
+                disabled={getClass(item.value) === "notAvailable"}
+                onPress={() => {
+                  if (getClass(item.value) !== "notAvailable") {
+                    setDisplayedDate(item.displayDate);
+                    dispatch(setServiceDate(item.value));
+                    dispatch(setStartTime(null));
+                  }
+                }}
+              >
+                <Date class={getClass(item.value)}>
+                  <DateBefore class={getClass(item.value)} />
+                  <DateText>{item.date}</DateText>
+                  {today && <DateAfter />}
+                </Date>
+                <DateLabel>
+                  <DateLabelText>{item.day}</DateLabelText>
+                </DateLabel>
+              </TouchableOpacity>
+            );
+          })}
+        </DateContainer>
+      </Spacer>
     </CalendarContainer>
   );
 };
