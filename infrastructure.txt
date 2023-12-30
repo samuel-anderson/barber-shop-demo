@@ -15,3 +15,14 @@ FIREBASE
 - Extensions
     Twilio
 
+Animations
+- https://lottiefiles.com/
+
+Images
+- https://unsplash.com/
+
+Icons
+- https://icons.expo.fyi/Index
+
+Fonts
+- https://fonts.google.com/git
