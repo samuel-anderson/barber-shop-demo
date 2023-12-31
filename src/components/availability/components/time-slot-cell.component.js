@@ -16,7 +16,7 @@ export const TimeSlotCell = ({ slot }) => {
     return "notSelected";
   };
 
-  const clickHandler = () => {
+  const clickHandler = (slot) => {
     if (slot === startTime) dispatch(setStartTime(null));
     else dispatch(setStartTime(slot));
   };
@@ -43,7 +43,7 @@ export const TimeSlotCell = ({ slot }) => {
     }
   };
   return (
-    <TouchableOpacity onPress={clickHandler}>
+    <TouchableOpacity onPress={() => clickHandler(slot)}>
       <Cell class={slotClass}>
         {getIcon(slot)}
         <CellText class={slotClass}>{slot}</CellText>

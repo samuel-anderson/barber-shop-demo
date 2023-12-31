@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const SHOP_INITIAL_STATE = {
   loading: false,
   error: null,
+  info: null,
 };
 
 const shopSlice = createSlice({
@@ -13,8 +14,9 @@ const shopSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    fetchShopDataSuccess: (state) => {
+    fetchShopDataSuccess: (state, action) => {
       state.loading = false;
+      state.info = action.payload;
     },
     fetchShopDataFailure: (state, action) => {
       state.loading = false;

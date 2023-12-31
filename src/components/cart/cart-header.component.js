@@ -1,21 +1,27 @@
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { useSelector } from "react-redux";
 
 import { selectDurationTotal } from "../../redux/cart/cartSelector";
 import { showDurationTotal } from "../../util/cart";
 import { Header, Duration, Title, ExpandIcon } from "./cart.styles";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useTheme } from "styled-components";
+import styled, { useTheme } from "styled-components/native";
+import { Text } from "../../components/typography/text.component";
 
+export const Order = ({ durationTotal }) => {
+  return (
+    <Title>
+      Your Order <Duration>{showDurationTotal(durationTotal)}</Duration>
+    </Title>
+  );
+};
 export const CartHeader = ({ cartIndex, expandHandler }) => {
   const durationTotal = useSelector(selectDurationTotal);
   const theme = useTheme();
 
   return (
     <Header>
-      <Title>
-        Your Order <Duration>{showDurationTotal(durationTotal)}</Duration>
-      </Title>
+      <Order durationTotal={durationTotal} />
       <ExpandIcon>
         <TouchableOpacity onPress={() => expandHandler(1)}>
           {cartIndex == 0 && (

@@ -1,5 +1,5 @@
 import moment from "moment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   CalendarContainer,
   DateContainer,
@@ -24,6 +24,10 @@ export const Calendar = ({ clickHandler }) => {
   );
 
   const serviceDate = useSelector((state) => state.cart.serviceDate);
+
+  useEffect(() => {
+    dispatch(setServiceDate(moment().format("YYYY-MM-DD"))); //Set to today's date
+  }, []);
 
   const getClass = (date) => {
     if (!clickHandler(date)) return "notAvailable";

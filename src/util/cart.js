@@ -21,13 +21,7 @@ export const showProfessional = (professional) => {
   return professional ? professional.name : "Any Professional";
 };
 
-export const showAddOnsDesktop = (addOns) => {
-  if (addOns.length === 0) return "";
-  else if (addOns.length === 1) return ` with ${addOns.length} addon`;
-  else return ` with ${addOns.length} addons`;
-};
-
-export const showAddOnsMobile = (addOns) => {
+export const showAddOns = (addOns) => {
   if (addOns.length === 0) return "";
   else if (addOns.length === 1) return ` + ${addOns.length} addon`;
   else return ` + ${addOns.length} addons`;

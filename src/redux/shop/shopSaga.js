@@ -15,7 +15,10 @@ function* fetchShopWorker() {
   try {
     const shop_data = yield call(firebaseService.getCollection, "barber_shop");
 
-    yield put(fetchShopDataSuccess());
+    const shopInfo = shop_data.find((document) => {
+      return document.id === "shop";
+    });
+    yield put(fetchShopDataSuccess(shopInfo.data.items));
 
     const professionals = shop_data.find((document) => {
       return document.id === "professionals";

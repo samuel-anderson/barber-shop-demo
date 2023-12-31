@@ -26,10 +26,6 @@ export const Duration = styled(Text)`
   color: ${({ theme }) => theme.colors.text.secondary};
 `;
 
-export const Content = styled.View`
-  color: ${({ theme }) => theme.colors.text.inverse};
-`;
-
 export const Professional = styled.View`
   ${standardStyling}
 `;
@@ -45,12 +41,12 @@ export const Total = styled(Text)`
 `;
 
 export const ServiceTitle = styled(Text)`
-  color: ${({ theme }) => theme.colors.text.inverse};
+  color: ${({ theme }) => theme.colors.text.secondary};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
 
 export const ServicePrice = styled(Text)`
-  color: ${({ theme }) => theme.colors.text.inverse};
+  color: ${({ theme }) => theme.colors.text.secondary};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
 
@@ -62,7 +58,17 @@ export const AddOns = styled.View`
   ${standardStyling}
 `;
 
+export const AddOnsText = styled(Text)`
+  color: ${({ theme }) => theme.colors.text.secondary};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+`;
+
 export const ExpandIcon = styled.View`
   background-color: rgb(58, 58, 60);
   border-radius: 50px;
+`;
+
+export const ServiceDateTime = styled(Text)`
+  color: ${({ theme }) => theme.colors.text.inverse};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;

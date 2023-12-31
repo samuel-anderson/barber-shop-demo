@@ -1,70 +1,122 @@
-import { Spacer } from "../components/spacer/spacer.component";
-import styled from "styled-components/native";
-import { Platform } from "react-native";
-import { Text } from "../components/typography/text.component";
+import { Platform, View, StyleSheet, TouchableOpacity } from "react-native";
+import Constants from "expo-constants";
+import {
+  Background,
+  CompactImage,
+  Container,
+  Touchable,
+  IconText,
+  ErrorText,
+} from "./main.styles";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { TextInput } from "react-native-paper";
 
-const Container = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.2);
-`;
-
-const Touchable = styled.TouchableOpacity`
-  background-color: rgba(255, 255, 255, 0.6);
-  border-radius: 10px;
-  padding: 15px;
-  margin: 5px;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-`;
-
-const IconText = styled(Text)`
-  color: ${({ theme }) => theme.colors.text.primary};
-  font-weight: bold;
-  font-size: ${({ theme }) => theme.fontSizes.title};
-  text-align: center;
-  width: 80%;
-`;
-
-const Background = styled.ImageBackground.attrs({
-  source: require("../../assets/home.jpg"),
-})`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-`;
-
-const CompactImage = styled.Image`
-  width: 150px;
-  height: 150px;
-  position: absolute;
-  top: 0;
-`;
+const {
+  appFeatures: { dashboard },
+} = Constants.expoConfig;
 
 const isAndroid = Platform.OS === "android";
 
 export const MainScreen = ({ navigation }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [error, setError] = useState(null);
+
   const Image = isAndroid ? CompactWebview : CompactImage;
+  const shop = useSelector((state) => state.shop.info);
+  const [pin, setPin] = useState("");
+
+  useEffect(() => {
+    const getPin = async () => {
+      try {
+        const value = await AsyncStorage.getItem(`@shop-${shop.id}`);
+
+        if (value !== null) {
+          const { pin: pin } = JSON.parse(value);
+          pin === shop.accessCode && setIsAuthenticated(true);
+        } else console.log("NO PIN STORED");
+      } catch (e) {
+        console.log("error storing", e);
+      }
+    };
+    shop && getPin();
+  }, []);
+
+  const handlePinChange = (text) => {
+    // Limit input to 4 digits
+    if (/^\d{0,4}$/.test(text)) {
+      setPin(text);
+      if (text.length === 4) handlePinSubmit(text);
+    }
+  };
+
+  const handlePinSubmit = async (pin) => {
+    if (pin === shop.accessCode) {
+      setIsAuthenticated(true);
+      savePin(pin);
+    } else setError("PIN is incorrect");
+  };
+
+  const savePin = async (pin) => {
+    try {
+      const jsonValue = JSON.stringify({ pin: pin });
+      await AsyncStorage.setItem(`@shop-${shop.id}`, jsonValue); //Async storage
+    } catch (e) {
+      console.log("error storing", e);
+    }
+  };
 
   return (
     <Background>
       <Container>
         <Image source={require("../../assets/legacy.png")} />
 
-        <Touchable onPress={() => navigation.navigate("Choose a Barber")}>
-          <IconText>Book Appointment</IconText>
-        </Touchable>
-        <Spacer />
-        <Spacer />
-        <Touchable onPress={() => navigation.navigate("Access")}>
-          <IconText>Barber Access</IconText>
-        </Touchable>
+        {!isAuthenticated && (
+          <View style={styles.container}>
+            {error && <ErrorText variant="error">{error}</ErrorText>}
+            <TextInput
+              style={styles.pinInput}
+              keyboardType="numeric"
+              maxLength={4}
+              secureTextEntry
+              placeholderTextColor="rgba(255, 255, 255, 0.7)" // Set placeholder text color with transparency
+              value={pin}
+              error={!!error}
+              onChangeText={handlePinChange}
+            />
+          </View>
+        )}
+        {isAuthenticated && (
+          <>
+            <Touchable onPress={() => navigation.navigate("Choose a Barber")}>
+              <IconText>Book Appointment</IconText>
+            </Touchable>
+
+            {dashboard && (
+              <Touchable onPress={() => navigation.navigate("Access")}>
+                <IconText>Barber Access</IconText>
+              </Touchable>
+            )}
+          </>
+        )}
       </Container>
     </Background>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  pinInput: {
+    backgroundColor: "rgba(255, 255, 255, 0.4)", // Set transparent background color
+    fontSize: 60,
+    width: 200,
+    padding: 10,
+    textAlign: "center",
+  },
+});

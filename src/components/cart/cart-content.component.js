@@ -3,13 +3,8 @@ import {
   selectAddOnTotal,
   selectOrderTotal,
 } from "../../redux/cart/cartSelector";
+import { showProfessional, showOrderTotal, showAddOns } from "../../util/cart";
 import {
-  showProfessional,
-  showOrderTotal,
-  showAddOnsMobile,
-} from "../../util/cart";
-import {
-  Content,
   Professional,
   Service,
   AddOns,
@@ -17,49 +12,74 @@ import {
   Total,
   ServiceTitle,
   ServicePrice,
+  AddOnsText,
+  ServiceDateTime,
 } from "./cart.styles";
-import styled from "styled-components/native";
 import { Spacer } from "../../components/spacer/spacer.component";
-import { Text } from "../typography/text.component";
+import moment from "moment";
+import { View } from "react-native";
 
-const AddOnsText = styled(Text)`
-  color: ${({ theme }) => theme.colors.text.inverse};
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-`;
+export const ProfessionalInfo = ({ professional, orderTotal }) => {
+  return (
+    <Spacer position="left" size="large">
+      <Professional>
+        <Name>{showProfessional(professional)}</Name>
+        <Total>{showOrderTotal(orderTotal)}</Total>
+      </Professional>
+    </Spacer>
+  );
+};
 
+export const ServiceInfo = ({ service }) => {
+  return (
+    <Spacer position="left" size="xl">
+      <Service>
+        <ServiceTitle>{service && service.title.toUpperCase()}</ServiceTitle>
+        <ServicePrice>${service && service.price}</ServicePrice>
+      </Service>
+    </Spacer>
+  );
+};
+
+export const DateInfo = ({ serviceDate, startTime }) => {
+  return (
+    <View
+      style={{
+        flexDirection: "row",
+        justifyContent: "flex-end",
+      }}
+    >
+      {startTime && (
+        <ServiceDateTime>
+          {moment(serviceDate).format("MMM. Do")} @ {startTime}
+        </ServiceDateTime>
+      )}
+    </View>
+  );
+};
 export const CartContent = () => {
-  const { professional, service, addOns } = useSelector((state) => state.cart);
+  const { professional, service, addOns, serviceDate, startTime } = useSelector(
+    (state) => state.cart
+  );
+
   const addOnTotal = useSelector(selectAddOnTotal);
   const orderTotal = useSelector(selectOrderTotal);
 
   return (
     <Spacer position="top" size="large">
-      <Content>
-        <Spacer position="left" size="large">
-          <Professional>
-            <Name>{showProfessional(professional)}</Name>
-            <Total>{showOrderTotal(orderTotal)}</Total>
-          </Professional>
-        </Spacer>
+      <ProfessionalInfo professional={professional} orderTotal={orderTotal} />
+      <ServiceInfo service={service} />
+
+      {addOns.length > 0 && (
         <Spacer position="left" size="xl">
-          <Service>
-            <ServiceTitle>
-              {service && service.title.toUpperCase()}
-            </ServiceTitle>
-            <ServicePrice>${service && service.price}</ServicePrice>
-          </Service>
+          <AddOns>
+            <AddOnsText>{showAddOns(addOns).replace("with", "+")}</AddOnsText>
+            <AddOnsText>${addOnTotal}</AddOnsText>
+          </AddOns>
         </Spacer>
-        {addOns.length > 0 && (
-          <Spacer position="left" size="xl">
-            <AddOns>
-              <AddOnsText>
-                {showAddOnsMobile(addOns).replace("with", "+")}
-              </AddOnsText>
-              <AddOnsText>${addOnTotal}</AddOnsText>
-            </AddOns>
-          </Spacer>
-        )}
-      </Content>
+      )}
+
+      <DateInfo serviceDate={serviceDate} startTime={startTime} />
     </Spacer>
   );
 };
