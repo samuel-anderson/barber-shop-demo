@@ -31,18 +31,19 @@ export const MainScreen = ({ navigation }) => {
   useEffect(() => {
     const getPin = async () => {
       try {
+        //await AsyncStorage.clear();
         const value = await AsyncStorage.getItem(`@shop-${shop.id}`);
 
         if (value !== null) {
           const { pin: pin } = JSON.parse(value);
           pin === shop.accessCode && setIsAuthenticated(true);
-        } else console.log("NO PIN STORED");
+        } else setIsAuthenticated(false);
       } catch (e) {
         console.log("error storing", e);
       }
     };
     shop && getPin();
-  }, []);
+  }, [shop]);
 
   const handlePinChange = (text) => {
     // Limit input to 4 digits
@@ -81,6 +82,7 @@ export const MainScreen = ({ navigation }) => {
               keyboardType="numeric"
               maxLength={4}
               secureTextEntry
+              placeholder="Enter PIN"
               placeholderTextColor="rgba(255, 255, 255, 0.7)" // Set placeholder text color with transparency
               value={pin}
               error={!!error}
@@ -115,7 +117,8 @@ const styles = StyleSheet.create({
   pinInput: {
     backgroundColor: "rgba(255, 255, 255, 0.4)", // Set transparent background color
     fontSize: 60,
-    width: 200,
+    minWidth: "80%",
+    height: 50,
     padding: 10,
     textAlign: "center",
   },
