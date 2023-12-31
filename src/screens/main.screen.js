@@ -7,10 +7,11 @@ import {
   Touchable,
   IconText,
   ErrorText,
+  TextInputContainer,
+  Pin,
 } from "./main.styles";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { TextInput } from "react-native-paper";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -31,6 +32,7 @@ export const MainScreen = ({ navigation }) => {
   useEffect(() => {
     const getPin = async () => {
       try {
+        //await AsyncStorage.clear();
         const value = await AsyncStorage.getItem(`@shop-${shop.id}`);
 
         if (value !== null) {
@@ -74,10 +76,9 @@ export const MainScreen = ({ navigation }) => {
         <Image source={require("../../assets/legacy.png")} />
 
         {!isAuthenticated && (
-          <View style={styles.container}>
+          <TextInputContainer>
             {error && <ErrorText variant="error">{error}</ErrorText>}
-            <TextInput
-              style={styles.pinInput}
+            <Pin
               keyboardType="numeric"
               maxLength={4}
               secureTextEntry
@@ -87,7 +88,7 @@ export const MainScreen = ({ navigation }) => {
               error={!!error}
               onChangeText={handlePinChange}
             />
-          </View>
+          </TextInputContainer>
         )}
         {isAuthenticated && (
           <>
@@ -106,19 +107,3 @@ export const MainScreen = ({ navigation }) => {
     </Background>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  pinInput: {
-    backgroundColor: "rgba(255, 255, 255, 0.4)", // Set transparent background color
-    fontSize: 60,
-    minWidth: "80%",
-    height: 50,
-    padding: 10,
-    textAlign: "center",
-  },
-});

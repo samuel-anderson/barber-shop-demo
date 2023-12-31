@@ -1,11 +1,12 @@
 import { Text } from "../components/typography/text.component";
+import { TextInput } from "react-native-paper";
+
 import styled from "styled-components/native";
 
 export const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-
   width: 100%;
   height: 100%;
   background-color: rgba(255, 255, 255, 0.2);
@@ -47,4 +48,19 @@ export const CompactImage = styled.Image`
 export const ErrorText = styled(Text)`
   font-size: ${({ theme }) => theme.sizes[2]};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
+`;
+
+export const TextInputContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Pin = styled(TextInput)`
+  background-color: rgba(255, 255, 255, 0.4);
+  font-size: ${({ theme }) => theme.fontSizes.h2};
+  min-width: 80%;
+  height: 50px;
+  padding: 10px;
+  text-align: center;
 `;

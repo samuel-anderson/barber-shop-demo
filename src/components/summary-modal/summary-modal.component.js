@@ -7,10 +7,7 @@ import * as Calendar from "expo-calendar";
 import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
 import moment from "moment";
-import Constants from "expo-constants";
 import { Text } from "../typography/text.component";
-
-const { eventDetails } = Constants.expoConfig;
 
 const Done = styled(Text)`
   color: ${({ theme }) => theme.colors.text.inverse};
@@ -19,7 +16,7 @@ const Done = styled(Text)`
 
 export const SummaryModal = () => {
   const navigation = useNavigation();
-
+  const shop = useSelector((state) => state.shop.info);
   const cart = useSelector((state) => state.cart);
   const [isModalVisible, setModalVisible] = useState(false);
   const [isAppointmentAdded, setIsAppointmentAdded] = useState(null);
@@ -58,12 +55,13 @@ export const SummaryModal = () => {
     ).toDate();
 
     const event = {
-      title: eventDetails.title,
+      title: shop.name,
       startDate,
       endDate,
-      timeZone: eventDetails.timeZone, // Adjust based on your event's time zone
-      location: eventDetails.location,
-      notes: eventDetails.notes,
+      timeZone: shop.timeZone, // Adjust based on your event's time zone
+      location: shop.address,
+      notes: shop.eventNotes,
+      //set alarms
     };
 
     try {
