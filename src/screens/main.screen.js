@@ -31,7 +31,6 @@ export const MainScreen = ({ navigation }) => {
   useEffect(() => {
     const getPin = async () => {
       try {
-        //await AsyncStorage.clear();
         const value = await AsyncStorage.getItem(`@shop-${shop.id}`);
 
         if (value !== null) {
