@@ -21,7 +21,7 @@ const {
 const isAndroid = Platform.OS === "android";
 
 export const MainScreen = ({ navigation }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [error, setError] = useState(null);
 
   const Image = isAndroid ? CompactWebview : CompactImage;
