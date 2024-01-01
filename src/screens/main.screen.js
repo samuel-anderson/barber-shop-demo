@@ -5,7 +5,7 @@ import {
   CompactImage,
   Container,
   Touchable,
-  IconText,
+  ButtonText,
   ErrorText,
   TextInputContainer,
   Pin,
@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { WithBackground } from "../components/with-background/with-background.component.component";
 
 const {
   appFeatures: { dashboard },
@@ -71,39 +72,35 @@ export const MainScreen = ({ navigation }) => {
   };
 
   return (
-    <Background>
-      <Container>
-        <Image source={require("../../assets/legacy.png")} />
+    <WithBackground>
+      {!isAuthenticated && (
+        <TextInputContainer>
+          {error && <ErrorText variant="error">{error}</ErrorText>}
+          <Pin
+            keyboardType="numeric"
+            maxLength={4}
+            secureTextEntry
+            placeholder="Enter PIN"
+            placeholderTextColor="rgba(255, 255, 255, 0.7)" // Set placeholder text color with transparency
+            value={pin}
+            error={!!error}
+            onChangeText={handlePinChange}
+          />
+        </TextInputContainer>
+      )}
+      {isAuthenticated && (
+        <>
+          <Touchable onPress={() => navigation.navigate("Choose a Barber")}>
+            <ButtonText>Book Appointment</ButtonText>
+          </Touchable>
 
-        {!isAuthenticated && (
-          <TextInputContainer>
-            {error && <ErrorText variant="error">{error}</ErrorText>}
-            <Pin
-              keyboardType="numeric"
-              maxLength={4}
-              secureTextEntry
-              placeholder="Enter PIN"
-              placeholderTextColor="rgba(255, 255, 255, 0.7)" // Set placeholder text color with transparency
-              value={pin}
-              error={!!error}
-              onChangeText={handlePinChange}
-            />
-          </TextInputContainer>
-        )}
-        {isAuthenticated && (
-          <>
-            <Touchable onPress={() => navigation.navigate("Choose a Barber")}>
-              <IconText>Book Appointment</IconText>
+          {dashboard && (
+            <Touchable onPress={() => navigation.navigate("Access")}>
+              <ButtonText>Barber Access</ButtonText>
             </Touchable>
-
-            {dashboard && (
-              <Touchable onPress={() => navigation.navigate("Access")}>
-                <IconText>Barber Access</IconText>
-              </Touchable>
-            )}
-          </>
-        )}
-      </Container>
-    </Background>
+          )}
+        </>
+      )}
+    </WithBackground>
   );
 };

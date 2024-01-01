@@ -9,7 +9,7 @@ import { ChooseServiceScreen } from "../screens/client/choose-service.screen";
 import { ChooseTimeScreen } from "../screens/client/choose-time.screen";
 import { SubmitAppointmentScreen } from "../screens/appointment/submit-appointment.screen";
 
-import { BarberAccessScreen } from "../screens/auth/barber-access.screen";
+import { AccessScreen } from "../screens/auth/access.screen";
 import { LoginScreen } from "../screens/auth/login.screen";
 import { RegisterScreen } from "../screens/auth/register.sreen";
 
@@ -17,7 +17,6 @@ import { fetchShopDataStart } from "../redux/shop/shopSlice";
 import { checkUserSession } from "../redux/user/userSlice";
 import useFirebase from "../hooks/useFirebase";
 import { useTheme } from "styled-components";
-import { fecthStorage } from "../util/firebase";
 
 const ClientStack = createStackNavigator();
 
@@ -72,7 +71,7 @@ export const ClientNavigator = () => {
 
       {/* Authentication */}
       <ClientStack.Group>
-        <ClientStack.Screen name={"Access"} component={BarberAccessScreen} />
+        <ClientStack.Screen name={"Access"} component={AccessScreen} />
         <ClientStack.Screen name={"Login"} component={LoginScreen} />
         <ClientStack.Screen name={"Register"} component={RegisterScreen} />
       </ClientStack.Group>

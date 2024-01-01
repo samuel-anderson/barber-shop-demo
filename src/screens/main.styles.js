@@ -22,7 +22,7 @@ export const Touchable = styled.TouchableOpacity`
   flex-direction: row;
 `;
 
-export const IconText = styled(Text)`
+export const ButtonText = styled(Text)`
   color: ${({ theme }) => theme.colors.text.primary};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   font-size: ${({ theme }) => theme.fontSizes.title};

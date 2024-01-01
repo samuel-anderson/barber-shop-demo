@@ -12,6 +12,7 @@ import BottomSheet from "@gorhom/bottom-sheet";
 import { Spacer } from "../spacer/spacer.component";
 import { Text } from "../typography/text.component";
 import styled from "styled-components/native";
+import { CustomButton } from "../custom-button/custom-button.component";
 
 const BtnText = styled(Text)`
   color: ${({ theme }) => theme.colors.text.inverse};
@@ -44,6 +45,11 @@ export const TimeBottomSheet = () => {
 
   const handleIconClick = (index) => bottomSheetRef.current.snapToIndex(index);
 
+  const handleNavigation = () => {
+    dispatch(setEstimatedDuration(durationTotal));
+    navigation.navigate("Book Appointment");
+  };
+
   return (
     <BottomSheet
       ref={bottomSheetRef}
@@ -55,18 +61,9 @@ export const TimeBottomSheet = () => {
       <Cart handleIconClick={handleIconClick} cartIndex={cartIndex} />
 
       {startTime && (
-        <TouchableOpacity
-          onPress={() => {
-            dispatch(setEstimatedDuration(durationTotal));
-            navigation.navigate("Book Appointment");
-          }}
-        >
-          <Spacer position="top" size="xl">
-            <CartButton>
-              <BtnText>I'm done</BtnText>
-            </CartButton>
-          </Spacer>
-        </TouchableOpacity>
+        <Spacer position="top" size="medium">
+          <CustomButton text={"I'm done"} pressHandler={handleNavigation} />
+        </Spacer>
       )}
     </BottomSheet>
   );

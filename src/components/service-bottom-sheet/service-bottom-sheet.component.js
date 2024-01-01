@@ -1,22 +1,15 @@
 import { useRef, useMemo, useEffect, useState, useCallback } from "react";
-import styled, { useTheme } from "styled-components";
+import { useTheme } from "styled-components";
 
 import { Cart } from "../cart/cart.component";
-import { TouchableOpacity } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { selectDurationTotal } from "../../redux/cart/cartSelector";
 import { setEstimatedDuration } from "../../redux/cart/cartSlice";
 
-import { CartButton } from "./service-bottom-sheet.styles";
 import BottomSheet from "@gorhom/bottom-sheet";
-import { Text } from "../typography/text.component";
 import { Spacer } from "../spacer/spacer.component";
-
-const BtnText = styled(Text)`
-  color: ${({ theme }) => theme.colors.text.inverse};
-  font-weight: bold;
-`;
+import { CustomButton } from "../custom-button/custom-button.component";
 
 export const ServiceBottomSheet = () => {
   const dispatch = useDispatch();
@@ -48,6 +41,11 @@ export const ServiceBottomSheet = () => {
 
   const handleIconClick = (index) => bottomSheetRef.current.snapToIndex(index);
 
+  const handleNavigation = () => {
+    dispatch(setEstimatedDuration(durationTotal));
+    navigation.navigate("Choose a Time");
+  };
+
   return (
     <BottomSheet
       ref={bottomSheetRef}
@@ -58,18 +56,9 @@ export const ServiceBottomSheet = () => {
     >
       <Cart handleIconClick={handleIconClick} cartIndex={cartIndex} />
 
-      <TouchableOpacity
-        onPress={() => {
-          dispatch(setEstimatedDuration(durationTotal));
-          navigation.navigate("Choose a Time");
-        }}
-      >
-        <Spacer position="top" size="xl">
-          <CartButton>
-            <BtnText>Choose Time</BtnText>
-          </CartButton>
-        </Spacer>
-      </TouchableOpacity>
+      <Spacer position="top" size="medium">
+        <CustomButton text={"Choose Time"} pressHandler={handleNavigation} />
+      </Spacer>
     </BottomSheet>
   );
 };
