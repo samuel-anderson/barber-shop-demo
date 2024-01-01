@@ -101,14 +101,14 @@ export const usePhotoBottomSheet = () => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "start",
     padding: 16,
     flexWrap: "wrap",
     marginTop: 40,
   },
   thumbnail: {
-    width: 100,
-    height: 100,
+    width: 120,
+    height: 120,
     borderRadius: 8,
     margin: 3,
   },

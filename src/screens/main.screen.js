@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { WithBackground } from "../components/with-background/with-background.component.component";
+import { CustomButton } from "../components/custom-button/custom-button.component";
 
 const {
   appFeatures: { dashboard },
@@ -90,14 +91,17 @@ export const MainScreen = ({ navigation }) => {
       )}
       {isAuthenticated && (
         <>
-          <Touchable onPress={() => navigation.navigate("Choose a Barber")}>
-            <ButtonText>Book Appointment</ButtonText>
-          </Touchable>
-
+          <CustomButton
+            variant="transparent"
+            text="Book Appointment"
+            pressHandler={() => navigation.navigate("Choose a Barber")}
+          />
           {dashboard && (
-            <Touchable onPress={() => navigation.navigate("Access")}>
-              <ButtonText>Barber Access</ButtonText>
-            </Touchable>
+            <CustomButton
+              variant="transparent"
+              text="Barber Access"
+              pressHandler={() => navigation.navigate("Access")}
+            />
           )}
         </>
       )}

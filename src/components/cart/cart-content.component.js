@@ -17,7 +17,7 @@ import {
 } from "./cart.styles";
 import { Spacer } from "../../components/spacer/spacer.component";
 import moment from "moment";
-import { View } from "react-native";
+import { View, Image } from "react-native";
 
 export const ProfessionalInfo = ({ professional, orderTotal }) => {
   return (
@@ -57,6 +57,24 @@ export const DateInfo = ({ serviceDate, startTime }) => {
     </View>
   );
 };
+
+export const ProfileImage = ({ profileImages, professional }) => {
+  if (professional && profileImages) {
+    const urls = profileImages[professional.id];
+    const profile = urls.find((url) => url.includes("profile.jpg"));
+
+    return (
+      profile && (
+        <Image
+          source={{ uri: profile }}
+          style={{ width: 40, height: 40, borderRadius: 50 }}
+        />
+      )
+    );
+  }
+
+  return null;
+};
 export const CartContent = () => {
   const { professional, service, addOns, serviceDate, startTime } = useSelector(
     (state) => state.cart
@@ -64,22 +82,36 @@ export const CartContent = () => {
 
   const addOnTotal = useSelector(selectAddOnTotal);
   const orderTotal = useSelector(selectOrderTotal);
+  const { profileImages } = useSelector((state) => state.profileImages);
 
   return (
-    <Spacer position="top" size="large">
-      <ProfessionalInfo professional={professional} orderTotal={orderTotal} />
-      <ServiceInfo service={service} />
+    <Spacer position="top" size="xl">
+      <View style={{ flexDirection: "row" }}>
+        <ProfileImage
+          profileImages={profileImages}
+          professional={professional}
+        />
+        <View style={{ flex: 1 }}>
+          <ProfessionalInfo
+            professional={professional}
+            orderTotal={orderTotal}
+          />
+          <ServiceInfo service={service} />
 
-      {addOns.length > 0 && (
-        <Spacer position="left" size="xl">
-          <AddOns>
-            <AddOnsText>{showAddOns(addOns).replace("with", "+")}</AddOnsText>
-            <AddOnsText>${addOnTotal}</AddOnsText>
-          </AddOns>
-        </Spacer>
-      )}
+          {addOns.length > 0 && (
+            <Spacer position="left" size="xl">
+              <AddOns>
+                <AddOnsText>
+                  {showAddOns(addOns).replace("with", "+")}
+                </AddOnsText>
+                <AddOnsText>${addOnTotal}</AddOnsText>
+              </AddOns>
+            </Spacer>
+          )}
 
-      <DateInfo serviceDate={serviceDate} startTime={startTime} />
+          <DateInfo serviceDate={serviceDate} startTime={startTime} />
+        </View>
+      </View>
     </Spacer>
   );
 };

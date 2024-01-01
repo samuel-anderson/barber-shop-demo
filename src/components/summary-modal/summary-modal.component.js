@@ -8,6 +8,8 @@ import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
 import moment from "moment";
 import { Text } from "../typography/text.component";
+import { CustomButton } from "../custom-button/custom-button.component";
+import { Spacer } from "../spacer/spacer.component";
 
 const Done = styled(Text)`
   color: ${({ theme }) => theme.colors.text.inverse};
@@ -74,6 +76,11 @@ export const SummaryModal = () => {
     } catch (e) {}
   };
 
+  const handleNavigation = () => {
+    setModalVisible(false);
+    navigation.navigate("Home");
+  };
+
   return (
     <Modal
       animationType="slide"
@@ -91,24 +98,19 @@ export const SummaryModal = () => {
             </View>
           )}
 
-          {!isAppointmentAdded ? (
-            <TouchableOpacity onPress={requestAccessToCalendar}>
-              <Button style={styles.button}>
-                <Text style={styles.closeBtn}>Add to Calendar</Text>
-              </Button>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              onPress={() => {
-                setModalVisible(false);
-                navigation.navigate("Home");
-              }}
-            >
-              <Button style={styles.button}>
-                <Text style={styles.closeBtn}>Return to Main</Text>
-              </Button>
-            </TouchableOpacity>
-          )}
+          <Spacer position="top" size="medium">
+            {!isAppointmentAdded ? (
+              <CustomButton
+                text="Add to Calendar"
+                pressHandler={requestAccessToCalendar}
+              />
+            ) : (
+              <CustomButton
+                text="Return to Main"
+                pressHandler={handleNavigation}
+              />
+            )}
+          </Spacer>
         </View>
       </View>
     </Modal>

@@ -28,7 +28,7 @@ export const ProfessionalInfo = ({ professional = {}, index = 1 }) => {
     ) {
       setImages(profileImages[professional.id]);
     }
-  });
+  }, [profileImages, professional]);
 
   useEffect(() => {
     let obj =
@@ -47,7 +47,7 @@ export const ProfessionalInfo = ({ professional = {}, index = 1 }) => {
     );
   };
 
-  const getImageUrl = (index) => {
+  const getImageUrl = () => {
     let profile =
       images &&
       profileImages[professional.id].find((url) => url.includes("profile.jpg"));
@@ -64,10 +64,7 @@ export const ProfessionalInfo = ({ professional = {}, index = 1 }) => {
   return (
     <ProfessionalCard elevation={2}>
       <View>
-        <ProfessionalCardCover
-          key={professional.name}
-          source={getImageUrl(index)}
-        />
+        <ProfessionalCardCover key={professional.name} source={getImageUrl()} />
       </View>
       <Info>
         <Text variant="label">{professional.name.toUpperCase()}</Text>

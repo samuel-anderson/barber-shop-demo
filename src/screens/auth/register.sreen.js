@@ -1,10 +1,5 @@
-import { View, Text } from "react-native";
-import { Button } from "react-native-paper";
+import { WithBackground } from "../../components/with-background/with-background.component.component";
 
 export const RegisterScreen = ({ navigation }) => {
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Register</Text>
-    </View>
-  );
+  return <WithBackground></WithBackground>;
 };

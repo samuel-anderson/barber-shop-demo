@@ -25,9 +25,38 @@ const DefaultBtn = ({ text, pressHandler }) => {
   );
 };
 
+export const Touchable = styled.TouchableOpacity`
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
+  padding: 15px;
+  margin: 5px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+`;
+
+export const TransText = styled(Text)`
+  color: ${({ theme }) => theme.colors.text.primary};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  font-size: ${({ theme }) => theme.fontSizes.title};
+  text-align: center;
+  width: 80%;
+`;
+
+const TransBtn = ({ text, pressHandler }) => {
+  return (
+    <Touchable onPress={pressHandler}>
+      <TransText>{text}</TransText>
+    </Touchable>
+  );
+};
+
 const variants = {
   default: ({ text, pressHandler }) => (
     <DefaultBtn text={text} pressHandler={pressHandler} />
+  ),
+  transparent: ({ text, pressHandler }) => (
+    <TransBtn text={text} pressHandler={pressHandler} />
   ),
 };
 
