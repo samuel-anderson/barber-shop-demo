@@ -6,6 +6,7 @@ FIREBASE
         appointments {date {addOns, clientName, clientPhoneNumber, estimatedDuration, service, serviceDate, startTime}}
         professionals {id, email, name, phoneNumber, role, schedule {monday, tuesday, wednesday, thursday, friday}, socialMedia}
         services {duration, id, price, title}
+        shop {id, name, address, timeZone, accessCode, eventNotes}
 - Storage
     profile_images
         samuel_anderson

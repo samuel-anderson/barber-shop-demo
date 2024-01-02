@@ -46,7 +46,7 @@ export const professionals = [
     id: "samuel_anderson",
     name: "Samuel Anderson",
     phoneNumber: "+17602774923",
-    email: "sam@me.com",
+    email: "sam@sam.com",
     role: "admin",
     socialMedia: [
       {

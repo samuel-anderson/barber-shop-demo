@@ -23,13 +23,15 @@ import {
 const ERRORS = {
   "auth/email-already-in-use": "*Email already has a registered account*",
   "auth/weak-password": "*Password should be at least 6 characters*",
+  "auth/too-many-requests": "*Too many attempts*",
 };
 
 export function* getSnapshotFromUserAuth(userAuth) {
   try {
     const userSnapshot = yield call(createUserDocumentFromAuth, userAuth);
-
-    yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
+    yield put(
+      signInSuccess({ id: userSnapshot.id, email: userSnapshot.data().email })
+    );
   } catch (error) {
     yield put(signInFailed(error.code));
   }
@@ -54,8 +56,6 @@ export function* signInWithEmail({ payload: { email, password } }) {
       email,
       password
     );
-
-    console.log("Sign In Success: ", user);
 
     yield call(getSnapshotFromUserAuth, user);
   } catch (error) {
@@ -86,7 +86,6 @@ export function* signUp({ payload: { email, password } }) {
 export function* signOut() {
   try {
     yield call(signOutUser);
-    console.log("Sign Out Success");
     yield put(signOutSuccess());
   } catch (error) {
     console.log("Sign Out Failed");

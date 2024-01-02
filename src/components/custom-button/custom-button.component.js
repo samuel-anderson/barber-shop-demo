@@ -25,8 +25,12 @@ const DefaultBtn = ({ text, pressHandler }) => {
   );
 };
 
+const whiteOpac = `rgba(255, 255, 255, 0.6);`;
+const blackOpac = `rgba(0, 0, 0, 0.9);`;
+
 export const Touchable = styled.TouchableOpacity`
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: ${({ type }) =>
+    type == "inverse" ? blackOpac : whiteOpac};
   border-radius: 10px;
   padding: 15px;
   margin: 5px;
@@ -36,17 +40,18 @@ export const Touchable = styled.TouchableOpacity`
 `;
 
 export const TransText = styled(Text)`
-  color: ${({ theme }) => theme.colors.text.primary};
+  color: ${({ theme, type }) =>
+    type == "inverse" ? theme.colors.text.inverse : theme.colors.text.primary};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   font-size: ${({ theme }) => theme.fontSizes.title};
   text-align: center;
   width: 80%;
 `;
 
-const TransBtn = ({ text, pressHandler }) => {
+const TransBtn = ({ text, pressHandler, type = "default" }) => {
   return (
-    <Touchable onPress={pressHandler}>
-      <TransText>{text}</TransText>
+    <Touchable onPress={pressHandler} type={type}>
+      <TransText type={type}>{text}</TransText>
     </Touchable>
   );
 };
@@ -57,6 +62,9 @@ const variants = {
   ),
   transparent: ({ text, pressHandler }) => (
     <TransBtn text={text} pressHandler={pressHandler} />
+  ),
+  transparentInverse: ({ text, pressHandler }) => (
+    <TransBtn text={text} pressHandler={pressHandler} type="inverse" />
   ),
 };
 
