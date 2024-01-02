@@ -41,7 +41,10 @@ export function* isUserAuthenticated() {
   try {
     const userAuth = yield call(getCurrentUser);
 
-    if (!userAuth) return;
+    if (!userAuth) {
+      yield put(userNotAuthicated());
+      return;
+    }
 
     yield call(getSnapshotFromUserAuth, userAuth);
   } catch (error) {
