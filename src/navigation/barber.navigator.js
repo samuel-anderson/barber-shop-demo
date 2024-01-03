@@ -4,9 +4,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { View } from "react-native";
 import { Text } from "../components/typography/text.component";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signOutStart } from "../redux/user/userSlice";
 import { CustomButton } from "../components/custom-button/custom-button.component";
+import { selectBarberWithCurrentUser } from "../redux/professionals/professionalsSelector";
 import { useTheme } from "styled-components/native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -17,6 +18,7 @@ const TAB_ICON = {
   Profile: { active: "person", inactive: "person-outline" },
   Appointments: { active: "calendar", inactive: "calendar-outline" },
   Settings: { active: "settings", inactive: "settings-outline" },
+  Admin: { active: "folder-open", inactive: "folder-open-outline" },
 };
 
 const Component1 = () => {
@@ -42,6 +44,7 @@ const Component1 = () => {
 };
 export const BarberNavigator = () => {
   const theme = useTheme();
+  const currentUser = useSelector(selectBarberWithCurrentUser);
 
   //Abstract icon based on route name
   const createScreenOptions = ({ route }) => {
@@ -82,6 +85,9 @@ export const BarberNavigator = () => {
       <Tab.Screen name="Profile" component={Component1} />
       <Tab.Screen name="Appointments" component={Component1} />
       <Tab.Screen name="Settings" component={Component1} />
+      {currentUser && currentUser.role == "admin" && (
+        <Tab.Screen name="Admin" component={Component1} />
+      )}
     </Tab.Navigator>
   );
 };
