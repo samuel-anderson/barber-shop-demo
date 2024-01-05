@@ -1,13 +1,15 @@
 import React from "react";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
-import { View } from "react-native";
+import { Settings } from "../screens/barber/settings.component";
 import { Text } from "../components/typography/text.component";
-import { useDispatch, useSelector } from "react-redux";
-import { signOutStart } from "../redux/user/userSlice";
-import { CustomButton } from "../components/custom-button/custom-button.component";
+import { useSelector } from "react-redux";
+import { Profile } from "../screens/barber/profile.component";
+import { Reports } from "../screens/barber/reports.component";
+
 import { selectBarberWithCurrentUser } from "../redux/professionals/professionalsSelector";
+import { AppointmentsNavigator } from "./appointments.navigator";
+import { AdminNavigator } from "./admin.navigator";
 import { useTheme } from "styled-components/native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -17,31 +19,11 @@ const Tab = createBottomTabNavigator();
 const TAB_ICON = {
   Profile: { active: "person", inactive: "person-outline" },
   Appointments: { active: "calendar", inactive: "calendar-outline" },
+  Reports: { active: "folder-open", inactive: "folder-open-outline" },
   Settings: { active: "settings", inactive: "settings-outline" },
-  Admin: { active: "folder-open", inactive: "folder-open-outline" },
+  Admin: { active: "construct", inactive: "construct-outline" },
 };
 
-const Component1 = () => {
-  const dispatch = useDispatch();
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <View style={{ width: "80%" }}>
-        <CustomButton
-          text={"Sign Out"}
-          pressHandler={() => dispatch(signOutStart())}
-          variant="dark"
-        />
-      </View>
-    </View>
-  );
-};
 export const BarberNavigator = () => {
   const theme = useTheme();
   const currentUser = useSelector(selectBarberWithCurrentUser);
@@ -53,7 +35,7 @@ export const BarberNavigator = () => {
       tabBarIcon: ({ focused, size, color }) => (
         <Ionicons
           name={focused ? iconName.active : iconName.inactive}
-          size={size}
+          size={20}
           color={theme.colors.bg.tertiary}
         />
       ),
@@ -65,7 +47,13 @@ export const BarberNavigator = () => {
         const labelWeight = focused ? "bold" : "normal";
 
         return (
-          <Text style={{ color: labelColor, fontWeight: labelWeight }}>
+          <Text
+            style={{
+              color: labelColor,
+              fontWeight: labelWeight,
+              fontSize: 12,
+            }}
+          >
             {route.name}
           </Text>
         );
@@ -82,11 +70,12 @@ export const BarberNavigator = () => {
 
   return (
     <Tab.Navigator screenOptions={createScreenOptions}>
-      <Tab.Screen name="Profile" component={Component1} />
-      <Tab.Screen name="Appointments" component={Component1} />
-      <Tab.Screen name="Settings" component={Component1} />
+      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Appointments" component={AppointmentsNavigator} />
+      <Tab.Screen name="Reports" component={Reports} />
+      <Tab.Screen name="Settings" component={Settings} />
       {currentUser && currentUser.role == "admin" && (
-        <Tab.Screen name="Admin" component={Component1} />
+        <Tab.Screen name="Admin" component={AdminNavigator} />
       )}
     </Tab.Navigator>
   );

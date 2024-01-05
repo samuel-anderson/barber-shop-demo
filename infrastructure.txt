@@ -27,3 +27,13 @@ Icons
 
 Fonts
 - https://fonts.google.com/git
+
+
+====================================
+
+Profile (images display name schedule)
+Appointments (create read update delete)
+Setting (account password email)
+Reports 
+Admin (all profiles, shop info, all appointments)
+
