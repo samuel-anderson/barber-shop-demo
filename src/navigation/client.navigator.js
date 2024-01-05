@@ -7,7 +7,7 @@ import { MainScreen } from "../screens/main.screen";
 import { ChooseBarberScreen } from "../screens/client/choose-barber.screen";
 import { ChooseServiceScreen } from "../screens/client/choose-service.screen";
 import { ChooseTimeScreen } from "../screens/client/choose-time.screen";
-import { SubmitAppointmentScreen } from "../screens/appointment/submit-appointment.screen";
+import { SubmitAppointmentScreen } from "../screens/client/submit-appointment.screen";
 
 import { AccessScreen } from "../screens/auth/access.screen";
 import { LoginScreen } from "../screens/auth/login.screen";

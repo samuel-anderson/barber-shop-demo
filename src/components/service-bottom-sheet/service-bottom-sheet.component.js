@@ -57,7 +57,10 @@ export const ServiceBottomSheet = () => {
       <Cart handleIconClick={handleIconClick} cartIndex={cartIndex} />
 
       <Spacer position="top" size="medium">
-        <CustomButton text={"Choose Time"} pressHandler={handleNavigation} />
+        <CustomButton
+          text={"Choose Time"}
+          buttonOptions={{ onPress: handleNavigation }}
+        />
       </Spacer>
     </BottomSheet>
   );

@@ -1,6 +1,5 @@
 import { AppointmentSummary } from "../appointment-summary/appointment-summary.component";
-import { TouchableOpacity, View, StyleSheet, Modal } from "react-native";
-import { Button } from "react-native-paper";
+import { View, StyleSheet, Modal } from "react-native";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import * as Calendar from "expo-calendar";
@@ -102,12 +101,14 @@ export const SummaryModal = () => {
             {!isAppointmentAdded ? (
               <CustomButton
                 text="Add to Calendar"
-                pressHandler={requestAccessToCalendar}
+                buttonOptions={{ onPress: requestAccessToCalendar }}
               />
             ) : (
               <CustomButton
                 text="Return to Main"
-                pressHandler={handleNavigation}
+                buttonOptions={{
+                  onPress: handleNavigation,
+                }}
               />
             )}
           </Spacer>

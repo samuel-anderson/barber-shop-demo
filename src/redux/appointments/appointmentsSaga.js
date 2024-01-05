@@ -10,7 +10,8 @@ import { firebaseService } from "../../services";
 function* fetchAppointmentsWorker() {
   try {
     const appointments = yield call(
-      firebaseService.getDocument,
+      firebaseService.getCollection,
+      "barber_shop",
       "appointments"
     );
 

@@ -15,9 +15,9 @@ const Content = styled(Text)`
   height: 100%;
 `;
 
-const DefaultBtn = ({ text, pressHandler, additionalStyling }) => {
+const DefaultBtn = ({ text, buttonOptions }) => {
   return (
-    <TouchableOpacity onPress={pressHandler} style={{ ...additionalStyling }}>
+    <TouchableOpacity {...buttonOptions}>
       <Container>
         <Content>{text}</Content>
       </Container>
@@ -48,18 +48,9 @@ export const TransText = styled(Text)`
   width: 80%;
 `;
 
-const TransBtn = ({
-  text,
-  pressHandler,
-  type = "default",
-  additionalStyling,
-}) => {
+const TransBtn = ({ text, buttonOptions, type = "default" }) => {
   return (
-    <Touchable
-      onPress={pressHandler}
-      type={type}
-      style={{ ...additionalStyling }}
-    >
+    <Touchable type={type} {...buttonOptions}>
       <TransText type={type}>{text}</TransText>
     </Touchable>
   );
@@ -74,50 +65,28 @@ const DarkTxt = styled(Text)`
   color: ${({ theme }) => theme.colors.text.inverse};
 `;
 
-const DarkBtn = ({ text, pressHandler, additionalStyling }) => {
+const DarkBtn = ({ text, buttonOptions }) => {
   return (
-    <DarkContainer onPress={pressHandler} style={{ ...additionalStyling }}>
+    <DarkContainer {...buttonOptions}>
       <DarkTxt>{text}</DarkTxt>
     </DarkContainer>
   );
 };
 const variants = {
-  default: ({ text, pressHandler, additionalStyling }) => (
-    <DefaultBtn
-      text={text}
-      pressHandler={pressHandler}
-      additionalStyling={additionalStyling}
-    />
+  default: ({ text, buttonOptions }) => (
+    <DefaultBtn text={text} buttonOptions={buttonOptions} />
   ),
-  transparent: ({ text, pressHandler, additionalStyling }) => (
-    <TransBtn
-      text={text}
-      pressHandler={pressHandler}
-      additionalStyling={additionalStyling}
-    />
+  transparent: ({ text, buttonOptions }) => (
+    <TransBtn text={text} buttonOptions={buttonOptions} />
   ),
-  transparentInverse: ({ text, pressHandler, additionalStyling }) => (
-    <TransBtn
-      text={text}
-      pressHandler={pressHandler}
-      type="inverse"
-      additionalStyling={additionalStyling}
-    />
+  transparentInverse: ({ text, buttonOptions }) => (
+    <TransBtn text={text} buttonOptions={buttonOptions} type="inverse" />
   ),
-  dark: ({ text, pressHandler, additionalStyling }) => (
-    <DarkBtn
-      text={text}
-      pressHandler={pressHandler}
-      additionalStyling={additionalStyling}
-    />
+  dark: ({ text, buttonOptions }) => (
+    <DarkBtn text={text} buttonOptions={buttonOptions} />
   ),
 };
 
-export const CustomButton = ({
-  variant = "default",
-  text,
-  pressHandler,
-  additionalStyling,
-}) => {
-  return variants[variant]({ text, pressHandler, additionalStyling });
+export const CustomButton = ({ variant = "default", text, buttonOptions }) => {
+  return variants[variant]({ text, buttonOptions });
 };

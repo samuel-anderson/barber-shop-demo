@@ -10,13 +10,17 @@ export const AccessScreen = ({ navigation }) => {
       <CustomButton
         variant="transparent"
         text="Login"
-        pressHandler={() => navigation.navigate("Login")}
+        buttonOptions={{
+          onPress: () => navigation.navigate("Login"),
+        }}
       />
       <Spacer />
       <CustomButton
         variant="transparent"
         text="Register"
-        pressHandler={() => navigation.navigate("Register")}
+        buttonOptions={{
+          onPress: () => navigation.navigate("Register"),
+        }}
       />
     </WithBackground>
   );

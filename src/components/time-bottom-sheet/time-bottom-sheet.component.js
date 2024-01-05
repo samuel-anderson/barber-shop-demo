@@ -62,7 +62,10 @@ export const TimeBottomSheet = () => {
 
       {startTime && (
         <Spacer position="top" size="medium">
-          <CustomButton text={"I'm done"} pressHandler={handleNavigation} />
+          <CustomButton
+            text={"I'm done"}
+            buttonOptions={{ onPress: handleNavigation }}
+          />
         </Spacer>
       )}
     </BottomSheet>

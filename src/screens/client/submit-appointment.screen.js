@@ -9,6 +9,7 @@ import { SummaryModal } from "../../components/summary-modal/summary-modal.compo
 import { Text } from "../../components/typography/text.component";
 import { Spacer } from "../../components/spacer/spacer.component";
 import { useTheme } from "styled-components/native";
+import { CustomButton } from "../../components/custom-button/custom-button.component";
 
 const defaultFormFields = {
   firstName: "",
@@ -170,9 +171,14 @@ export const SubmitAppointmentScreen = ({ navigation }) => {
           )}
           {phoneError && <ErrorText variant="error">{phoneError}</ErrorText>}
           <Spacer position="top" size="large">
-            <BookingBtn onPress={submitHandler} loading={sms.loading}>
-              <Text style={{ color: theme.colors.text.inverse }}>Book Now</Text>
-            </BookingBtn>
+            <CustomButton
+              text="Book Now"
+              variant="dark"
+              buttonOptions={{
+                loading: sms.loading,
+                onPress: submitHandler,
+              }}
+            />
           </Spacer>
         </>
       )}

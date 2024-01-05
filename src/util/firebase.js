@@ -75,19 +75,23 @@ export const fecthStorage = async (ids) => {
   return imageObj;
 };
 
-export const fetchCollection = async (collectionName) => {
+export const fetchCollection = async (collectionName, documentName) => {
   const collectionRef = collection(db, collectionName);
   const q = query(collectionRef);
 
   //for testing error
   //await Promise.reject(new Error('whoop we received an error));
   const querySnapshot = await getDocs(q);
-  const items = querySnapshot.docs.map((docSnapshot) => {
-    return {
-      id: docSnapshot.id,
-      data: docSnapshot.data(),
-    };
-  });
+  const items = querySnapshot.docs
+    .filter((docSnapshot) => {
+      return documentName ? docSnapshot.id === documentName : docSnapshot;
+    })
+    .map((docSnapshot) => {
+      return {
+        id: docSnapshot.id,
+        data: docSnapshot.data(),
+      };
+    });
   return items;
 };
 

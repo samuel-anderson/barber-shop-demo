@@ -108,7 +108,9 @@ export const LoginScreen = ({ navigation }) => {
         <CustomButton
           variant="transparentInverse"
           text="Login"
-          pressHandler={loginHandler}
+          buttonOptions={{
+            onPress: loginHandler,
+          }}
         />
       </Container>
     </WithBackground>

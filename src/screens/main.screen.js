@@ -94,13 +94,17 @@ export const MainScreen = ({ navigation }) => {
           <CustomButton
             variant="transparent"
             text="Book Appointment"
-            pressHandler={() => navigation.navigate("Choose a Barber")}
+            buttonOptions={{
+              onPress: () => navigation.navigate("Choose a Barber"),
+            }}
           />
           {dashboard && (
             <CustomButton
               variant="transparent"
               text="Barber Access"
-              pressHandler={() => navigation.navigate("Access")}
+              buttonOptions={{
+                onPress: () => navigation.navigate("Access"),
+              }}
             />
           )}
         </>

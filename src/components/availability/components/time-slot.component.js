@@ -14,6 +14,7 @@ import moment from "moment";
 import styled from "styled-components/native";
 import { Spacer } from "../../spacer/spacer.component";
 import { Text } from "../../typography/text.component";
+import { useIsFocused } from "@react-navigation/native";
 
 export const TotalAvailable = styled(Text)`
   font-size: ${({ theme }) => theme.fontSizes.title};
@@ -26,9 +27,13 @@ export const TimeSlot = ({ schedule }) => {
     (state) => state.cart.estimatedDuration
   );
 
+  const isFocused = useIsFocused();
+
   useEffect(() => {
-    dispatch(fetchAppointmentsStart());
-  }, [dispatch]);
+    if (isFocused) {
+      dispatch(fetchAppointmentsStart());
+    }
+  }, [isFocused]);
 
   const appointments = useSelector((state) => state.appointments.appointments);
   const professional = useSelector((state) => state.cart.professional);

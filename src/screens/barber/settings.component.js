@@ -14,8 +14,10 @@ export const Settings = () => {
       <View style={{ width: "80%" }}>
         <CustomButton
           text={"Sign Out"}
-          pressHandler={() => dispatch(signOutStart())}
           variant="dark"
+          buttonOptions={{
+            onPress: () => dispatch(signOutStart()),
+          }}
         />
       </View>
     </SafeArea>
