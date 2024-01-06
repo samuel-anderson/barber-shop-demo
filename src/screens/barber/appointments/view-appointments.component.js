@@ -15,14 +15,16 @@ export const ViewAppointments = ({ navigation }) => {
   const appointments = useSelector((state) => state.appointments.appointments);
 
   //CLEAN UP CODE
-  const getAppointments = () => {
+  const getAppointments = (currentUser, appointments) => {
+    if (!currentUser || !appointments || !appointments[currentUser.id]) return;
+
     let appts = appointments[currentUser.id];
 
     const dates = Object.keys(appts);
     const list = [];
 
     for (let i = 0; i < dates.length; i++) {
-      appts[dates[i]].map((appt, idx) =>
+      appts[dates[i]].map((appt) =>
         list.push(
           <Text key={`${appt.serviceDate}-${appt.startTime}`}>
             {appt.serviceDate} - {appt.clientName} {appt.startTime}
@@ -46,7 +48,7 @@ export const ViewAppointments = ({ navigation }) => {
     >
       <View style={{ width: "80%" }}>
         <Text>View Appoinments Screen</Text>
-        {currentUser && appointments && getAppointments()}
+        {getAppointments(currentUser, appointments)}
       </View>
     </SafeArea>
   );
