@@ -1,13 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const APPOINTMENTS_INITIAL_STATE = {
-  appointments: [],
+  appointments: null,
 };
 
 const appointmentsSlice = createSlice({
   name: "appointments",
   initialState: APPOINTMENTS_INITIAL_STATE,
   reducers: {
+    fetchBarberAppointmentsStart: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
     fetchAppointmentsStart: (state) => {
       state.loading = true;
       state.error = null;
@@ -27,5 +31,6 @@ export const {
   fetchAppointmentsStart,
   fetchAppointmentsSuccess,
   fetchAppointmentsFailure,
+  fetchBarberAppointmentsStart,
 } = appointmentsSlice.actions;
 export default appointmentsSlice.reducer;

@@ -75,6 +75,30 @@ export const fecthStorage = async (ids) => {
   return imageObj;
 };
 
+export const fetchDocObject = async (
+  collectionName,
+  documentName,
+  documentKey
+) => {
+  const collectionRef = collection(db, collectionName);
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+  const items = querySnapshot.docs
+    .filter((docSnapshot) => {
+      return documentName ? docSnapshot.id === documentName : docSnapshot;
+    })
+    .map((docSnapshot) => {
+      const { items } = docSnapshot.data();
+
+      return {
+        id: docSnapshot.id,
+        data: items[documentKey],
+      };
+    });
+  return items;
+};
+
 export const fetchCollection = async (collectionName, documentName) => {
   const collectionRef = collection(db, collectionName);
   const q = query(collectionRef);
