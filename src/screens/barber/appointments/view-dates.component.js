@@ -9,6 +9,7 @@ import { Text } from "../../../components/typography/text.component";
 import moment from "moment";
 import { CustomButton } from "../../../components/custom-button/custom-button.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
+import { AppointmentDateList } from "../../../components/appointment-date-list/appointment-date-list.component";
 
 export const ViewDates = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -24,31 +25,11 @@ export const ViewDates = ({ navigation }) => {
 
   return (
     <SafeArea style={{ flex: 1, alignItems: "center" }}>
-      <View style={{ width: "100%", padding: 10 }}>
-        {appointments &&
-          Object.keys(appointments).map((date) => {
-            const formattedDate = moment(date, "YYYY_MM_DD").format(
-              "MMM. Do, YYYY"
-            );
-
-            return (
-              <Spacer position="top" size="small" key={formattedDate}>
-                <CustomButton
-                  text={formattedDate}
-                  variant="dark"
-                  buttonOptions={{
-                    style: { borderRadius: 10 },
-                    onPress: () => {
-                      navigation.navigate("Select Appointment", {
-                        appointments: appointments[date],
-                      });
-                    },
-                  }}
-                />
-              </Spacer>
-            );
-          })}
-      </View>
+      {appointments ? (
+        <AppointmentDateList appointments={appointments} />
+      ) : (
+        <Text>No Appointments</Text>
+      )}
     </SafeArea>
   );
 };

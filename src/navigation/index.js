@@ -5,9 +5,11 @@ import { ClientNavigator } from "./client.navigator";
 import { BarberNavigator } from "./barber.navigator";
 import { useSelector, useDispatch } from "react-redux";
 import { checkUserSession } from "../redux/user/userSlice";
+import useFirebase from "../hooks/useFirebase";
 
 export const Navigation = () => {
   const dispatch = useDispatch();
+  //useFirebase(); //INITIAL LAUNCH
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const user = useSelector((state) => state.user);

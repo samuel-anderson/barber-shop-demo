@@ -38,11 +38,14 @@ export const TimeSlot = ({ schedule }) => {
   const appointments = useSelector((state) => state.appointments.appointments);
   const professional = useSelector((state) => state.cart.professional);
   const serviceDate = useSelector((state) => state.cart.serviceDate);
-  const scheduledAppointments = appointments[professional.id]
-    ? appointments[professional.id][matchDatabaseDateFormat(serviceDate)]
-    : null;
+  const scheduledAppointments =
+    appointments && appointments[professional.id]
+      ? appointments[professional.id][matchDatabaseDateFormat(serviceDate)]
+      : null;
 
   const filterTimeSlots = (timeSlot) => {
+    if (!timeSlot) return;
+
     let keepTimeSlot = true;
     let slot = moment(timeSlot, "h:mm A");
 

@@ -66,3 +66,16 @@ export const isBetweenNoonAndFive = (timeString) => {
   const beforeFive = parsedTime.isBefore(moment("5:00 PM", "h:mm A"));
   return afterNoon && beforeFive;
 };
+
+export const sortArrayOfDateStrings = (a, b) => {
+  const momentA = moment(a, "YYYY_MM_DD");
+  const momentB = moment(b, "YYYY_MM_DD");
+
+  if (momentA.isBefore(momentB)) {
+    return -1;
+  } else if (momentA.isSame(momentB)) {
+    return 0;
+  } else {
+    return 1;
+  }
+};
