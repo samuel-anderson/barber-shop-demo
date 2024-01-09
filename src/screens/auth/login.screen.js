@@ -49,25 +49,24 @@ export const LoginScreen = ({ navigation }) => {
   };
 
   const handleErrors = () => {
-    let failed = true;
-
     if (!password) {
       setPasswordError("Please enter a valid PASSWORD");
+      return true;
     } else if (password) {
       setPasswordError(null);
-      failed = false;
     }
 
     if (!email) {
       setEmailError("Please enter a valid EMAIL");
+      return true;
     } else if (email && !barberEmails.includes(email.toLowerCase())) {
       setEmailError("Barber email was NOT found");
+      return true;
     } else {
       setEmailError(null);
-      failed = false;
     }
 
-    return failed;
+    return false;
   };
 
   const loginHandler = async () => {

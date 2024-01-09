@@ -148,21 +148,6 @@ export const ViewAppointments = () => {
         }}
         keyExtractor={(item) => item.startTime}
       />
-
-      {/* 
-      {appointments.map((appointment) => {
-        return (
-          <Spacer position="top" size="medium">
-            <Text>{appointment.clientName}</Text>
-            <Text>
-              {appointment.startTime} - {appointment.endTime},
-            </Text>
-            <Text>{appointment.estimatedDuration / 60}</Text>
-
-            <Text>{appointment.service.title}</Text>
-          </Spacer>
-        );
-      })} */}
     </SafeArea>
   );
 };
