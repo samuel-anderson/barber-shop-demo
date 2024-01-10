@@ -7,7 +7,6 @@ import { FlatList } from "react-native";
 import { FadeInView } from "../../../components/animations/fade.animation";
 import styled from "styled-components/native";
 import { Card } from "react-native-paper";
-import { showDurationTotal } from "../../../util/cart";
 
 export const AppointmentCard = styled(Card)`
   background-color: ${(props) => props.theme.colors.bg.primary};
@@ -25,6 +24,7 @@ export const AppointmentCardList = styled(FlatList).attrs({
 export const Container = styled.View`
   flex-direction: row;
   justify-content: space-between;
+  margin-top: 10px;
 `;
 
 export const CustomText = styled(Text)`
@@ -33,7 +33,15 @@ export const CustomText = styled(Text)`
   text-align: right;
 `;
 
+export const Total = styled(Text)`
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+`;
+
 export const ClientName = styled(Text)`
+  font-size: ${({ theme }) => theme.fontSizes.body};
+`;
+
+export const Time = styled(Text)`
   font-size: ${({ theme }) => theme.fontSizes.title};
 `;
 
@@ -76,8 +84,13 @@ const SMSComponent = ({ phoneNumber }) => {
 
   return (
     <TouchableOpacity onPress={handlePress}>
-      <Text style={{ color: "blue", textDecorationLine: "underline" }}>
-        Txt: {phoneNumber}
+      <Text
+        style={{
+          color: "blue",
+          textDecorationLine: "underline",
+        }}
+      >
+        Text: {phoneNumber}
       </Text>
     </TouchableOpacity>
   );
@@ -106,6 +119,9 @@ export const ViewAppointments = () => {
             <Spacer position="bottom" size="large">
               <FadeInView>
                 <AppointmentCard elevation={2}>
+                  <Time>
+                    {item.startTime} - {item.endTime}
+                  </Time>
                   <Container>
                     <View>
                       <ClientName>Name: {item.clientName}</ClientName>
@@ -115,15 +131,9 @@ export const ViewAppointments = () => {
                       <SMSComponent phoneNumber={item.clientPhoneNumber} />
 
                       <Spacer position="top" size="large">
-                        <Text>
-                          Time: {item.startTime} - {item.endTime}
-                        </Text>
-                        <Text>{showDurationTotal(item.estimatedDuration)}</Text>
-                      </Spacer>
-                      <Spacer position="top" size="large">
-                        <Text>
+                        <Total>
                           Total: ${getOrderTotal(item.service, item.addOns)}
-                        </Text>
+                        </Total>
                       </Spacer>
                     </View>
 

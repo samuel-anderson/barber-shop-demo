@@ -1,1 +1,360 @@
-export const appointments = {};
+export const appointments = {
+  samuel_anderson: {
+    "2023_11_11": [
+      {
+        clientName: "Sam Anderson",
+        clientPhoneNumber: "(760) 277-4923",
+        service: {
+          duration: 45,
+          id: "haircut",
+          price: 35,
+          title: "Haircut",
+        },
+        addOns: [
+          {
+            duration: 45,
+            id: "facial",
+            price: 20,
+            title: "Facial",
+          },
+          {
+            duration: 30,
+            id: "lineup_neck",
+            price: 20,
+            title: "Lineup / Neck Shave",
+          },
+          {
+            duration: 30,
+            id: "eyebrows",
+            price: 8,
+            title: "Eyebrows",
+          },
+        ],
+        serviceDate: "2024-01-09",
+        startTime: "7:00 AM",
+        estimatedDuration: 150,
+        endTime: "9:30 AM",
+      },
+    ],
+    "2023_12_09": [
+      {
+        clientName: "Sam Anderson",
+        clientPhoneNumber: "(760) 277-4923",
+        service: {
+          duration: 45,
+          id: "haircut",
+          price: 35,
+          title: "Haircut",
+        },
+        addOns: [
+          {
+            duration: 45,
+            id: "facial",
+            price: 20,
+            title: "Facial",
+          },
+          {
+            duration: 30,
+            id: "lineup_neck",
+            price: 20,
+            title: "Lineup / Neck Shave",
+          },
+          {
+            duration: 30,
+            id: "eyebrows",
+            price: 8,
+            title: "Eyebrows",
+          },
+        ],
+        serviceDate: "2024-01-09",
+        startTime: "7:00 AM",
+        estimatedDuration: 150,
+        endTime: "9:30 AM",
+      },
+    ],
+    "2024_01_09": [
+      {
+        clientName: "Sam Anderson",
+        clientPhoneNumber: "(760) 277-4923",
+        service: {
+          duration: 45,
+          id: "haircut",
+          price: 35,
+          title: "Haircut",
+        },
+        addOns: [
+          {
+            duration: 45,
+            id: "facial",
+            price: 20,
+            title: "Facial",
+          },
+          {
+            duration: 30,
+            id: "lineup_neck",
+            price: 20,
+            title: "Lineup / Neck Shave",
+          },
+          {
+            duration: 30,
+            id: "eyebrows",
+            price: 8,
+            title: "Eyebrows",
+          },
+        ],
+        serviceDate: "2024-01-09",
+        startTime: "7:00 AM",
+        estimatedDuration: 150,
+        endTime: "9:30 AM",
+      },
+      {
+        clientName: "Sam Anderson",
+        clientPhoneNumber: "(760) 277-4923",
+        service: {
+          duration: 45,
+          id: "haircut",
+          price: 35,
+          title: "Haircut",
+        },
+        addOns: [
+          {
+            duration: 45,
+            id: "facial",
+            price: 20,
+            title: "Facial",
+          },
+          {
+            duration: 30,
+            id: "lineup_neck",
+            price: 20,
+            title: "Lineup / Neck Shave",
+          },
+          {
+            duration: 30,
+            id: "eyebrows",
+            price: 8,
+            title: "Eyebrows",
+          },
+        ],
+        serviceDate: "2024-01-09",
+        startTime: "9:30 AM",
+        estimatedDuration: 150,
+        endTime: "12:00 PM",
+      },
+      {
+        clientName: "Sam Anderson",
+        clientPhoneNumber: "(760) 277-4923",
+        service: {
+          duration: 45,
+          id: "haircut",
+          price: 35,
+          title: "Haircut",
+        },
+        addOns: [
+          {
+            duration: 45,
+            id: "facial",
+            price: 20,
+            title: "Facial",
+          },
+          {
+            duration: 30,
+            id: "lineup_neck",
+            price: 20,
+            title: "Lineup / Neck Shave",
+          },
+          {
+            duration: 30,
+            id: "eyebrows",
+            price: 8,
+            title: "Eyebrows",
+          },
+        ],
+        serviceDate: "2024-01-09",
+        startTime: "12:00 PM",
+        estimatedDuration: 150,
+        endTime: "2:30 PM",
+      },
+    ],
+    "2024_01_10": [
+      {
+        clientName: "Sam Anderson",
+        clientPhoneNumber: "(760) 277-4923",
+        service: {
+          duration: 45,
+          id: "haircut",
+          price: 35,
+          title: "Haircut",
+        },
+        addOns: [
+          {
+            duration: 45,
+            id: "facial",
+            price: 20,
+            title: "Facial",
+          },
+          {
+            duration: 30,
+            id: "lineup_neck",
+            price: 20,
+            title: "Lineup / Neck Shave",
+          },
+          {
+            duration: 30,
+            id: "eyebrows",
+            price: 8,
+            title: "Eyebrows",
+          },
+        ],
+        serviceDate: "2024-01-09",
+        startTime: "7:00 AM",
+        estimatedDuration: 150,
+        endTime: "9:30 AM",
+      },
+    ],
+    "2024_01_11": [
+      {
+        clientName: "Sam Anderson",
+        clientPhoneNumber: "(760) 277-4923",
+        service: {
+          duration: 45,
+          id: "haircut",
+          price: 35,
+          title: "Haircut",
+        },
+        addOns: [
+          {
+            duration: 45,
+            id: "facial",
+            price: 20,
+            title: "Facial",
+          },
+          {
+            duration: 30,
+            id: "lineup_neck",
+            price: 20,
+            title: "Lineup / Neck Shave",
+          },
+          {
+            duration: 30,
+            id: "eyebrows",
+            price: 8,
+            title: "Eyebrows",
+          },
+        ],
+        serviceDate: "2024-01-09",
+        startTime: "7:00 AM",
+        estimatedDuration: 150,
+        endTime: "9:30 AM",
+      },
+    ],
+    "2024_02_09": [
+      {
+        clientName: "Sam Anderson",
+        clientPhoneNumber: "(760) 277-4923",
+        service: {
+          duration: 45,
+          id: "haircut",
+          price: 35,
+          title: "Haircut",
+        },
+        addOns: [
+          {
+            duration: 45,
+            id: "facial",
+            price: 20,
+            title: "Facial",
+          },
+          {
+            duration: 30,
+            id: "lineup_neck",
+            price: 20,
+            title: "Lineup / Neck Shave",
+          },
+          {
+            duration: 30,
+            id: "eyebrows",
+            price: 8,
+            title: "Eyebrows",
+          },
+        ],
+        serviceDate: "2024-01-09",
+        startTime: "7:00 AM",
+        estimatedDuration: 150,
+        endTime: "9:30 AM",
+      },
+    ],
+    "2024_03_09": [
+      {
+        clientName: "Sam Anderson",
+        clientPhoneNumber: "(760) 277-4923",
+        service: {
+          duration: 45,
+          id: "haircut",
+          price: 35,
+          title: "Haircut",
+        },
+        addOns: [
+          {
+            duration: 45,
+            id: "facial",
+            price: 20,
+            title: "Facial",
+          },
+          {
+            duration: 30,
+            id: "lineup_neck",
+            price: 20,
+            title: "Lineup / Neck Shave",
+          },
+          {
+            duration: 30,
+            id: "eyebrows",
+            price: 8,
+            title: "Eyebrows",
+          },
+        ],
+        serviceDate: "2024-01-09",
+        startTime: "7:00 AM",
+        estimatedDuration: 150,
+        endTime: "9:30 AM",
+      },
+    ],
+    "2024_04_09": [
+      {
+        clientName: "Sam Anderson",
+        clientPhoneNumber: "(760) 277-4923",
+        service: {
+          duration: 45,
+          id: "haircut",
+          price: 35,
+          title: "Haircut",
+        },
+        addOns: [
+          {
+            duration: 45,
+            id: "facial",
+            price: 20,
+            title: "Facial",
+          },
+          {
+            duration: 30,
+            id: "lineup_neck",
+            price: 20,
+            title: "Lineup / Neck Shave",
+          },
+          {
+            duration: 30,
+            id: "eyebrows",
+            price: 8,
+            title: "Eyebrows",
+          },
+        ],
+        serviceDate: "2024-01-09",
+        startTime: "7:00 AM",
+        estimatedDuration: 150,
+        endTime: "9:30 AM",
+      },
+    ],
+  },
+};
