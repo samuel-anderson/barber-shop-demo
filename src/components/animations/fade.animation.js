@@ -12,6 +12,17 @@ export const FadeInView = ({ duration = 1500, ...props }) => {
     }).start();
   }, [fadeAnim, duration]);
 
+  useEffect(() => {
+    const listener = fadeAnim.addListener(({ _ }) => {
+      // Handle the value update here
+    });
+
+    // Make sure to remove the listener when the component unmounts
+    return () => {
+      fadeAnim.removeListener(listener);
+    };
+  }, [fadeAnim]);
+
   return (
     <Animated.View // Special animatable View
       style={{

@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { CustomButton } from "../custom-button/custom-button.component";
 import { Spacer } from "../spacer/spacer.component";
 import { SafeArea } from "../utility/safe-area.component";
@@ -19,11 +19,12 @@ export const AppointmentDateList = ({ appointments }) => {
     value: null,
   };
 
-  const items = [
-    { label: "Option 1", value: "option1" },
-    { label: "Option 2", value: "option2" },
-    { label: "Option 3", value: "option3" },
-  ];
+  let items = sortedDates.map((date) => {
+    return {
+      value: date,
+      label: moment(date, "YYYY_MM_DD").format("MMM. Do, YYYY"),
+    };
+  });
 
   return (
     <>
@@ -31,31 +32,62 @@ export const AppointmentDateList = ({ appointments }) => {
         onValueChange={(value) => setSelectedValue(value)}
         items={items}
         placeholder={placeholder}
+        style={{
+          ...pickerSelectStyles,
+          iconContainer: {
+            top: 10,
+            right: 12,
+          },
+        }}
       />
       <View style={{ width: "100%", padding: 20 }}>
-        {sortedDates.map((date) => {
-          const formattedDate = moment(date, "YYYY_MM_DD").format(
-            "MMM. Do, YYYY"
-          );
+        {sortedDates
+          .filter((date) => (selectedValue ? selectedValue == date : true))
+          .map((date) => {
+            const formattedDate = moment(date, "YYYY_MM_DD").format(
+              "MMM. Do, YYYY"
+            );
 
-          return (
-            <Spacer position="top" size="small" key={formattedDate}>
-              <CustomButton
-                text={formattedDate}
-                variant="dark"
-                buttonOptions={{
-                  style: { borderRadius: 10 },
-                  onPress: () => {
-                    navigation.navigate("Select Appointment", {
-                      appointments: appointments[date],
-                    });
-                  },
-                }}
-              />
-            </Spacer>
-          );
-        })}
+            return (
+              <Spacer position="top" size="small" key={formattedDate}>
+                <CustomButton
+                  text={formattedDate}
+                  variant="dark"
+                  buttonOptions={{
+                    style: { borderRadius: 10 },
+                    onPress: () => {
+                      navigation.navigate("Select Appointment", {
+                        appointments: appointments[date],
+                      });
+                    },
+                  }}
+                />
+              </Spacer>
+            );
+          })}
       </View>
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+    backgroundColor: "#f0f0f0",
+  },
+  inputIOS: {
+    fontSize: 16,
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderColor: "gray",
+    borderRadius: 4,
+    color: "white",
+    paddingRight: 30,
+    backgroundColor: "black",
+  },
+});
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: styles.inputIOS,
+});
