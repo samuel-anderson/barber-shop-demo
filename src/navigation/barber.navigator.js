@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Settings } from "../screens/barber/settings.component";
 import { Text } from "../components/typography/text.component";
 import { useSelector } from "react-redux";
-import { Profile } from "../screens/barber/profile.component";
+import { Profile } from "../screens/barber/profile/profile.component";
 import { Reports } from "../screens/barber/reports.component";
 
 import { selectBarberWithCurrentUser } from "../redux/professionals/professionalsSelector";
@@ -12,6 +12,7 @@ import { AppointmentsNavigator } from "./appointments.navigator";
 import { AdminNavigator } from "./admin.navigator";
 import { useTheme } from "styled-components/native";
 import { Ionicons } from "@expo/vector-icons";
+import { ProfileNavigator } from "./profile.navigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -70,7 +71,7 @@ export const BarberNavigator = () => {
 
   return (
     <Tab.Navigator screenOptions={createScreenOptions}>
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Profile" component={ProfileNavigator} />
       <Tab.Screen name="Appointments" component={AppointmentsNavigator} />
       <Tab.Screen name="Reports" component={Reports} />
       <Tab.Screen name="Settings" component={Settings} />

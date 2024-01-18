@@ -1,7 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import { CustomButton } from "../custom-button/custom-button.component";
 import { Spacer } from "../spacer/spacer.component";
-import { SafeArea } from "../utility/safe-area.component";
 import moment from "moment";
 import { useNavigation } from "@react-navigation/native";
 import { sortArrayOfDateStrings } from "../../util/date";
@@ -28,18 +27,22 @@ export const AppointmentDateList = ({ appointments }) => {
 
   return (
     <>
-      <RNPickerSelect
-        onValueChange={(value) => setSelectedValue(value)}
-        items={items}
-        placeholder={placeholder}
-        style={{
-          ...pickerSelectStyles,
-          iconContainer: {
-            top: 10,
-            right: 12,
-          },
-        }}
-      />
+      <View
+        style={{ justifyContent: "center", alignItems: "center", width: "90%" }}
+      >
+        <RNPickerSelect
+          onValueChange={(value) => setSelectedValue(value)}
+          items={items}
+          placeholder={placeholder}
+          style={{
+            ...pickerSelectStyles,
+            iconContainer: {
+              top: 10,
+              right: 12,
+            },
+          }}
+        />
+      </View>
       <View style={{ width: "100%", padding: 20 }}>
         {sortedDates
           .filter((date) => (selectedValue ? selectedValue == date : true))
@@ -84,7 +87,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     color: "white",
     paddingRight: 30,
-    backgroundColor: "black",
+
+    backgroundColor: "#333333",
   },
 });
 

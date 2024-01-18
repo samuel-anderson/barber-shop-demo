@@ -3,12 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useIsFocused } from "@react-navigation/native";
 import { fetchBarberAppointmentsStart } from "../../../redux/appointments/appointmentsSlice";
 import { selectBarberWithCurrentUser } from "../../../redux/professionals/professionalsSelector";
-import { View } from "react-native";
 import { SafeArea } from "../../../components/utility/safe-area.component";
 import { Text } from "../../../components/typography/text.component";
-import moment from "moment";
-import { CustomButton } from "../../../components/custom-button/custom-button.component";
-import { Spacer } from "../../../components/spacer/spacer.component";
 import { AppointmentDateList } from "../../../components/appointment-date-list/appointment-date-list.component";
 
 export const ViewDates = ({ navigation }) => {
