@@ -1,7 +1,9 @@
 export const professionals = [
   {
     id: "george_mena",
-    name: "George Mena",
+    //name: "George Mena",
+    firstName: "George",
+    lastName: "Mena",
     phoneNumber: "+19097306555",
     email: "george@me.com",
     role: "user",
@@ -23,7 +25,9 @@ export const professionals = [
   },
   {
     id: "kari_anderson",
-    name: "Kari Anderson",
+    //name: "Kari Anderson",
+    firstName: "Kari",
+    lastName: "Anderson",
     phoneNumber: "+18583543893",
     email: "kari@me.com",
     role: "user",
@@ -44,7 +48,9 @@ export const professionals = [
   },
   {
     id: "samuel_anderson",
-    name: "Samuel Anderson",
+    //name: "Samuel Anderson",
+    firstName: "Samuel",
+    lastName: "Anderson",
     phoneNumber: "+17602774923",
     email: "sam@sam.com",
     role: "admin",

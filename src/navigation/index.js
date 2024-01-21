@@ -9,7 +9,7 @@ import useFirebase from "../hooks/useFirebase";
 
 export const Navigation = () => {
   const dispatch = useDispatch();
-  //useFirebase(); //INITIAL LAUNCH
+  useFirebase(); //INITIAL LAUNCH
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const user = useSelector((state) => state.user);

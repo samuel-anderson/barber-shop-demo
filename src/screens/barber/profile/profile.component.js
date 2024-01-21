@@ -12,8 +12,16 @@ export const Profile = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const currentUser = useSelector(selectBarberWithCurrentUser);
-  const { id, name, email, phoneNumber, schedule, services, socialMedia } =
-    currentUser;
+  const {
+    id,
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    schedule,
+    services,
+    socialMedia,
+  } = currentUser;
 
   const daysOfWeek = [
     "Monday",

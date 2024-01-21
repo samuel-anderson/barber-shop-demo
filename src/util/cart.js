@@ -18,7 +18,9 @@ export const showStartTime = (startTime) => {
 };
 
 export const showProfessional = (professional) => {
-  return professional ? professional.name : "Any Professional";
+  return professional
+    ? professional.firstName + " " + professional.lastName
+    : "Any Professional";
 };
 
 export const showAddOns = (addOns) => {

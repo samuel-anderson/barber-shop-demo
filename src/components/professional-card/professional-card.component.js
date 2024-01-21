@@ -64,10 +64,17 @@ export const ProfessionalInfo = ({ professional = {}, index = 1 }) => {
   return (
     <ProfessionalCard elevation={2}>
       <View>
-        <ProfessionalCardCover key={professional.name} source={getImageUrl()} />
+        <ProfessionalCardCover
+          key={professional.lastName}
+          source={getImageUrl()}
+        />
       </View>
       <Info>
-        <Text variant="label">{professional.name.toUpperCase()}</Text>
+        <Text variant="label">
+          {professional.firstName.toUpperCase() +
+            " " +
+            professional.lastName.toUpperCase()}
+        </Text>
 
         <View style={{ flexDirection: "row" }}>
           {images && (
