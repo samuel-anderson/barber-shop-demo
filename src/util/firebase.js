@@ -136,7 +136,20 @@ export const updateDocument = async (collectionName, documentId, dataToAdd) => {
     const documentRef = doc(db, collectionName, documentId);
     await updateDoc(documentRef, dataToAdd);
   } catch (error) {
-    console.error("Error creating document:", error);
+    console.error("Error updating document:", error);
+  }
+};
+
+export const updateProfessionalDocument = async (
+  collectionName,
+  documentId,
+  dataToAdd
+) => {
+  try {
+    const documentRef = doc(db, collectionName, documentId);
+    await setDoc(documentRef, dataToAdd, { merge: true });
+  } catch (error) {
+    console.error("Error updating document:", error);
   }
 };
 

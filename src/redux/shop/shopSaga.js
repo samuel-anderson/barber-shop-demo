@@ -28,7 +28,9 @@ function* fetchShopWorker() {
       return document.id === "services";
     });
 
-    yield put(setProfessionals(professionals.data.items));
+    const professionalArray = Object.values(professionals.data.items);
+
+    yield put(setProfessionals(professionalArray));
     yield put(fetchProfileImagesStart(professionals.data.items));
 
     yield put(setServices(services.data.items));

@@ -6,11 +6,10 @@ import { BarberNavigator } from "./barber.navigator";
 import { useSelector, useDispatch } from "react-redux";
 import { checkUserSession } from "../redux/user/userSlice";
 import useFirebase from "../hooks/useFirebase";
-import { updateProfessionalEmail } from "../util/firebase";
 
 export const Navigation = () => {
   const dispatch = useDispatch();
-  useFirebase(); //INITIAL LAUNCH
+  //useFirebase(); //INITIAL LAUNCH
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const user = useSelector((state) => state.user);
@@ -24,13 +23,6 @@ export const Navigation = () => {
     else setIsAuthenticated(false);
   }, [user]);
 
-  useEffect(() => {
-    const test = async () => {
-      //await updateProfessionalEmail("samuel_anderson", "same@test.com");
-    };
-
-    test();
-  });
   return (
     <NavigationContainer>
       {isAuthenticated ? <BarberNavigator /> : <ClientNavigator />}

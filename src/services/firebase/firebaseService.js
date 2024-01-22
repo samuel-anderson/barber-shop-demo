@@ -5,6 +5,7 @@ import {
   updateDocument,
   fecthStorage,
   fetchDocObject,
+  updateProfessionalDocument,
 } from "../../util/firebase";
 
 export const getStorage = async (professionals) => {
@@ -41,4 +42,12 @@ export const updateDoc = async (
 
 export const removeDocument = async (collectionName, id) => {
   await deleteDocument(collectionName, id);
+};
+
+export const updateProfessionalDoc = async (
+  collectionName,
+  documentId,
+  updatedDocument
+) => {
+  await updateProfessionalDocument(collectionName, documentId, updatedDocument);
 };

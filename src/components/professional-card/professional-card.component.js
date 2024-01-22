@@ -70,11 +70,7 @@ export const ProfessionalInfo = ({ professional = {}, index = 1 }) => {
         />
       </View>
       <Info>
-        <Text variant="label">
-          {professional.firstName.toUpperCase() +
-            " " +
-            professional.lastName.toUpperCase()}
-        </Text>
+        <Text variant="label">{professional.displayName.toUpperCase()}</Text>
 
         <View style={{ flexDirection: "row" }}>
           {images && (
