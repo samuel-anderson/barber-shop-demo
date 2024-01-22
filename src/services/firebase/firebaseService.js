@@ -7,8 +7,8 @@ import {
   fetchDocObject,
 } from "../../util/firebase";
 
-export const getStorage = async (professionalIds) => {
-  const ids = professionalIds.payload.map((obj) => obj.id);
+export const getStorage = async (professionals) => {
+  const ids = professionals.map((obj) => obj.id);
 
   const items = await fecthStorage(ids);
   return items;

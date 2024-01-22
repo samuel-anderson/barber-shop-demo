@@ -7,8 +7,9 @@ import {
   fetchProfileImagesSuccess,
 } from "./profileImagesSlice";
 
-function* fetchImageWorker(professionals) {
+function* fetchImageWorker({ payload }) {
   try {
+    const professionals = Object.values(payload);
     const image_data = yield call(firebaseService.getStorage, professionals);
 
     yield put(fetchProfileImagesSuccess(image_data));

@@ -1,5 +1,5 @@
-export const professionals = [
-  {
+export const professionals = {
+  george_mena: {
     id: "george_mena",
     //name: "George Mena",
     firstName: "George",
@@ -23,7 +23,7 @@ export const professionals = [
       },
     ],
   },
-  {
+  kari_anderson: {
     id: "kari_anderson",
     //name: "Kari Anderson",
     firstName: "Kari",
@@ -46,7 +46,7 @@ export const professionals = [
       ],
     },
   },
-  {
+  samuel_anderson: {
     id: "samuel_anderson",
     //name: "Samuel Anderson",
     firstName: "Samuel",
@@ -94,4 +94,4 @@ export const professionals = [
       },
     ],
   },
-];
+};

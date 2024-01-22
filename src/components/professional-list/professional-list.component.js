@@ -9,12 +9,12 @@ import { SafeArea } from "../utility/safe-area.component";
 import { PhotoBottomSheetProvider } from "../../contexts/PhotoBottomSheet.context";
 export const ProfessionalList = ({ professionals, navigation }) => {
   const dispatch = useDispatch();
-
+  const professionalArray = Object.values(professionals);
   return (
     <SafeArea>
       <PhotoBottomSheetProvider>
         <ProfessionalCardList
-          data={professionals}
+          data={professionalArray}
           renderItem={({ item, index }) => {
             return (
               <TouchableOpacity
@@ -31,7 +31,7 @@ export const ProfessionalList = ({ professionals, navigation }) => {
               </TouchableOpacity>
             );
           }}
-          keyExtractor={(item) => item.name}
+          keyExtractor={(item) => item.id}
         />
       </PhotoBottomSheetProvider>
     </SafeArea>

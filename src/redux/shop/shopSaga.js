@@ -28,8 +28,6 @@ function* fetchShopWorker() {
       return document.id === "services";
     });
 
-    yield put(fetchProfileImagesStart(professionals.data.items));
-
     yield put(setProfessionals(professionals.data.items));
     yield put(fetchProfileImagesStart(professionals.data.items));
 
