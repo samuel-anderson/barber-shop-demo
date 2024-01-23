@@ -9,6 +9,9 @@ import {
 } from "../../util/firebase";
 import {
   checkUserSession,
+  editContactInfoStart,
+  editContactInfoSuccess,
+  editContactInfoFailed,
   signInFailed,
   signInStart,
   signInSuccess,
@@ -19,6 +22,8 @@ import {
   signUpStart,
   signUpSuccess,
 } from "./userSlice";
+import { updateProfessionalDoc } from "../../services/firebase/firebaseService";
+import { fetchShopDataStart } from "../shop/shopSlice";
 
 const ERRORS = {
   "auth/email-already-in-use": "*Email already has a registered account*",
@@ -96,6 +101,16 @@ export function* signOut() {
   }
 }
 
+export function* editContactInfo({ payload }) {
+  try {
+    yield call(updateProfessionalDoc, "barber_shop", "professionals", payload);
+    yield put(editContactInfoSuccess());
+    yield put(fetchShopDataStart());
+  } catch (error) {
+    yield put(editContactInfoFailed(error.code));
+  }
+}
+
 export function* signInAfterSignUp({ payload: { user } }) {
   yield call(getSnapshotFromUserAuth, user);
 }
@@ -119,6 +134,10 @@ export function* onSignOutStart() {
   yield takeLatest(signOutStart.type, signOut);
 }
 
+export function* onEditContactInfoStart() {
+  yield takeLatest(editContactInfoStart.type, editContactInfo);
+}
+
 export function* watchUserSagas() {
   yield all([
     call(onCheckUserSession),
@@ -126,5 +145,6 @@ export function* watchUserSagas() {
     call(onSignInStart),
     call(onSignUpSuccess),
     call(onSignOutStart),
+    call(onEditContactInfoStart),
   ]);
 }

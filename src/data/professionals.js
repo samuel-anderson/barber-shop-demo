@@ -17,12 +17,12 @@ export const professionals = {
       friday: [{ start: "8:00 AM", end: "8:00 PM" }],
       saturday: [{ start: "8:00 AM", end: "8:00 PM" }],
     },
-    socialMedia: [
-      {
-        id: "instagram",
-        username: "george_the_barber",
+    socialMedia: {
+      instagram: {
+        label: "Instagram",
+        handle: "george_the_barber",
       },
-    ],
+    },
   },
   kari_anderson: {
     id: "kari_anderson",
@@ -57,12 +57,12 @@ export const professionals = {
     phoneNumber: "+17602774923",
     email: "sam@sam.com",
     role: "admin",
-    socialMedia: [
-      {
-        id: "instagram",
-        username: "pana_papito",
+    socialMedia: {
+      instagram: {
+        label: "Instagram",
+        handle: "pana_papito",
       },
-    ],
+    },
     schedule: {
       sunday: null,
       monday: null,

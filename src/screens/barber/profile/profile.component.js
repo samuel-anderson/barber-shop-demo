@@ -38,7 +38,7 @@ export const Profile = () => {
   return (
     <SafeArea>
       <View style={{ width: "100%", padding: 20 }}>
-        {["Edit Contact Information", "Edit Schedule"].map((screen) => {
+        {["Contact Information", "Schedule"].map((screen) => {
           return (
             <Spacer position="top" size="small" key={screen}>
               <CustomButton

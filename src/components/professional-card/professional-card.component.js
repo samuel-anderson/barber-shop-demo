@@ -31,11 +31,9 @@ export const ProfessionalInfo = ({ professional = {}, index = 1 }) => {
   }, [profileImages, professional]);
 
   useEffect(() => {
-    let obj =
-      professional.socialMedia &&
-      professional.socialMedia.find((obj) => obj.id === "instagram");
+    let obj = professional.socialMedia && professional.socialMedia.instagram;
 
-    if (obj) setInstagramHandle(obj.username);
+    if (obj) setInstagramHandle(obj.handle);
   }, []);
 
   const handleInstagramPress = () => {

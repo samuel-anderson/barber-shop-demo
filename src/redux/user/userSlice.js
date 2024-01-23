@@ -53,6 +53,18 @@ const userSlice = createSlice({
     userNotAuthicated(state, action) {
       state.currentUser = null;
     },
+    editContactInfoStart(state) {
+      state.loading = true;
+      state.error = null;
+    },
+    editContactInfoSuccess(state, _) {
+      state.loading = false;
+      state.error = null;
+    },
+    editContactInfoFailed(state, action) {
+      state.error = action.payload;
+      state.loading = false;
+    },
   },
 });
 
@@ -68,5 +80,8 @@ export const {
   signOutStart,
   signOutSuccess,
   userNotAuthicated,
+  editContactInfoStart,
+  editContactInfoSuccess,
+  editContactInfoFailed,
 } = userSlice.actions;
 export default userSlice.reducer;

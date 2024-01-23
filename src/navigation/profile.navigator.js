@@ -22,7 +22,7 @@ export const ProfileNavigator = () => {
     >
       <ProfileStack.Screen name={"Edit Profile"} component={Profile} />
       <ProfileStack.Screen
-        name={"Edit Contact Information"}
+        name={"Contact Information"}
         component={EditContactInfo}
       />
     </ProfileStack.Navigator>
