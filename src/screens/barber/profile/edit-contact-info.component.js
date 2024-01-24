@@ -8,6 +8,13 @@ import { Spacer } from "../../../components/spacer/spacer.component";
 import { useDispatch, useSelector } from "react-redux";
 import { editContactInfoStart } from "../../../redux/user/userSlice";
 import { useNavigation } from "@react-navigation/native";
+import { ModalComponent } from "../../../components/modal/modal.component";
+import styled from "styled-components/native";
+
+const Done = styled(Text)`
+  color: ${({ theme }) => theme.colors.text.inverse};
+  font-size: ${({ theme }) => theme.fontSizes.title};
+`;
 
 export const EditContactInfo = ({ route }) => {
   const navigation = useNavigation();
@@ -18,6 +25,7 @@ export const EditContactInfo = ({ route }) => {
   const [displayName_, setDisplayName] = useState(displayName);
   const [phoneNumber_, setPhoneNumber] = useState(phoneNumber);
   const [socialMedia_, setSocialMedia] = useState(socialMedia);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const onSaveChanges = async () => {
     try {
@@ -34,6 +42,7 @@ export const EditContactInfo = ({ route }) => {
           },
         })
       );
+      setIsModalVisible(true);
     } catch (e) {
       console.error(e);
     }
@@ -86,6 +95,22 @@ export const EditContactInfo = ({ route }) => {
           }}
         />
       </TouchableOpacity>
+      <ModalComponent isModalVisible={isModalVisible}>
+        <View style={{ alignItems: "center" }}>
+          <Done>Profile has been updated!</Done>
+        </View>
+        <Spacer size="medium" position="top">
+          <CustomButton
+            text="Done"
+            buttonOptions={{
+              onPress: () => {
+                setIsModalVisible(false);
+                navigation.navigate("Edit Profile");
+              },
+            }}
+          />
+        </Spacer>
+      </ModalComponent>
     </View>
   );
 };

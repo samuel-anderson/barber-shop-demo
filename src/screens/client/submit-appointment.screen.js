@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import { Button, TextInput } from "react-native-paper";
+import { TextInput } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { SafeArea } from "../../components/utility/safe-area.component";
@@ -10,6 +10,7 @@ import { Text } from "../../components/typography/text.component";
 import { Spacer } from "../../components/spacer/spacer.component";
 import { useTheme } from "styled-components/native";
 import { CustomButton } from "../../components/custom-button/custom-button.component";
+import { DismissKeyboardComponent } from "../../components/dismiss-keyboard/dismiss-keyboard.componet";
 
 const defaultFormFields = {
   firstName: "",
@@ -25,12 +26,6 @@ const ErrorText = styled(Text)`
 const Title = styled(Text)`
   font-size: ${({ theme }) => theme.fontSizes.title};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
-`;
-
-const BookingBtn = styled(Button)`
-  background-color: ${({ theme }) => theme.colors.bg.tertiary};
-  width: 100%;
-  padding: 10px;
 `;
 
 export const SubmitAppointmentScreen = ({ navigation }) => {
@@ -137,49 +132,61 @@ export const SubmitAppointmentScreen = ({ navigation }) => {
       </View>
       {!cart.isFinished && (
         <>
-          <TextInput
-            label="First Name"
-            value={firstName}
-            error={!!firstNameError}
-            onChangeText={(text) =>
-              handleChange({ name: "firstName", value: text })
-            }
-          />
-          <TextInput
-            label="Last Name"
-            value={lastName}
-            error={!!lastNameError}
-            onChangeText={(text) =>
-              handleChange({ name: "lastName", value: text })
-            }
-          />
-          <TextInput
-            label="Phone Number"
-            value={phoneNumber}
-            error={!!phoneError}
-            keyboardType="numeric"
-            onChangeText={(text) =>
-              handleChange({ name: "phoneNumber", value: text })
-            }
-          />
+          <DismissKeyboardComponent>
+            <View style={{ flex: 1 }}>
+              <Spacer size="large" position="top">
+                <TextInput
+                  label="First Name"
+                  value={firstName}
+                  error={!!firstNameError}
+                  onChangeText={(text) =>
+                    handleChange({ name: "firstName", value: text })
+                  }
+                />
+              </Spacer>
+              <Spacer size="large" position="top">
+                <TextInput
+                  label="Last Name"
+                  value={lastName}
+                  error={!!lastNameError}
+                  onChangeText={(text) =>
+                    handleChange({ name: "lastName", value: text })
+                  }
+                />
+              </Spacer>
+              <Spacer size="large" position="top">
+                <TextInput
+                  label="Phone Number"
+                  value={phoneNumber}
+                  error={!!phoneError}
+                  keyboardType="numeric"
+                  onChangeText={(text) =>
+                    handleChange({ name: "phoneNumber", value: text })
+                  }
+                />
+              </Spacer>
 
-          {firstNameError && (
-            <ErrorText variant="error">{firstNameError}</ErrorText>
-          )}
-          {lastNameError && (
-            <ErrorText variant="error">{lastNameError}</ErrorText>
-          )}
-          {phoneError && <ErrorText variant="error">{phoneError}</ErrorText>}
-          <Spacer position="top" size="large">
-            <CustomButton
-              text="Book Now"
-              variant="dark"
-              buttonOptions={{
-                loading: sms.loading,
-                onPress: submitHandler,
-              }}
-            />
-          </Spacer>
+              {firstNameError && (
+                <ErrorText variant="error">{firstNameError}</ErrorText>
+              )}
+              {lastNameError && (
+                <ErrorText variant="error">{lastNameError}</ErrorText>
+              )}
+              {phoneError && (
+                <ErrorText variant="error">{phoneError}</ErrorText>
+              )}
+              <Spacer position="top" size="large">
+                <CustomButton
+                  text="Book Now"
+                  variant="dark"
+                  buttonOptions={{
+                    loading: sms.loading,
+                    onPress: submitHandler,
+                  }}
+                />
+              </Spacer>
+            </View>
+          </DismissKeyboardComponent>
         </>
       )}
 

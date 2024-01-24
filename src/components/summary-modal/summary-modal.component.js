@@ -1,5 +1,5 @@
 import { AppointmentSummary } from "../appointment-summary/appointment-summary.component";
-import { View, StyleSheet, Modal } from "react-native";
+import { View } from "react-native";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import * as Calendar from "expo-calendar";
@@ -9,6 +9,7 @@ import moment from "moment";
 import { Text } from "../typography/text.component";
 import { CustomButton } from "../custom-button/custom-button.component";
 import { Spacer } from "../spacer/spacer.component";
+import { ModalComponent } from "../modal/modal.component";
 
 const Done = styled(Text)`
   color: ${({ theme }) => theme.colors.text.inverse};
@@ -81,71 +82,30 @@ export const SummaryModal = () => {
   };
 
   return (
-    <Modal
-      animationType="slide"
-      transparent={true}
-      visible={isModalVisible}
-      onRequestClose={() => {}}
-    >
-      <View style={styles.modal}>
-        <View style={styles.modalContent}>
-          {!isAppointmentAdded ? (
-            <AppointmentSummary />
-          ) : (
-            <View style={{ alignItems: "center" }}>
-              <Done>Appointment has been added!</Done>
-            </View>
-          )}
-
-          <Spacer position="top" size="medium">
-            {!isAppointmentAdded ? (
-              <CustomButton
-                text="Add to Calendar"
-                buttonOptions={{ onPress: requestAccessToCalendar }}
-              />
-            ) : (
-              <CustomButton
-                text="Return to Main"
-                buttonOptions={{
-                  onPress: handleNavigation,
-                }}
-              />
-            )}
-          </Spacer>
+    <ModalComponent isModalVisible={isModalVisible}>
+      {!isAppointmentAdded ? (
+        <AppointmentSummary />
+      ) : (
+        <View style={{ alignItems: "center" }}>
+          <Done>Appointment has been added!</Done>
         </View>
-      </View>
-    </Modal>
+      )}
+
+      <Spacer position="top" size="medium">
+        {!isAppointmentAdded ? (
+          <CustomButton
+            text="Add to Calendar"
+            buttonOptions={{ onPress: requestAccessToCalendar }}
+          />
+        ) : (
+          <CustomButton
+            text="Return to Main"
+            buttonOptions={{
+              onPress: handleNavigation,
+            }}
+          />
+        )}
+      </Spacer>
+    </ModalComponent>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modal: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-  },
-  modalContent: {
-    backgroundColor: "black",
-    padding: 50,
-    borderRadius: 10,
-    elevation: 5,
-    width: "97%",
-
-    justifyContent: "center",
-  },
-  button: {
-    width: "100%",
-    marginTop: 20,
-    backgroundColor: "rgb(0, 131, 255)",
-  },
-  closeBtn: {
-    color: "white",
-  },
-});

@@ -8,6 +8,7 @@ import { Text } from "../../components/typography/text.component";
 import { selectBarberEmails } from "../../redux/professionals/professionalsSelector";
 import { signInStart } from "../../redux/user/userSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { DismissKeyboardComponent } from "../../components/dismiss-keyboard/dismiss-keyboard.componet";
 
 const defaultFormFields = {
   email: "",
@@ -80,38 +81,41 @@ export const LoginScreen = ({ navigation }) => {
       console.log("ERROR: ", e);
     }
   };
+
   return (
     <WithBackground>
-      <Container>
-        <TextInput
-          label="Email"
-          value={email}
-          error={!!emailError}
-          onChangeText={(text) => handleChange("email", text)}
-          style={{ opacity: 0.6 }}
-        />
-        <Spacer />
-        <TextInput
-          label="Password"
-          value={password}
-          error={!!passwordError}
-          secureTextEntry
-          onChangeText={(text) => handleChange("password", text)}
-          style={{ opacity: 0.6 }}
-        />
-        {loginError && <ErrorText variant="error">{loginError}</ErrorText>}
-        {emailError && <ErrorText variant="error">{emailError}</ErrorText>}
-        {passwordError && (
-          <ErrorText variant="error">{passwordError}</ErrorText>
-        )}
-        <CustomButton
-          variant="transparentInverse"
-          text="Login"
-          buttonOptions={{
-            onPress: loginHandler,
-          }}
-        />
-      </Container>
+      <DismissKeyboardComponent>
+        <Container>
+          <TextInput
+            label="Email"
+            value={email}
+            error={!!emailError}
+            onChangeText={(text) => handleChange("email", text)}
+            style={{ opacity: 0.6 }}
+          />
+          <Spacer />
+          <TextInput
+            label="Password"
+            value={password}
+            error={!!passwordError}
+            secureTextEntry
+            onChangeText={(text) => handleChange("password", text)}
+            style={{ opacity: 0.6 }}
+          />
+          {loginError && <ErrorText variant="error">{loginError}</ErrorText>}
+          {emailError && <ErrorText variant="error">{emailError}</ErrorText>}
+          {passwordError && (
+            <ErrorText variant="error">{passwordError}</ErrorText>
+          )}
+          <CustomButton
+            variant="transparentInverse"
+            text="Login"
+            buttonOptions={{
+              onPress: loginHandler,
+            }}
+          />
+        </Container>
+      </DismissKeyboardComponent>
     </WithBackground>
   );
 };
