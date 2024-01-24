@@ -9,36 +9,13 @@ import { CustomButton } from "../../../components/custom-button/custom-button.co
 import { useNavigation } from "@react-navigation/native";
 
 export const Profile = () => {
-  const dispatch = useDispatch();
   const navigation = useNavigation();
   const currentUser = useSelector(selectBarberWithCurrentUser);
-
-  const daysOfWeek = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
-
-  let items = daysOfWeek.map((day) => {
-    return {
-      value: day,
-      label: day,
-    };
-  });
-
-  const placeholder = {
-    label: "Select a time...",
-    value: null,
-  };
 
   return (
     <SafeArea>
       <View style={{ width: "100%", padding: 20 }}>
-        {["Contact Information"].map((screen) => {
+        {["Contact Information", "Schedule"].map((screen) => {
           return (
             <Spacer position="top" size="small" key={screen}>
               <CustomButton

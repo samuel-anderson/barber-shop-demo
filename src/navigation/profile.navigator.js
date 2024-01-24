@@ -7,6 +7,7 @@ import {
   EditContactInfo,
   EditName,
 } from "../screens/barber/profile/edit-contact-info.component";
+import { EditSchedule } from "../screens/barber/profile/edit-schedule.component";
 
 const ProfileStack = createStackNavigator();
 
@@ -25,6 +26,7 @@ export const ProfileNavigator = () => {
         name={"Contact Information"}
         component={EditContactInfo}
       />
+      <ProfileStack.Screen name={"Schedule"} component={EditSchedule} />
     </ProfileStack.Navigator>
   );
 };
