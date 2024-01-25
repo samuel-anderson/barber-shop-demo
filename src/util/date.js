@@ -32,8 +32,6 @@ export const isBetweenTimes = (
   scheduledAppointments,
   estimatedDuration
 ) => {
-  let keepTimeSlot = true;
-
   for (var i = 0; i < scheduledAppointments.length; i++) {
     let { startTime, endTime } = scheduledAppointments[i];
 
@@ -44,15 +42,15 @@ export const isBetweenTimes = (
     startBuffer.subtract(estimatedDuration, "minutes");
 
     if (slot.isSameOrAfter(start) && slot.isBefore(end)) {
-      keepTimeSlot = false;
+      return false;
     }
 
     //Allow enough time for the new service to be completed before next appointment
     if (slot.isAfter(startBuffer) && slot.isBefore(start)) {
-      keepTimeSlot = false;
+      return false;
     }
   }
-  return keepTimeSlot;
+  return true;
 };
 
 export const isBeforeNoon = (timeString) => {
