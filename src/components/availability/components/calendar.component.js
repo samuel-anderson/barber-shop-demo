@@ -36,20 +36,25 @@ export const Calendar = ({ clickHandler }) => {
     else return "notSelected";
   };
   const generateNext14Days = () => {
-    const dates = [];
-    const currentDate = moment(); // Get the current date
+    const currentDate = moment();
 
-    while (currentDate.isSameOrBefore(moment().add(14, "days"))) {
-      dates.push({
-        value: currentDate.format("YYYY-MM-DD"),
-        date: currentDate.date(),
-        displayDate: currentDate.format("MMMM Do, YYYY"),
-        day: currentDate.format("dd"),
-      });
+    const dates = Array.from({ length: 14 }, (_, idx) => {
+      const nextDate = currentDate.clone().add(idx, "days");
+      return {
+        value: nextDate.format("YYYY-MM-DD"),
+        date: nextDate.date(),
+        displayDate: nextDate.format("MMMM Do, YYYY"),
+        day: nextDate.format("dd"),
+      };
+    });
 
-      currentDate.add(1, "days");
-    }
     return dates;
+  };
+
+  const handleDateSelection = (item) => {
+    setDisplayedDate(item.displayDate);
+    dispatch(setServiceDate(item.value));
+    dispatch(setStartTime(null));
   };
 
   return (
@@ -60,19 +65,14 @@ export const Calendar = ({ clickHandler }) => {
       <Spacer position="top" size="large">
         <DateContainer>
           {generateNext14Days().map((item, idx) => {
-            let today = moment().dayOfYear() === moment(item.value).dayOfYear();
+            let today = moment().isSame(item.value, "day");
+            const disabled = getClass(item.value) === "notAvailable";
 
             return (
               <TouchableOpacity
                 key={idx}
-                disabled={getClass(item.value) === "notAvailable"}
-                onPress={() => {
-                  if (getClass(item.value) !== "notAvailable") {
-                    setDisplayedDate(item.displayDate);
-                    dispatch(setServiceDate(item.value));
-                    dispatch(setStartTime(null));
-                  }
-                }}
+                disabled={disabled}
+                onPress={() => !disabled && handleDateSelection(item)}
               >
                 <Date class={getClass(item.value)}>
                   <DateBefore class={getClass(item.value)} />

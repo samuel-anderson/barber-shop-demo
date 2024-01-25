@@ -3,7 +3,6 @@ import { CustomButton } from "../../../components/custom-button/custom-button.co
 import { Text } from "../../../components/typography/text.component";
 import { TextInput } from "react-native-paper";
 import { useState } from "react";
-import { updateProfessionalDoc } from "../../../services/firebase/firebaseService";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { useDispatch, useSelector } from "react-redux";
 import { editContactInfoStart } from "../../../redux/user/userSlice";
@@ -24,7 +23,9 @@ export const EditContactInfo = ({ route }) => {
 
   const [displayName_, setDisplayName] = useState(displayName);
   const [phoneNumber_, setPhoneNumber] = useState(phoneNumber);
-  const [socialMedia_, setSocialMedia] = useState(socialMedia);
+  const [socialMedia_, setSocialMedia] = useState(
+    socialMedia ? socialMedia : {}
+  );
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const onSaveChanges = async () => {

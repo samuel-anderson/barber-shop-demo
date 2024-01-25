@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
-
+import { Summary, AddOns, AddOnsText } from "./appointment-summary.styles";
+import { Spacer } from "../spacer/spacer.component";
+import { Order } from "../cart/cart-header.component";
 import {
   selectDurationTotal,
   selectOrderTotal,
 } from "../../redux/cart/cartSelector";
-import { Summary, AddOns, AddOnsText } from "./appointment-summary.styles";
-import { Spacer } from "../spacer/spacer.component";
-import { Order } from "../cart/cart-header.component";
+
 import {
   DateInfo,
   ProfessionalInfo,
