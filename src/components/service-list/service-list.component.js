@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { View } from "react-native";
 import { Spacer } from "../spacer/spacer.component";
 import styled from "styled-components/native";
-import { FadeInView } from "../animations/fade.animation";
 import { Text } from "../typography/text.component";
 
 const Title = styled(Text)`
@@ -46,11 +45,7 @@ export const ServiceList = ({ services }) => {
 
   return (
     <SafeArea>
-      {selectedService && (
-        <FadeInView duration={1000}>
-          <ServiceCard service={selectedService} />
-        </FadeInView>
-      )}
+      {selectedService && <ServiceCard service={selectedService} />}
 
       <Spacer />
       {selectedService && (

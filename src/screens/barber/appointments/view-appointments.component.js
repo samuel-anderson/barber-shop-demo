@@ -4,7 +4,6 @@ import { SafeArea } from "../../../components/utility/safe-area.component";
 import { useRoute } from "@react-navigation/native";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { FlatList } from "react-native";
-import { FadeInView } from "../../../components/animations/fade.animation";
 import styled from "styled-components/native";
 import { Card } from "react-native-paper";
 
@@ -117,42 +116,40 @@ export const ViewAppointments = () => {
         renderItem={({ item, index }) => {
           return (
             <Spacer position="bottom" size="large">
-              <FadeInView>
-                <AppointmentCard elevation={2}>
-                  <Time>
-                    {item.startTime} - {item.endTime}
-                  </Time>
-                  <Container>
-                    <View>
-                      <ClientName>Name: {item.clientName}</ClientName>
-                      <PhoneNumberComponent
-                        phoneNumber={item.clientPhoneNumber}
-                      />
-                      <SMSComponent phoneNumber={item.clientPhoneNumber} />
+              <AppointmentCard elevation={2}>
+                <Time>
+                  {item.startTime} - {item.endTime}
+                </Time>
+                <Container>
+                  <View>
+                    <ClientName>Name: {item.clientName}</ClientName>
+                    <PhoneNumberComponent
+                      phoneNumber={item.clientPhoneNumber}
+                    />
+                    <SMSComponent phoneNumber={item.clientPhoneNumber} />
 
-                      <Spacer position="top" size="large">
-                        <Total>
-                          Total: ${getOrderTotal(item.service, item.addOns)}
-                        </Total>
-                      </Spacer>
-                    </View>
+                    <Spacer position="top" size="large">
+                      <Total>
+                        Total: ${getOrderTotal(item.service, item.addOns)}
+                      </Total>
+                    </Spacer>
+                  </View>
 
-                    <View>
-                      <CustomText>{item.service.title}</CustomText>
-                      {item.addOns.length > 0 &&
-                        item.addOns.map((addOn, idx) => {
-                          return (
-                            <View key={idx}>
-                              <CustomText>
-                                + {addOn.title.toUpperCase()}
-                              </CustomText>
-                            </View>
-                          );
-                        })}
-                    </View>
-                  </Container>
-                </AppointmentCard>
-              </FadeInView>
+                  <View>
+                    <CustomText>{item.service.title}</CustomText>
+                    {item.addOns.length > 0 &&
+                      item.addOns.map((addOn, idx) => {
+                        return (
+                          <View key={idx}>
+                            <CustomText>
+                              + {addOn.title.toUpperCase()}
+                            </CustomText>
+                          </View>
+                        );
+                      })}
+                  </View>
+                </Container>
+              </AppointmentCard>
             </Spacer>
           );
         }}

@@ -3,7 +3,6 @@ import { ProfessionalCardList } from "./professional-list.styles";
 import { ProfessionalInfo } from "../professional-card/professional-card.component";
 import { useDispatch } from "react-redux";
 import { setProfessional } from "../../redux/cart/cartSlice";
-import { FadeInView } from "../animations/fade.animation";
 import { Spacer } from "../spacer/spacer.component";
 import { SafeArea } from "../utility/safe-area.component";
 import { PhotoBottomSheetProvider } from "../../contexts/PhotoBottomSheet.context";
@@ -23,9 +22,7 @@ export const ProfessionalList = ({ professionals, navigation }) => {
                 }}
               >
                 <Spacer position="bottom" size="large">
-                  <FadeInView>
-                    <ProfessionalInfo professional={item} index={index} />
-                  </FadeInView>
+                  <ProfessionalInfo professional={item} index={index} />
                 </Spacer>
               </TouchableOpacity>
             );

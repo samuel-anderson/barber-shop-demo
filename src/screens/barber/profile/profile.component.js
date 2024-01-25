@@ -13,22 +13,24 @@ export const Profile = () => {
   return (
     <SafeArea>
       <View style={{ width: "100%", padding: 20 }}>
-        {["Contact Information", "Work Schedule", "Days Off"].map((screen) => {
-          return (
-            <Spacer position="top" size="small" key={screen}>
-              <CustomButton
-                text={screen}
-                variant="dark"
-                buttonOptions={{
-                  style: { borderRadius: 10 },
-                  onPress: () => {
-                    navigation.navigate(screen, { user: currentUser });
-                  },
-                }}
-              />
-            </Spacer>
-          );
-        })}
+        {["Contact Information", "Work Schedule", "Days Off", "Services"].map(
+          (screen) => {
+            return (
+              <Spacer position="top" size="small" key={screen}>
+                <CustomButton
+                  text={screen}
+                  variant="dark"
+                  buttonOptions={{
+                    style: { borderRadius: 10 },
+                    onPress: () => {
+                      navigation.navigate(screen, { user: currentUser });
+                    },
+                  }}
+                />
+              </Spacer>
+            );
+          }
+        )}
       </View>
     </SafeArea>
   );

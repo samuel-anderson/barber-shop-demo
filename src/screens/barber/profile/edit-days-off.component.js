@@ -1,15 +1,10 @@
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { CustomButton } from "../../../components/custom-button/custom-button.component";
 import { Text } from "../../../components/typography/text.component";
-import { TextInput } from "react-native-paper";
 import { useState } from "react";
-import { updateProfessionalDoc } from "../../../services/firebase/firebaseService";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  editContactInfoStart,
-  editDaysOffStart,
-} from "../../../redux/user/userSlice";
+import { editDaysOffStart } from "../../../redux/user/userSlice";
 import { useNavigation } from "@react-navigation/native";
 import { ModalComponent } from "../../../components/modal/modal.component";
 import { FontAwesome } from "@expo/vector-icons";
@@ -75,7 +70,6 @@ export const EditDaysOff = ({ route }) => {
             text="Save"
             variant="dark"
             buttonOptions={{
-              loading: user.loading,
               style: { borderRadius: 10 },
             }}
           />
@@ -105,6 +99,7 @@ export const EditDaysOff = ({ route }) => {
       <View style={{ marginTop: 20 }}>
         {updatedDaysOff.map((dayOff) => (
           <View
+            key={dayOff}
             style={{
               flexDirection: "row",
               alignItems: "center",
@@ -121,7 +116,7 @@ export const EditDaysOff = ({ route }) => {
               <FontAwesome name="remove" size={30} color="black" />
             </TouchableOpacity>
 
-            <Text key={dayOff}>{dayOff}</Text>
+            <Text>{dayOff}</Text>
           </View>
         ))}
       </View>

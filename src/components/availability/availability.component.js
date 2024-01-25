@@ -22,6 +22,11 @@ export const Availability = () => {
       : null;
 
   const checkProfessionalSchedule = (date) => {
+    if (selectedProfessional.daysOff) {
+      const val = moment(date).format("MMM. Do, YYYY");
+
+      if (selectedProfessional.daysOff.indexOf(val) != -1) return null;
+    }
     const day = moment(date).day();
 
     const hasSchedule =

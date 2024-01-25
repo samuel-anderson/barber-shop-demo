@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import { CustomButton } from "../custom-button/custom-button.component";
 import { Spacer } from "../spacer/spacer.component";
 import moment from "moment";
@@ -43,7 +43,7 @@ export const AppointmentDateList = ({ appointments }) => {
           }}
         />
       </View>
-      <View style={{ width: "100%", padding: 20 }}>
+      <ScrollView style={{ width: "100%", padding: 20 }}>
         {sortedDates
           .filter((date) => (selectedValue ? selectedValue == date : true))
           .map((date) => {
@@ -68,7 +68,7 @@ export const AppointmentDateList = ({ appointments }) => {
               </Spacer>
             );
           })}
-      </View>
+      </ScrollView>
     </>
   );
 };
