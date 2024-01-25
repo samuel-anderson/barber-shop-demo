@@ -32,51 +32,34 @@ export const isBetweenTimes = (
   scheduledAppointments,
   estimatedDuration
 ) => {
-  for (var i = 0; i < scheduledAppointments.length; i++) {
-    let { startTime, endTime } = scheduledAppointments[i];
+  for (const { startTime, endTime } of scheduledAppointments) {
+    const start = moment(startTime, "h:mm A");
+    const end = moment(endTime, "h:mm A");
+    const startBuffer = moment(startTime, "h:mm A").subtract(
+      estimatedDuration,
+      "minutes"
+    );
 
-    let start = moment(startTime, "h:mm A");
-    let end = moment(endTime, "h:mm A");
-
-    let startBuffer = moment(startTime, "h:mm A");
-    startBuffer.subtract(estimatedDuration, "minutes");
-
-    if (slot.isSameOrAfter(start) && slot.isBefore(end)) {
-      return false;
-    }
-
-    //Allow enough time for the new service to be completed before next appointment
-    if (slot.isAfter(startBuffer) && slot.isBefore(start)) {
+    if (
+      (slot.isSameOrAfter(start) && slot.isBefore(end)) ||
+      (slot.isAfter(startBuffer) && slot.isBefore(start))
+    ) {
       return false;
     }
   }
   return true;
 };
 
-export const isBeforeNoon = (timeString) => {
-  const parsedTime = moment(timeString, "h:mm A");
-  return parsedTime.isBefore(moment("12:00 PM", "h:mm A"));
-};
+export const isBeforeNoon = (timeString) =>
+  moment(timeString, "h:mm A").isBefore(moment("12:00 PM", "h:mm A"));
 
-export const isBetweenNoonAndFive = (timeString) => {
-  const parsedTime = moment(timeString, "h:mm A");
-  return parsedTime.isBetween(
+export const isBetweenNoonAndFive = (timeString) =>
+  moment(timeString, "h:mm A").isBetween(
     moment("12:00 PM", "h:mm A"),
     moment("5:00 PM", "h:mm A"),
     null,
     "[)"
   );
-};
 
-export const sortArrayOfDateStrings = (a, b) => {
-  const momentA = moment(a, "YYYY_MM_DD");
-  const momentB = moment(b, "YYYY_MM_DD");
-
-  if (momentA.isBefore(momentB)) {
-    return -1;
-  } else if (momentA.isSame(momentB)) {
-    return 0;
-  } else {
-    return 1;
-  }
-};
+export const sortArrayOfDateStrings = (a, b) =>
+  moment(a, "YYYY_MM_DD").diff(moment(b, "YYYY_MM_DD"));
