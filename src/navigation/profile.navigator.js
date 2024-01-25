@@ -8,6 +8,7 @@ import {
   EditName,
 } from "../screens/barber/profile/edit-contact-info.component";
 import { EditSchedule } from "../screens/barber/profile/edit-schedule.component";
+import { EditDaysOff } from "../screens/barber/profile/edit-days-off.component";
 
 const ProfileStack = createStackNavigator();
 
@@ -26,7 +27,8 @@ export const ProfileNavigator = () => {
         name={"Contact Information"}
         component={EditContactInfo}
       />
-      <ProfileStack.Screen name={"Schedule"} component={EditSchedule} />
+      <ProfileStack.Screen name={"Work Schedule"} component={EditSchedule} />
+      <ProfileStack.Screen name={"Days Off"} component={EditDaysOff} />
     </ProfileStack.Navigator>
   );
 };

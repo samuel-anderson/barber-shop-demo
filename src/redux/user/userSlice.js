@@ -65,6 +65,31 @@ const userSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
+    editScheduleStart(state) {
+      state.loading = true;
+      state.error = null;
+    },
+    editScheduleSuccess(state, _) {
+      state.loading = false;
+      state.error = null;
+    },
+    editScheduleFailed(state, action) {
+      state.error = action.payload;
+      state.loading = false;
+    },
+
+    editDaysOffStart(state) {
+      state.loading = true;
+      state.error = null;
+    },
+    editDaysOffSuccess(state, _) {
+      state.loading = false;
+      state.error = null;
+    },
+    editDaysOffFailed(state, action) {
+      state.error = action.payload;
+      state.loading = false;
+    },
   },
 });
 
@@ -83,5 +108,11 @@ export const {
   editContactInfoStart,
   editContactInfoSuccess,
   editContactInfoFailed,
+  editScheduleStart,
+  editScheduleFailed,
+  editScheduleSuccess,
+  editDaysOffStart,
+  editDaysOffSuccess,
+  editDaysOffFailed,
 } = userSlice.actions;
 export default userSlice.reducer;

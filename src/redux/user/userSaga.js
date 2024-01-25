@@ -21,6 +21,12 @@ import {
   signUpFailed,
   signUpStart,
   signUpSuccess,
+  editScheduleStart,
+  editScheduleSuccess,
+  editScheduleFailed,
+  editDaysOffSuccess,
+  editDaysOffFailed,
+  editDaysOffStart,
 } from "./userSlice";
 import { updateProfessionalDoc } from "../../services/firebase/firebaseService";
 import { fetchShopDataStart } from "../shop/shopSlice";
@@ -111,6 +117,26 @@ export function* editContactInfo({ payload }) {
   }
 }
 
+export function* editSchedule({ payload }) {
+  try {
+    yield call(updateProfessionalDoc, "barber_shop", "professionals", payload);
+    yield put(editScheduleSuccess());
+    yield put(fetchShopDataStart());
+  } catch (error) {
+    yield put(editScheduleFailed(error.code));
+  }
+}
+
+export function* editDaysOff({ payload }) {
+  try {
+    yield call(updateProfessionalDoc, "barber_shop", "professionals", payload);
+    yield put(editDaysOffSuccess());
+    yield put(fetchShopDataStart());
+  } catch (error) {
+    yield put(editDaysOffFailed(error.code));
+  }
+}
+
 export function* signInAfterSignUp({ payload: { user } }) {
   yield call(getSnapshotFromUserAuth, user);
 }
@@ -138,6 +164,14 @@ export function* onEditContactInfoStart() {
   yield takeLatest(editContactInfoStart.type, editContactInfo);
 }
 
+export function* onEditScheduleStart() {
+  yield takeLatest(editScheduleStart.type, editSchedule);
+}
+
+export function* onEditDaysOffStart() {
+  yield takeLatest(editDaysOffStart.type, editDaysOff);
+}
+
 export function* watchUserSagas() {
   yield all([
     call(onCheckUserSession),
@@ -146,5 +180,7 @@ export function* watchUserSagas() {
     call(onSignUpSuccess),
     call(onSignOutStart),
     call(onEditContactInfoStart),
+    call(onEditScheduleStart),
+    call(onEditDaysOffStart),
   ]);
 }
