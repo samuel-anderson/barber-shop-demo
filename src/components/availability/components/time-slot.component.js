@@ -60,22 +60,18 @@ export const TimeSlot = ({ schedule }) => {
     return keepTimeSlot;
   };
 
-  const availableSpots = schedule.map((day) => {
-    return generateTimeSlots(day.start, day.end).filter(filterTimeSlots);
-  });
-
-  const availableSpotsList = [].concat(...availableSpots);
+  const availableSpots = [].concat(
+    ...generateTimeSlots(schedule.start, schedule.end).filter(filterTimeSlots)
+  );
   return (
     <>
       <Spacer position="top" size="large">
-        <TotalAvailable>
-          {availableSpotsList.length} available spots
-        </TotalAvailable>
+        <TotalAvailable>{availableSpots.length} available spots</TotalAvailable>
       </Spacer>
       <Spacer position="top" size="large">
         <ScrollView style={{ height: "62%" }}>
           <SlotContainer>
-            {availableSpotsList.map((slot, idx) => (
+            {availableSpots.map((slot, idx) => (
               <TimeSlotCell key={idx} slot={slot} />
             ))}
           </SlotContainer>

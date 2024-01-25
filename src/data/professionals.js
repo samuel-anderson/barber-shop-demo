@@ -9,13 +9,13 @@ export const professionals = {
     email: "george@me.com",
     role: "user",
     schedule: {
-      sunday: [{ start: "8:00 AM", end: "8:00 PM" }],
-      monday: [{ start: "8:00 AM", end: "8:00 PM" }],
-      tuesday: [{ start: "8:00 AM", end: "8:00 PM" }],
-      wednesday: [{ start: "8:00 AM", end: "8:00 PM" }],
-      thursday: [{ start: "8:00 AM", end: "8:00 PM" }],
-      friday: [{ start: "8:00 AM", end: "8:00 PM" }],
-      saturday: [{ start: "8:00 AM", end: "8:00 PM" }],
+      sunday: { start: "8:00 AM", end: "8:00 PM" },
+      monday: { start: "8:00 AM", end: "8:00 PM" },
+      tuesday: { start: "8:00 AM", end: "8:00 PM" },
+      wednesday: { start: "8:00 AM", end: "8:00 PM" },
+      thursday: { start: "8:00 AM", end: "8:00 PM" },
+      friday: { start: "8:00 AM", end: "8:00 PM" },
+      saturday: { start: "8:00 AM", end: "8:00 PM" },
     },
     socialMedia: {
       instagram: {
@@ -34,18 +34,9 @@ export const professionals = {
     email: "kari@me.com",
     role: "user",
     schedule: {
-      tuesday: [
-        { start: "7:00 AM", end: "9:00 AM" },
-        { start: "4:00 PM", end: "8:00 PM" },
-      ],
-      wednesday: [
-        { start: "7:00 AM", end: "9:00 AM" },
-        { start: "4:00 PM", end: "8:00 PM" },
-      ],
-      thursday: [
-        { start: "7:00 AM", end: "9:00 AM" },
-        { start: "4:00 PM", end: "8:00 PM" },
-      ],
+      tuesday: { start: "7:00 AM", end: "9:00 AM" },
+      wednesday: { start: "4:00 PM", end: "8:00 PM" },
+      thursday: { start: "2:00 PM", end: "5:00 PM" },
     },
   },
   samuel_anderson: {
@@ -53,7 +44,7 @@ export const professionals = {
     //name: "Samuel Anderson",
     firstName: "Samuel",
     lastName: "Anderson",
-    displayName: "Slick Rick",
+    displayName: "Samuel Anderson",
     phoneNumber: "+17602774923",
     email: "sam@sam.com",
     role: "admin",
@@ -64,19 +55,11 @@ export const professionals = {
       },
     },
     schedule: {
-      sunday: null,
       monday: null,
-      tuesday: [
-        { start: "7:00 AM", end: "9:00 AM" },
-        { start: "4:00 PM", end: "8:00 PM" },
-      ],
-      wednesday: [{ start: "4:00 PM", end: "8:00 PM" }],
-      thursday: null,
-      friday: [
-        { start: "12:00 PM", end: "3:00 PM" },
-        { start: "6:00 PM", end: "7:00 PM" },
-      ],
-      saturday: null,
+      tuesday: { start: "7:00 AM", end: "9:00 AM" },
+      wednesday: { start: "4:00 PM", end: "8:00 PM" },
+      thursday: { start: "2:00 PM", end: "5:00 PM" },
+      friday: null,
     },
     services: [
       {
