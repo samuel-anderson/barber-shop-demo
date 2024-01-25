@@ -10,8 +10,9 @@ export const DAYSOFWEEK = {
   6: "saturday",
 };
 
-export const matchDatabaseDateFormat = (date) =>
-  moment(date).format("YYYY_MM_DD");
+export const matchDatabaseDateFormat = (date) => {
+  return moment(date).format("YYYY_MM_DD");
+};
 
 export const generateTimeSlots = (startTime, endTime) => {
   const slots = [];
@@ -54,15 +55,17 @@ export const isBetweenTimes = (
 
 export const isBeforeNoon = (timeString) => {
   const parsedTime = moment(timeString, "h:mm A");
-  const beforeNoon = parsedTime.isBefore(moment("12:00 PM", "h:mm A"));
-  return beforeNoon;
+  return parsedTime.isBefore(moment("12:00 PM", "h:mm A"));
 };
 
 export const isBetweenNoonAndFive = (timeString) => {
   const parsedTime = moment(timeString, "h:mm A");
-  const afterNoon = parsedTime.isSameOrAfter(moment("12:00 PM", "h:mm A"));
-  const beforeFive = parsedTime.isBefore(moment("5:00 PM", "h:mm A"));
-  return afterNoon && beforeFive;
+  return parsedTime.isBetween(
+    moment("12:00 PM", "h:mm A"),
+    moment("5:00 PM", "h:mm A"),
+    null,
+    "[)"
+  );
 };
 
 export const sortArrayOfDateStrings = (a, b) => {

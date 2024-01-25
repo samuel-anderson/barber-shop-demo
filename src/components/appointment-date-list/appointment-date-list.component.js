@@ -38,10 +38,10 @@ export const AppointmentDateList = ({ appointments }) => {
           style={pickerSelectStyles}
         />
       </View>
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <ScrollView style={styles.scrollContainer}>
         {sortedDates
           .filter((date) => (selectedValue ? selectedValue == date : true))
-          .map((date) => {
+          .map((date, idx) => {
             const formattedDate = moment(date, "YYYY_MM_DD").format(
               "MMM. Do, YYYY"
             );
@@ -95,9 +95,5 @@ const styles = StyleSheet.create({
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
     ...styles.inputIOS,
-    iconContainer: {
-      top: 10,
-      right: 12,
-    },
   },
 });

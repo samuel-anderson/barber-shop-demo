@@ -33,14 +33,13 @@ export const TimeSlotCell = ({ slot }) => {
         />
       );
     } else if (isBetweenNoonAndFive(slot)) {
-      if (slotClass === "selected")
-        return (
-          <Ionicons
-            name={slotClass === "selected" ? "sunny" : "sunny-outline"}
-            size={size}
-            color="black"
-          />
-        );
+      return (
+        <Ionicons
+          name={slotClass === "selected" ? "sunny" : "sunny-outline"}
+          size={size}
+          color="black"
+        />
+      );
     } else {
       return (
         <Ionicons
