@@ -10,9 +10,8 @@ export const DAYSOFWEEK = {
   6: "saturday",
 };
 
-export const matchDatabaseDateFormat = (date) => {
-  return moment(date).format("YYYY_MM_DD");
-};
+export const matchDatabaseDateFormat = (date) =>
+  moment(date).format("YYYY_MM_DD");
 
 export const generateTimeSlots = (startTime, endTime) => {
   const slots = [];
