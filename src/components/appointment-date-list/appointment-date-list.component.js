@@ -47,7 +47,7 @@ export const AppointmentDateList = ({ appointments }) => {
             );
 
             return (
-              <Spacer position="top" size="small" key={formattedDate}>
+              <Spacer position="top" size="small" key={idx}>
                 <CustomButton
                   text={formattedDate}
                   variant="dark"
