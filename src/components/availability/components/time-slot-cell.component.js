@@ -11,14 +11,11 @@ export const TimeSlotCell = ({ slot }) => {
 
   const startTime = useSelector((state) => state.cart.startTime);
 
-  const getTimeSlotClass = (slot) => {
-    if (slot === startTime) return "selected";
-    return "notSelected";
-  };
+  const getTimeSlotClass = (slot) =>
+    slot === startTime ? "selected" : "notSelected";
 
   const clickHandler = (slot) => {
-    if (slot === startTime) dispatch(setStartTime(null));
-    else dispatch(setStartTime(slot));
+    dispatch(setStartTime(slot === startTime ? null : slot));
   };
 
   const slotClass = getTimeSlotClass(slot);
@@ -26,26 +23,38 @@ export const TimeSlotCell = ({ slot }) => {
   const getIcon = () => {
     const size = 18;
     if (isBeforeNoon(slot)) {
-      if (slotClass === "selected")
-        return <Ionicons name="partly-sunny" size={size} color="black" />;
-      else
-        return (
-          <Ionicons name="partly-sunny-outline" size={size} color="black" />
-        );
+      return (
+        <Ionicons
+          name={
+            slotClass === "selected" ? "partly-sunny" : "partly-sunny-outline"
+          }
+          size={size}
+          color="black"
+        />
+      );
     } else if (isBetweenNoonAndFive(slot)) {
       if (slotClass === "selected")
-        return <Ionicons name="sunny" size={size} color="black" />;
-      else return <Ionicons name="sunny-outline" size={size} color="black" />;
+        return (
+          <Ionicons
+            name={slotClass === "selected" ? "sunny" : "sunny-outline"}
+            size={size}
+            color="black"
+          />
+        );
     } else {
-      if (slotClass === "selected")
-        return <Ionicons name="moon" size={size} color="black" />;
-      else return <Ionicons name="moon-outline" size={size} color="black" />;
+      return (
+        <Ionicons
+          name={slotClass === "selected" ? "moon" : "moon-outline"}
+          size={size}
+          color="black"
+        />
+      );
     }
   };
   return (
     <TouchableOpacity onPress={() => clickHandler(slot)}>
       <Cell class={slotClass}>
-        {getIcon(slot)}
+        {getIcon()}
         <CellText class={slotClass}>{slot}</CellText>
       </Cell>
     </TouchableOpacity>

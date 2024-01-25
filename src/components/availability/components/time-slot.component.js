@@ -23,45 +23,34 @@ export const TotalAvailable = styled(Text)`
 
 export const TimeSlot = ({ schedule }) => {
   const dispatch = useDispatch();
+  const isFocused = useIsFocused();
+
+  const appointments = useSelector((state) => state.appointments.appointments);
+  const professional = useSelector((state) => state.cart.professional);
+  const serviceDate = useSelector((state) => state.cart.serviceDate);
   const estimatedDuration = useSelector(
     (state) => state.cart.estimatedDuration
   );
-
-  const isFocused = useIsFocused();
+  const scheduledAppointments =
+    appointments?.[professional.id]?.[matchDatabaseDateFormat(serviceDate)] ||
+    [];
 
   useEffect(() => {
     if (isFocused) {
       dispatch(fetchAppointmentsStart());
     }
-  }, [isFocused]);
-
-  const appointments = useSelector((state) => state.appointments.appointments);
-  const professional = useSelector((state) => state.cart.professional);
-  const serviceDate = useSelector((state) => state.cart.serviceDate);
-  const scheduledAppointments =
-    appointments && appointments[professional.id]
-      ? appointments[professional.id][matchDatabaseDateFormat(serviceDate)]
-      : null;
+  }, [dispatch, isFocused]);
 
   const filterTimeSlots = (timeSlot) => {
-    if (!timeSlot) return;
+    if (!timeSlot) return true;
 
-    let keepTimeSlot = true;
     let slot = moment(timeSlot, "h:mm A");
 
-    if (scheduledAppointments) {
-      return isBetweenTimes(
-        keepTimeSlot,
-        slot,
-        scheduledAppointments,
-        estimatedDuration
-      );
-    }
-    return keepTimeSlot;
+    return isBetweenTimes(slot, scheduledAppointments, estimatedDuration);
   };
 
-  const availableSpots = [].concat(
-    ...generateTimeSlots(schedule.start, schedule.end).filter(filterTimeSlots)
+  const availableSpots = generateTimeSlots(schedule.start, schedule.end).filter(
+    filterTimeSlots
   );
   return (
     <>

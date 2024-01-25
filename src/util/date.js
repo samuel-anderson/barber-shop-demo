@@ -28,11 +28,12 @@ export const generateTimeSlots = (startTime, endTime) => {
 };
 
 export const isBetweenTimes = (
-  keepTimeSlot,
   slot,
   scheduledAppointments,
   estimatedDuration
 ) => {
+  let keepTimeSlot = true;
+
   for (var i = 0; i < scheduledAppointments.length; i++) {
     let { startTime, endTime } = scheduledAppointments[i];
 

@@ -12,38 +12,28 @@ export const Availability = () => {
   const selectedDate = useSelector((state) => state.cart.serviceDate);
   const selectedProfessional = useSelector((state) => state.cart.professional);
 
-  const selectedDayofWeek = selectedDate
-    ? moment(selectedDate).day()
-    : moment().day();
+  const selectedDayOfWeek = moment(selectedDate).day();
+  const selectedDayOfWeekName = DAYSOFWEEK[selectedDayOfWeek];
 
-  const schedule =
-    selectedProfessional && selectedProfessional.schedule
-      ? selectedProfessional.schedule[DAYSOFWEEK[selectedDayofWeek]]
-      : null;
+  const schedule = selectedProfessional?.schedule?.[selectedDayOfWeekName];
 
   const checkProfessionalSchedule = (date) => {
-    if (selectedProfessional.daysOff) {
-      const val = moment(date).format("MMM. Do, YYYY");
+    if (!selectedProfessional || !selectedProfessional.schedule) return null;
 
-      if (selectedProfessional.daysOff.indexOf(val) != -1) return null;
-    }
-    const day = moment(date).day();
+    const formattedDate = moment(date).format("MMM. Do, YYYY");
 
-    const hasSchedule =
-      selectedProfessional && selectedProfessional.schedule
-        ? selectedProfessional.schedule[DAYSOFWEEK[day]]
-        : null;
+    if (selectedProfessional.daysOff?.includes(formattedDate)) return null;
 
-    return hasSchedule;
+    const dayOfWeek = moment(date).day();
+    return selectedProfessional.schedule[DAYSOFWEEK[dayOfWeek]];
   };
 
   return (
     <SafeArea>
       <Calendar clickHandler={checkProfessionalSchedule} />
-      {schedule && (
-        <TimeSlot schedule={schedule} selectedDayofWeek={selectedDayofWeek} />
-      )}
-      {!schedule && (
+      {schedule ? (
+        <TimeSlot schedule={schedule} />
+      ) : (
         <Spacer position="top" size="large">
           <TotalAvailable>0 available spots</TotalAvailable>
         </Spacer>
