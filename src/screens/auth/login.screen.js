@@ -60,7 +60,7 @@ export const LoginScreen = ({ navigation }) => {
     if (!email) {
       setEmailError("Please enter a valid EMAIL");
       return true;
-    } else if (email && !barberEmails.includes(email.toLowerCase())) {
+    } else if (email && !barberEmails?.includes(email.toLowerCase())) {
       setEmailError("Barber email was NOT found");
       return true;
     } else {
