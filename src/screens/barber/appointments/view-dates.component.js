@@ -21,7 +21,7 @@ export const ViewDates = ({ navigation }) => {
 
   return (
     <SafeArea style={{ flex: 1, alignItems: "center" }}>
-      {appointments ? (
+      {appointments && Object.values(appointments).length > 0 ? (
         <AppointmentDateList appointments={appointments} />
       ) : (
         <Text>No Appointments</Text>
