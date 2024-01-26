@@ -27,12 +27,13 @@ export const CustomText = styled(Text)`
   color: ${({ theme }) => theme.colors.text.secondary};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   font-size: ${({ theme }) => theme.fontSizes.caption};
+  text-align: center;
 `;
 
 export const ServiceTitle = styled(Text)`
   color: ${({ theme }) => theme.colors.text.secondary};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
-  font-size: ${({ theme }) => theme.fontSizes.title};
+  font-size: ${({ theme }) => theme.fontSizes.h5};
   text-align: center;
 `;
 
