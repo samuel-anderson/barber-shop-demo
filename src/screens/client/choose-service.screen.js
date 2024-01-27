@@ -20,7 +20,7 @@ export const ChooseServiceScreen = ({ navigation }) => {
 
   return (
     <>
-      <ServiceList services={services} navigation={navigation} />
+      <ServiceList services={Object.values(services)} navigation={navigation} />
       <ServiceBottomSheet />
     </>
   );
