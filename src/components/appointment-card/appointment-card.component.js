@@ -1,15 +1,13 @@
 import { View } from "react-native";
-import { PhoneNumberComponent } from "../phone-number/phone-number.component";
-import { Spacer } from "../spacer/spacer.component";
-import { TextMessageComponent } from "../text-message/text-message.component";
+
 import {
   AppointmentCard,
-  ClientName,
-  Container,
   CustomText,
   ServiceTitle,
   Time,
   AppointmentStatus,
+  AppointmentStatusContainer,
+  Total,
 } from "./appointment-card.styles";
 import { Text } from "../typography/text.component";
 
@@ -24,41 +22,42 @@ const getOrderTotal = (service, addOns) => {
 };
 
 export const AppointmentCardComponent = ({ item }) => {
+  const statusColor = (status) => {
+    switch (status) {
+      case "pending":
+        return "yellow";
+      case "cancelled":
+        return "red";
+      case "paid":
+        return "lightgreen";
+      default:
+        return "yellow";
+    }
+  };
   return (
     <AppointmentCard elevation={2}>
-      <Time>
-        {item.startTime} - {item.endTime}
-      </Time>
-      <ServiceTitle>
-        {item.service.title} {<AppointmentStatus>(pending)</AppointmentStatus>}
-      </ServiceTitle>
-
-      {/* <Container>
-        <View>
-          <ClientName>Name: {item.clientName}</ClientName>
-          <PhoneNumberComponent phoneNumber={item.clientPhoneNumber} />
-          <TextMessageComponent phoneNumber={item.clientPhoneNumber} />
-
-          <Spacer position="top" size="large">
-            <Total>Total: ${getOrderTotal(item.service, item.addOns)}</Total>
-          </Spacer>
-        </View>
-
-        <View>
-          {item.addOns.length > 0 &&
-            item.addOns.map((addOn, idx) => {
-              return (
-                <View key={idx}>
-                  <CustomText>+ {addOn.title.toUpperCase()}</CustomText>
-                </View>
-              );
-            })}
-        </View>
-      </Container> */}
+      <View style={{ flexDirection: "row", justifyContent: "center" }}>
+        <Time>
+          {item.startTime} - {item.endTime}
+        </Time>
+      </View>
+      <View style={{ flexDirection: "row", justifyContent: "center" }}>
+        <ServiceTitle>{item.service.title}</ServiceTitle>
+      </View>
       <View style={{ marginTop: 10 }}>
         {item.addOns.map((addOn, idx) => (
-          <CustomText>{addOn.title.toUpperCase()}</CustomText>
+          <CustomText key={idx}>{addOn.title.toUpperCase()}</CustomText>
         ))}
+      </View>
+      <AppointmentStatusContainer $statusColor={statusColor(item.status)}>
+        <AppointmentStatus>{item.status}</AppointmentStatus>
+      </AppointmentStatusContainer>
+      <View>
+        <Total>
+          {item.status === "cancelled"
+            ? "--"
+            : `$${getOrderTotal(item.service, item.addOns)}`}
+        </Total>
       </View>
     </AppointmentCard>
   );

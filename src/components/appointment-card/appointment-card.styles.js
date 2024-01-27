@@ -5,16 +5,25 @@ import { View } from "react-native";
 
 export const AppointmentCard = styled(Card)`
   background-color: ${(props) => props.theme.colors.bg.primary};
-  align-items: center;
-  justify-content: center;
   padding: 15px;
+  position: relative;
 `;
 
 export const AppointmentStatus = styled(Text)`
-  color: ${({ theme }) => theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.primary};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
-  font-size: ${({ theme }) => theme.fontSizes.body};
+  font-size: ${({ theme }) => theme.fontSizes.caption};
   text-align: center;
+`;
+
+export const AppointmentStatusContainer = styled.View`
+  background-color: ${({ $statusColor }) => $statusColor};
+  padding: 5px;
+  border-radius: 10px;
+  width: 75px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 `;
 
 export const Container = styled.View`

@@ -6,4 +6,5 @@ export const shop = {
   accessCode: "5510",
   eventNotes:
     "Appointments must be cancelled 24 hours before scheduled appointment.",
+  appointmentStatuses: ["pending", "paid", "cancelled"],
 };

@@ -25,6 +25,7 @@ const insertBooking = (cart, clientInfo) => {
       startTime: cart.startTime,
       endTime: cart.endTime,
       estimatedDuration: cart.estimatedDuration,
+      status: "pending",
     }
   );
 
