@@ -5,7 +5,7 @@ import { TextInput } from "react-native-paper";
 import { useState } from "react";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { useDispatch, useSelector } from "react-redux";
-import { editContactInfoStart } from "../../../redux/user/userSlice";
+import { editProfileStart } from "../../../redux/user/userSlice";
 import { useNavigation } from "@react-navigation/native";
 import { ModalComponent } from "../../../components/modal/modal.component";
 import styled from "styled-components/native";
@@ -33,7 +33,7 @@ export const EditContactInfo = ({ route }) => {
       //check for errors first
 
       dispatch(
-        editContactInfoStart({
+        editProfileStart({
           items: {
             [id]: {
               phoneNumber: phoneNumber_,

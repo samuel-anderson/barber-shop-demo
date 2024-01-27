@@ -61,23 +61,23 @@ export const professionals = {
       thursday: { start: "2:00 PM", end: "5:00 PM" },
       friday: null,
     },
-    services: [
-      {
+    services: {
+      haircut: {
         id: "haircut",
         duration: 45,
       },
-      {
+      lineup_neck: {
         id: "lineup_neck",
         duration: 30,
       },
-      {
+      facial: {
         id: "facial",
         duration: 45,
       },
-      {
+      eyebrows: {
         id: "eyebrows",
         duration: 30,
       },
-    ],
+    },
   },
 };

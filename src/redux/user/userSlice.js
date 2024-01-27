@@ -65,34 +65,47 @@ const userSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
-    editScheduleStart(state) {
+    editProfileStart(state) {
       state.loading = true;
       state.error = null;
     },
-    editScheduleSuccess(state, _) {
+    editProfileSuccess(state, _) {
       state.loading = false;
       state.error = null;
     },
-    editScheduleFailed(state, action) {
+    editProfileFailed(state, action) {
       state.error = action.payload;
       state.loading = false;
     },
 
-    editDaysOffStart(state) {
-      state.loading = true;
-      state.error = null;
-    },
-    editDaysOffSuccess(state, _) {
-      state.loading = false;
-      state.error = null;
-    },
-    editDaysOffFailed(state, action) {
-      state.error = action.payload;
-      state.loading = false;
-    },
+    // editDaysOffStart(state) {
+    //   state.loading = true;
+    //   state.error = null;
+    // },
+    // editDaysOffSuccess(state, _) {
+    //   state.loading = false;
+    //   state.error = null;
+    // },
+    // editDaysOffFailed(state, action) {
+    //   state.error = action.payload;
+    //   state.loading = false;
+    // },
+    // editServicesStart(state) {
+    //   state.loading = true;
+    //   state.error = null;
+    // },
+    // editServicesSuccess(state, _) {
+    //   state.loading = false;
+    //   state.error = null;
+    // },
+    // editServicesFailed(state, action) {
+    //   state.error = action.payload;
+    //   state.loading = false;
+    // },
   },
 });
 
+//reduce with keys to determine******
 export const {
   checkUserSession,
   signUpStart,
@@ -105,14 +118,20 @@ export const {
   signOutStart,
   signOutSuccess,
   userNotAuthicated,
-  editContactInfoStart,
-  editContactInfoSuccess,
-  editContactInfoFailed,
-  editScheduleStart,
-  editScheduleFailed,
-  editScheduleSuccess,
-  editDaysOffStart,
-  editDaysOffSuccess,
-  editDaysOffFailed,
+  editProfileStart,
+  editProfileSuccess,
+  editProfileFailed,
+  // editContactInfoStart,
+  // editContactInfoSuccess,
+  // editContactInfoFailed,
+  // editScheduleStart,
+  // editScheduleFailed,
+  // editScheduleSuccess,
+  // editDaysOffStart,
+  // editDaysOffSuccess,
+  // editDaysOffFailed,
+  // editServicesStart,
+  // editServicesSuccess,
+  // editServicesFailed,
 } = userSlice.actions;
 export default userSlice.reducer;

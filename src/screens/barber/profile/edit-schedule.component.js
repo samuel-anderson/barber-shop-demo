@@ -7,7 +7,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { useState } from "react";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { CustomButton } from "../../../components/custom-button/custom-button.component";
-import { editScheduleStart } from "../../../redux/user/userSlice";
+import { editProfileStart } from "../../../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ModalComponent } from "../../../components/modal/modal.component";
 import { useNavigation } from "@react-navigation/native";
@@ -107,7 +107,7 @@ export const EditSchedule = ({ route }) => {
     try {
       //check for errors first
       dispatch(
-        editScheduleStart({
+        editProfileStart({
           items: {
             [id]: {
               schedule: updatedSchedule,

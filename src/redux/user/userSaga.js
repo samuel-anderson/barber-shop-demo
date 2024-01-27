@@ -9,9 +9,6 @@ import {
 } from "../../util/firebase";
 import {
   checkUserSession,
-  editContactInfoStart,
-  editContactInfoSuccess,
-  editContactInfoFailed,
   signInFailed,
   signInStart,
   signInSuccess,
@@ -21,12 +18,9 @@ import {
   signUpFailed,
   signUpStart,
   signUpSuccess,
-  editScheduleStart,
-  editScheduleSuccess,
-  editScheduleFailed,
-  editDaysOffSuccess,
-  editDaysOffFailed,
-  editDaysOffStart,
+  editProfileStart,
+  editProfileSuccess,
+  editProfileFailed,
 } from "./userSlice";
 import { updateProfessionalDoc } from "../../services/firebase/firebaseService";
 import { fetchShopDataStart } from "../shop/shopSlice";
@@ -107,33 +101,13 @@ export function* signOut() {
   }
 }
 
-export function* editContactInfo({ payload }) {
+export function* editProfile({ payload }) {
   try {
     yield call(updateProfessionalDoc, "barber_shop", "professionals", payload);
-    yield put(editContactInfoSuccess());
+    yield put(editProfileSuccess());
     yield put(fetchShopDataStart());
   } catch (error) {
-    yield put(editContactInfoFailed(error.code));
-  }
-}
-
-export function* editSchedule({ payload }) {
-  try {
-    yield call(updateProfessionalDoc, "barber_shop", "professionals", payload);
-    yield put(editScheduleSuccess());
-    yield put(fetchShopDataStart());
-  } catch (error) {
-    yield put(editScheduleFailed(error.code));
-  }
-}
-
-export function* editDaysOff({ payload }) {
-  try {
-    yield call(updateProfessionalDoc, "barber_shop", "professionals", payload);
-    yield put(editDaysOffSuccess());
-    yield put(fetchShopDataStart());
-  } catch (error) {
-    yield put(editDaysOffFailed(error.code));
+    yield put(editProfileFailed(error.code));
   }
 }
 
@@ -160,16 +134,8 @@ export function* onSignOutStart() {
   yield takeLatest(signOutStart.type, signOut);
 }
 
-export function* onEditContactInfoStart() {
-  yield takeLatest(editContactInfoStart.type, editContactInfo);
-}
-
-export function* onEditScheduleStart() {
-  yield takeLatest(editScheduleStart.type, editSchedule);
-}
-
-export function* onEditDaysOffStart() {
-  yield takeLatest(editDaysOffStart.type, editDaysOff);
+export function* onEditProfileStart() {
+  yield takeLatest(editProfileStart.type, editProfile);
 }
 
 export function* watchUserSagas() {
@@ -179,8 +145,6 @@ export function* watchUserSagas() {
     call(onSignInStart),
     call(onSignUpSuccess),
     call(onSignOutStart),
-    call(onEditContactInfoStart),
-    call(onEditScheduleStart),
-    call(onEditDaysOffStart),
+    call(onEditProfileStart),
   ]);
 }

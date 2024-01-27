@@ -4,7 +4,7 @@ import { Text } from "../../../components/typography/text.component";
 import { useState } from "react";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { useDispatch, useSelector } from "react-redux";
-//import { editServicesStart } from "../../../redux/user/userSlice";
+import { editProfileStart } from "../../../redux/user/userSlice";
 import RNPickerSelect from "react-native-picker-select";
 import { useNavigation } from "@react-navigation/native";
 import { ModalComponent } from "../../../components/modal/modal.component";
@@ -16,10 +16,6 @@ const Done = styled(Text)`
   font-size: ${({ theme }) => theme.fontSizes.title};
 `;
 
-const IconButton = styled(TouchableOpacity)`
-  margin-top: 10px;
-`;
-
 export const EditServices = ({ route }) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -29,9 +25,8 @@ export const EditServices = ({ route }) => {
 
   const { id, services } = route.params.user;
 
-  const [updatedServices, setUpdatedServices] = useState(services || []);
+  const [updatedServices, setUpdatedServices] = useState(services || {});
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(null);
 
   const placeholder = {
     label: "Add Service",
@@ -52,17 +47,15 @@ export const EditServices = ({ route }) => {
 
   const onSaveChanges = async () => {
     try {
-      //check for errors first
-
-      // dispatch(
-      //   editServicesStart({
-      //     items: {
-      //       [id]: {
-      //         services: updatedServices
-      //       },
-      //     },
-      //   })
-      // );
+      dispatch(
+        editProfileStart({
+          items: {
+            [id]: {
+              services: updatedServices,
+            },
+          },
+        })
+      );
       setIsModalVisible(true);
     } catch (e) {
       console.error(e);
@@ -70,64 +63,90 @@ export const EditServices = ({ route }) => {
   };
 
   const addService = (service) => {
-    console.log(updatedServices);
-    console.log(service);
+    if (!service) return;
 
     if (!updatedServices[service]) {
-      setUpdatedServices([...updatedServices, service]);
+      setUpdatedServices({
+        ...updatedServices,
+        [service]: { id: service, duration: 30 },
+      });
     }
+  };
+
+  const setDuration = (id, value) => {
+    setUpdatedServices({
+      ...updatedServices,
+      [id]: { id: id, duration: value },
+    });
+  };
+
+  const removeService = (id) => {
+    setUpdatedServices({
+      ...updatedServices,
+      [id]: null,
+    });
   };
 
   return (
     <View style={styles.container}>
       <View>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 10,
-          }}
-        >
-          <IconButton
-            onPress={() => {
-              addService(selectedValue);
-            }}
-          >
-            <FontAwesome name="plus" size={40} color="gray" />
-          </IconButton>
-          <View style={{ flex: 1 }}>
-            <RNPickerSelect
-              onValueChange={(value) => setSelectedValue(value)}
-              items={serviceList.map(({ id, title }) => {
-                return { value: id, label: title };
-              })}
-              placeholder={placeholder}
-              style={pickerSelectStyles}
-            />
-          </View>
+        <View>
+          <RNPickerSelect
+            onValueChange={(value) => addService(value)}
+            items={serviceList.map(({ id, title }) => {
+              return { value: id, label: title };
+            })}
+            placeholder={placeholder}
+            style={pickerSelectStyles}
+          />
         </View>
 
         <View style={{ padding: 10 }}>
-          {services.map((service, idx) => (
-            <View
-              key={idx}
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: 5,
-              }}
-            >
-              <Text>{servicesData[service.id].title}</Text>
-              <RNPickerSelect
-                onValueChange={(value) => setSelectedValue(value)}
-                items={durations}
-                placeholder={durationPlaceholder}
-                style={durationSelectStyles}
-              />
-            </View>
-          ))}
+          {Object.values(updatedServices).map((service, idx) => {
+            if (!service) return;
+
+            return (
+              <View
+                key={idx}
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: 5,
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "center",
+
+                    gap: 10,
+                  }}
+                >
+                  <TouchableOpacity
+                    style={{ padding: 10 }}
+                    onPress={() => {
+                      removeService(service.id);
+                    }}
+                  >
+                    <FontAwesome name="remove" size={15} color="black" />
+                  </TouchableOpacity>
+                  <View>
+                    <Text>{servicesData[service.id].title}</Text>
+                  </View>
+                </View>
+                <RNPickerSelect
+                  //onValueChange={(value) => setSelectedValue(value)}
+                  onValueChange={(value) => setDuration(service.id, value)}
+                  value={updatedServices[service.id].duration}
+                  items={durations}
+                  placeholder={durationPlaceholder}
+                  style={durationSelectStyles}
+                />
+              </View>
+            );
+          })}
         </View>
       </View>
       <TouchableOpacity onPress={onSaveChanges}>

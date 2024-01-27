@@ -8,14 +8,14 @@ export const BARBER_SHOP_DATA = [
   //   title: "shop",
   //   items: shop,
   // },
-  // {
-  //   title: "professionals",
-  //   items: professionals,
-  // },
   {
-    title: "services",
-    items: services,
+    title: "professionals",
+    items: professionals,
   },
+  // {
+  //   title: "services",
+  //   items: services,
+  // },
   // {
   //   title: "appointments",
   //   items: appointments,

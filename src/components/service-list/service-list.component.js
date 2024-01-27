@@ -17,13 +17,15 @@ export const ServiceList = ({ services }) => {
   const selectedService = useSelector((state) => state.cart.service);
 
   const filterServiceByBarber = (barber) => {
+    const barberServices = Object.values(barber.services);
+
     const filteredServices = services
       .filter((service) =>
-        barber.services.some((filterService) => filterService.id === service.id)
+        barberServices.some((filterService) => filterService?.id === service.id)
       )
       .map((service) => {
-        const customService = barber.services.find(
-          (item) => item.id === service.id
+        const customService = barberServices.find(
+          (item) => item?.id === service.id
         );
         return {
           ...service,
@@ -48,7 +50,7 @@ export const ServiceList = ({ services }) => {
       {selectedService && <ServiceCard service={selectedService} />}
 
       <Spacer />
-      {selectedService && (
+      {selectedService && filteredList.length > 0 && (
         <View style={{ margin: 15 }}>
           <Title>Anything you wish to add?</Title>
         </View>

@@ -4,7 +4,7 @@ import { Text } from "../../../components/typography/text.component";
 import { useState } from "react";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { useDispatch } from "react-redux";
-import { editDaysOffStart } from "../../../redux/user/userSlice";
+import { editProfileStart } from "../../../redux/user/userSlice";
 import { useNavigation } from "@react-navigation/native";
 import { ModalComponent } from "../../../components/modal/modal.component";
 import { FontAwesome } from "@expo/vector-icons";
@@ -58,7 +58,7 @@ export const EditDaysOff = ({ route }) => {
     try {
       //check for errors first
       dispatch(
-        editDaysOffStart({
+        editProfileStart({
           items: {
             [id]: {
               daysOff: updatedDaysOff,
