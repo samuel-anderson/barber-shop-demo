@@ -14,7 +14,7 @@ export const AppointmentDateList = ({ appointments }) => {
   const sortedDates = Object.keys(appointments).sort(sortArrayOfDateStrings);
 
   const placeholder = {
-    label: "Select a filter...",
+    label: "Filter",
     value: null,
   };
 
@@ -78,22 +78,23 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 20,
   },
-  inputIOS: {
-    fontSize: 16,
-    paddingVertical: 12,
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: "gray",
-    borderRadius: 4,
+  text: {
     color: "white",
-    paddingRight: 30,
-
-    backgroundColor: "#333333",
+    fontSize: 20,
+    fontWeight: "bold",
   },
 });
 
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
-    ...styles.inputIOS,
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    borderRadius: 10,
+    paddingRight: 30,
+    backgroundColor: "gray",
+    ...styles.text,
+  },
+  placeholder: {
+    ...styles.text,
   },
 });

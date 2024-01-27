@@ -9,7 +9,9 @@ import { useNavigation } from "@react-navigation/native";
 import { ModalComponent } from "../../../components/modal/modal.component";
 import { FontAwesome } from "@expo/vector-icons";
 
-import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePicker, {
+  RCTDateTimePickerNative,
+} from "@react-native-community/datetimepicker";
 import moment from "moment";
 
 import styled, { useTheme } from "styled-components/native";
@@ -79,6 +81,7 @@ export const EditDaysOff = ({ route }) => {
         style={{
           alignItems: "center",
           flexDirection: "row",
+          justifyContent: "center",
         }}
       >
         <TouchableOpacity
@@ -94,6 +97,8 @@ export const EditDaysOff = ({ route }) => {
           value={selectedDate}
           mode="date"
           onChange={(_, date) => setSelectedDate(date)}
+          minimumDate={moment("2024-01-01").toDate()}
+          maximumDate={moment("2024-12-31").toDate()}
         />
       </View>
       <View style={{ marginTop: 20 }}>
@@ -142,8 +147,6 @@ export const EditDaysOff = ({ route }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 16,
-    alignItems: "center",
   },
 });
