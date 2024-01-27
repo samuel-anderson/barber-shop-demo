@@ -1,12 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { ViewDates } from "../screens/barber/appointments/view-dates.component";
-import { ViewAppointments } from "../screens/barber/appointments/view-appointments.component";
 import { Profile } from "../screens/barber/profile/profile.component";
-import {
-  EditContactInfo,
-  EditName,
-} from "../screens/barber/profile/edit-contact-info.component";
+import { EditContactInfo } from "../screens/barber/profile/edit-contact-info.component";
 import { EditSchedule } from "../screens/barber/profile/edit-schedule.component";
 import { EditDaysOff } from "../screens/barber/profile/edit-days-off.component";
 

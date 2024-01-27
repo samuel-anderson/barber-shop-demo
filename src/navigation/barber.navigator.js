@@ -71,8 +71,9 @@ export const BarberNavigator = () => {
 
   return (
     <Tab.Navigator screenOptions={createScreenOptions}>
-      <Tab.Screen name="Profile" component={ProfileNavigator} />
       <Tab.Screen name="Appointments" component={AppointmentsNavigator} />
+
+      <Tab.Screen name="Profile" component={ProfileNavigator} />
       <Tab.Screen name="Reports" component={Reports} />
       <Tab.Screen name="Settings" component={Settings} />
       {currentUser && currentUser.role == "admin" && (

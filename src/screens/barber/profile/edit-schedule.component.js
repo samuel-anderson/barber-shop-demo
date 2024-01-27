@@ -121,7 +121,7 @@ export const EditSchedule = ({ route }) => {
     }
   };
   return (
-    <ScrollView>
+    <View style={{ flex: 1, justifyContent: "space-between", padding: 10 }}>
       <View style={{ margin: 15 }}>
         {daysOfWeek.map((item) => {
           const day = item.toLocaleLowerCase();
@@ -129,8 +129,8 @@ export const EditSchedule = ({ route }) => {
             <View
               key={day}
               style={{
-                padding: 10,
-                borderBottomWidth: 5,
+                padding: 5,
+                borderBottomWidth: 3,
                 borderBottomColor: "rgba(0, 0, 0, 0.8)",
                 flexDirection: "row",
                 justifyContent: "space-between",
@@ -166,7 +166,7 @@ export const EditSchedule = ({ route }) => {
                   </IconButton>
                 )}
               </View>
-              <View style={{ flex: 1 }}>
+              <View>
                 {updatedSchedule[day.toLowerCase()] ? (
                   (() => {
                     const timeSlot = updatedSchedule[day.toLowerCase()];
@@ -191,7 +191,7 @@ export const EditSchedule = ({ route }) => {
                             flexDirection: "row",
                             justifyContent: "center",
                             alignItems: "center",
-                            gap: 10,
+                            gap: 5,
                           }}
                         >
                           <View
@@ -293,6 +293,6 @@ export const EditSchedule = ({ route }) => {
           />
         </Spacer>
       </ModalComponent>
-    </ScrollView>
+    </View>
   );
 };

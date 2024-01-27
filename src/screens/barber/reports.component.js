@@ -33,7 +33,7 @@ export const Reports = () => {
 
           <MultipleSelectList
             setSelected={(val) => setSelectedStatuses(val)}
-            onSelect={() => console.log(selectedStatuses)}
+            onSelect={() => {}}
             data={statuses}
             save="value"
             label="Statuses"
