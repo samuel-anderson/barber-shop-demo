@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import { CustomButton } from "../../../components/custom-button/custom-button.component";
 import { Text } from "../../../components/typography/text.component";
 import { useState } from "react";
@@ -25,7 +25,9 @@ export const EditServices = ({ route }) => {
 
   const { id, services } = route.params.user;
 
-  const [updatedServices, setUpdatedServices] = useState(services || {});
+  const [updatedServices, setUpdatedServices] = useState(
+    services || servicesData
+  );
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const placeholder = {
@@ -101,7 +103,7 @@ export const EditServices = ({ route }) => {
           />
         </View>
 
-        <View style={{ padding: 10 }}>
+        <ScrollView style={{ padding: 5 }}>
           {Object.values(updatedServices).map((service, idx) => {
             if (!service) return;
 
@@ -112,7 +114,7 @@ export const EditServices = ({ route }) => {
                   flexDirection: "row",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  marginBottom: 5,
+                  marginBottom: 2,
                 }}
               >
                 <View
@@ -147,7 +149,7 @@ export const EditServices = ({ route }) => {
               </View>
             );
           })}
-        </View>
+        </ScrollView>
       </View>
       <TouchableOpacity onPress={onSaveChanges}>
         <CustomButton
