@@ -11,6 +11,7 @@ import { editProfileStart } from "../../../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ModalComponent } from "../../../components/modal/modal.component";
 import { useNavigation } from "@react-navigation/native";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const Day = styled(Text)`
   font-size: ${({ theme }) => theme.fontSizes.title};
@@ -32,6 +33,11 @@ const daysOfWeek = [
   "Sunday",
 ];
 
+const pickedDay = {
+  day: "",
+  selection: "",
+};
+
 const IconButton = styled(TouchableOpacity)`
   margin-top: 10px;
 `;
@@ -46,16 +52,30 @@ export const EditSchedule = ({ route }) => {
   const [updatedSchedule, setUpdatedSchedule] = useState(schedule);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  // set schedule to updateSchedule = useState(schedule)
-  //on change updateSchedule[day] = object {start, end}
-  //on change must be smart send (day, start/end)
-  //error checks for end time greater than start
-  //clean code add components, abstract
+  const [selectedDay, setSelectedDay] = useState(pickedDay);
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
-  //upate button
-  //then modal
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
 
-  //add days off*************
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (value) => {
+    const time = moment(value).format("h:mm A");
+
+    setUpdatedSchedule({
+      ...updatedSchedule,
+      [selectedDay.day]: {
+        ...updatedSchedule[selectedDay.day],
+        [selectedDay.selection]: time,
+      },
+    });
+
+    hideDatePicker();
+  };
 
   const addSchedule = (day) => {
     if (!updatedSchedule[day]) {
@@ -121,8 +141,8 @@ export const EditSchedule = ({ route }) => {
     }
   };
   return (
-    <View style={{ flex: 1, justifyContent: "space-between", padding: 10 }}>
-      <View style={{ margin: 15 }}>
+    <View style={{ flex: 1, justifyContent: "space-between", padding: 15 }}>
+      <View>
         {daysOfWeek.map((item) => {
           const day = item.toLocaleLowerCase();
           return (
@@ -180,12 +200,7 @@ export const EditSchedule = ({ route }) => {
                     ).toDate();
 
                     return (
-                      <View
-                        style={{
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
+                      <View>
                         <View
                           style={{
                             flexDirection: "row",
@@ -201,7 +216,35 @@ export const EditSchedule = ({ route }) => {
                             }}
                           >
                             <Text>START</Text>
-                            <DateTimePicker
+                            <TouchableOpacity
+                              onPress={() => {
+                                setSelectedDay({
+                                  day: day,
+                                  selection: "start",
+                                });
+                                showDatePicker();
+                              }}
+                            >
+                              <View
+                                style={{
+                                  backgroundColor: "black",
+                                  padding: 5,
+                                  borderRadius: 5,
+                                  width: 90,
+                                }}
+                              >
+                                <Text
+                                  style={{
+                                    color: "white",
+                                    textAlign: "center",
+                                  }}
+                                >
+                                  {updatedSchedule[day.toLowerCase()].start}
+                                </Text>
+                              </View>
+                            </TouchableOpacity>
+
+                            {/* <DateTimePicker
                               testID="timePicker"
                               value={initialStartTime}
                               mode={mode}
@@ -216,8 +259,9 @@ export const EditSchedule = ({ route }) => {
                               style={{
                                 width: 100,
                                 height: 30,
+                                color: "black",
                               }}
-                            />
+                            /> */}
                           </View>
 
                           <View
@@ -227,7 +271,34 @@ export const EditSchedule = ({ route }) => {
                             }}
                           >
                             <Text>END</Text>
-                            <DateTimePicker
+                            <TouchableOpacity
+                              onPress={() => {
+                                setSelectedDay({
+                                  day: day,
+                                  selection: "end",
+                                });
+                                showDatePicker();
+                              }}
+                            >
+                              <View
+                                style={{
+                                  backgroundColor: "black",
+                                  padding: 5,
+                                  borderRadius: 5,
+                                  width: 90,
+                                }}
+                              >
+                                <Text
+                                  style={{
+                                    color: "white",
+                                    textAlign: "center",
+                                  }}
+                                >
+                                  {updatedSchedule[day.toLowerCase()].end}
+                                </Text>
+                              </View>
+                            </TouchableOpacity>
+                            {/* <DateTimePicker
                               testID="timePicker"
                               value={initialEndTime}
                               mode={mode}
@@ -243,7 +314,7 @@ export const EditSchedule = ({ route }) => {
                                 width: 100,
                                 height: 30,
                               }}
-                            />
+                            /> */}
                           </View>
                         </View>
                       </View>
@@ -293,6 +364,13 @@ export const EditSchedule = ({ route }) => {
           />
         </Spacer>
       </ModalComponent>
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="time"
+        onConfirm={handleConfirm}
+        onCancel={hideDatePicker}
+        minuteInterval={15}
+      />
     </View>
   );
 };
