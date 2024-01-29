@@ -1,6 +1,5 @@
-import { View, ScrollView, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { Text } from "../../../components/typography/text.component";
-import DateTimePicker from "@react-native-community/datetimepicker";
 import styled from "styled-components/native";
 import moment from "moment";
 import { FontAwesome } from "@expo/vector-icons";
@@ -11,7 +10,8 @@ import { editProfileStart } from "../../../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ModalComponent } from "../../../components/modal/modal.component";
 import { useNavigation } from "@react-navigation/native";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { TimePickerComponent } from "../../../components/time-picker/time-picker-component";
+import { TimeComponent } from "./components/time.component";
 
 const Day = styled(Text)`
   font-size: ${({ theme }) => theme.fontSizes.title};
@@ -48,7 +48,6 @@ export const EditSchedule = ({ route }) => {
   const navigation = useNavigation();
 
   const { id, schedule } = route.params.user;
-  const mode = "time";
   const [updatedSchedule, setUpdatedSchedule] = useState(schedule);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -65,6 +64,15 @@ export const EditSchedule = ({ route }) => {
 
   const handleConfirm = (value) => {
     const time = moment(value).format("h:mm A");
+
+    if (checkErrors(value)) {
+      alert(
+        selectedDay.selection == "start"
+          ? "Start time cannot be AFTER end time"
+          : "End time cannot be BEFORE start time"
+      );
+      return;
+    }
 
     setUpdatedSchedule({
       ...updatedSchedule,
@@ -95,32 +103,18 @@ export const EditSchedule = ({ route }) => {
     });
   };
 
-  const startTimeChangeHandler = (day, startTime) => {
-    const start = moment(startTime, "h:mm A");
-    const end = moment(updatedSchedule[day].end, "h:mm A");
+  const checkErrors = (time) => {
+    let start = moment(time, "h:mm A");
+    let end = moment(updatedSchedule[selectedDay.day].end, "h:mm A");
 
-    if (start.isBefore(end)) {
-      setUpdatedSchedule({
-        ...updatedSchedule,
-        [day]: { start: startTime, end: updatedSchedule[day].end },
-      });
-    } else {
-      alert("Start time cannot be AFTER end time");
-    }
-  };
+    if (selectedDay.selection == "start" && !start.isBefore(end)) return true;
 
-  const endTimeChangeHandler = (day, endTime) => {
-    const start = moment(updatedSchedule[day].start, "h:mm A");
-    const end = moment(endTime, "h:mm A");
+    start = moment(updatedSchedule[selectedDay.day].start, "h:mm A");
+    end = moment(time, "h:mm A");
 
-    if (end.isAfter(start)) {
-      setUpdatedSchedule({
-        ...updatedSchedule,
-        [day]: { start: updatedSchedule[day].start, end: endTime },
-      });
-    } else {
-      alert("End time cannot be BEFORE start time");
-    }
+    if (selectedDay.selection == "end" && !end.isAfter(start)) return true;
+
+    return false;
   };
 
   const onSaveChanges = async () => {
@@ -140,22 +134,22 @@ export const EditSchedule = ({ route }) => {
       console.error(e);
     }
   };
+
+  const timePressHandler = (day, selection) => {
+    setSelectedDay({
+      day: day,
+      selection: selection,
+    });
+    showDatePicker();
+  };
+
   return (
-    <View style={{ flex: 1, justifyContent: "space-between", padding: 15 }}>
+    <View style={styles.container}>
       <View>
         {daysOfWeek.map((item) => {
           const day = item.toLocaleLowerCase();
           return (
-            <View
-              key={day}
-              style={{
-                padding: 5,
-                borderBottomWidth: 3,
-                borderBottomColor: "rgba(0, 0, 0, 0.8)",
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-            >
+            <View key={day} style={styles.schedule_container}>
               <View
                 style={{
                   justifyContent: "start",
@@ -189,133 +183,24 @@ export const EditSchedule = ({ route }) => {
               <View>
                 {updatedSchedule[day.toLowerCase()] ? (
                   (() => {
-                    const timeSlot = updatedSchedule[day.toLowerCase()];
-                    const initialStartTime = moment(
-                      timeSlot.start,
-                      "h:mm A"
-                    ).toDate();
-                    const initialEndTime = moment(
-                      timeSlot.end,
-                      "h:mm A"
-                    ).toDate();
-
                     return (
                       <View>
-                        <View
-                          style={{
-                            flexDirection: "row",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            gap: 5,
-                          }}
-                        >
-                          <View
-                            style={{
-                              justifyContent: "center",
-                              alignItems: "center",
-                            }}
-                          >
-                            <Text>START</Text>
-                            <TouchableOpacity
-                              onPress={() => {
-                                setSelectedDay({
-                                  day: day,
-                                  selection: "start",
-                                });
-                                showDatePicker();
-                              }}
-                            >
-                              <View
-                                style={{
-                                  backgroundColor: "black",
-                                  padding: 5,
-                                  borderRadius: 5,
-                                  width: 90,
-                                }}
-                              >
-                                <Text
-                                  style={{
-                                    color: "white",
-                                    textAlign: "center",
-                                  }}
-                                >
-                                  {updatedSchedule[day.toLowerCase()].start}
-                                </Text>
-                              </View>
-                            </TouchableOpacity>
+                        <View style={styles.time_component_container}>
+                          <TimeComponent
+                            onPressHandler={() =>
+                              timePressHandler(day, "start")
+                            }
+                            updatedSchedule={updatedSchedule}
+                            day={day}
+                            selection="start"
+                          />
 
-                            {/* <DateTimePicker
-                              testID="timePicker"
-                              value={initialStartTime}
-                              mode={mode}
-                              is24Hour={true}
-                              onChange={(_, time) =>
-                                startTimeChangeHandler(
-                                  day,
-                                  moment(time).format("h:mm A")
-                                )
-                              }
-                              minuteInterval={15}
-                              style={{
-                                width: 100,
-                                height: 30,
-                                color: "black",
-                              }}
-                            /> */}
-                          </View>
-
-                          <View
-                            style={{
-                              justifyContent: "center",
-                              alignItems: "center",
-                            }}
-                          >
-                            <Text>END</Text>
-                            <TouchableOpacity
-                              onPress={() => {
-                                setSelectedDay({
-                                  day: day,
-                                  selection: "end",
-                                });
-                                showDatePicker();
-                              }}
-                            >
-                              <View
-                                style={{
-                                  backgroundColor: "black",
-                                  padding: 5,
-                                  borderRadius: 5,
-                                  width: 90,
-                                }}
-                              >
-                                <Text
-                                  style={{
-                                    color: "white",
-                                    textAlign: "center",
-                                  }}
-                                >
-                                  {updatedSchedule[day.toLowerCase()].end}
-                                </Text>
-                              </View>
-                            </TouchableOpacity>
-                            {/* <DateTimePicker
-                              testID="timePicker"
-                              value={initialEndTime}
-                              mode={mode}
-                              is24Hour={true}
-                              minuteInterval={15}
-                              onChange={(_, time) =>
-                                endTimeChangeHandler(
-                                  day,
-                                  moment(time).format("h:mm A")
-                                )
-                              }
-                              style={{
-                                width: 100,
-                                height: 30,
-                              }}
-                            /> */}
-                          </View>
+                          <TimeComponent
+                            onPressHandler={() => timePressHandler(day, "end")}
+                            updatedSchedule={updatedSchedule}
+                            day={day}
+                            selection="end"
+                          />
                         </View>
                       </View>
                     );
@@ -364,13 +249,29 @@ export const EditSchedule = ({ route }) => {
           />
         </Spacer>
       </ModalComponent>
-      <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode="time"
-        onConfirm={handleConfirm}
-        onCancel={hideDatePicker}
-        minuteInterval={15}
+      <TimePickerComponent
+        isDatePickerVisible={isDatePickerVisible}
+        handleConfirm={handleConfirm}
+        hideDatePicker={hideDatePicker}
+        minInterval={15}
       />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: "space-between", padding: 15 },
+  schedule_container: {
+    padding: 5,
+    borderBottomWidth: 3,
+    borderBottomColor: "rgba(0, 0, 0, 0.8)",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  time_component_container: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 5,
+  },
+});
