@@ -8,6 +8,7 @@ import {
   AppointmentStatus,
   AppointmentStatusContainer,
   Total,
+  TotalContainer,
 } from "./appointment-card.styles";
 import { Text } from "../typography/text.component";
 
@@ -52,13 +53,13 @@ export const AppointmentCardComponent = ({ item }) => {
       <AppointmentStatusContainer $statusColor={statusColor(item.status)}>
         <AppointmentStatus>{item.status}</AppointmentStatus>
       </AppointmentStatusContainer>
-      <View>
+      <TotalContainer>
         <Total>
           {item.status === "cancelled"
             ? "--"
             : `$${getOrderTotal(item.service, item.addOns)}`}
         </Total>
-      </View>
+      </TotalContainer>
     </AppointmentCard>
   );
 };

@@ -48,6 +48,7 @@ export const ServiceTitle = styled(Text)`
 
 export const Total = styled(Text)`
   font-weight: ${({ theme }) => theme.fontWeights.bold};
+  font-size: ${({ theme }) => theme.fontSizes.caption};
 `;
 
 export const ClientName = styled(Text)`
@@ -56,4 +57,13 @@ export const ClientName = styled(Text)`
 
 export const Time = styled(Text)`
   font-size: ${({ theme }) => theme.fontSizes.h4};
+`;
+
+export const TotalContainer = styled.View`
+  background-color: rgba(186, 186, 186, 0.3);
+  padding: 5px;
+  border-radius: 10px;
+  width: 50px;
+  align-items: center;
+  justify-content: center;
 `;

@@ -2,7 +2,6 @@ import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { Text } from "../../../components/typography/text.component";
 import styled from "styled-components/native";
 import moment from "moment";
-import { FontAwesome } from "@expo/vector-icons";
 import { useState } from "react";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { CustomButton } from "../../../components/custom-button/custom-button.component";
@@ -12,6 +11,7 @@ import { ModalComponent } from "../../../components/modal/modal.component";
 import { useNavigation } from "@react-navigation/native";
 import { TimePickerComponent } from "../../../components/time-picker/time-picker-component";
 import { TimeComponent } from "./components/time.component";
+import { ScheduleIcons } from "./components/schedule-icons.component";
 
 const Day = styled(Text)`
   font-size: ${({ theme }) => theme.fontSizes.title};
@@ -37,10 +37,6 @@ const pickedDay = {
   day: "",
   selection: "",
 };
-
-const IconButton = styled(TouchableOpacity)`
-  margin-top: 10px;
-`;
 
 export const EditSchedule = ({ route }) => {
   const dispatch = useDispatch();
@@ -150,35 +146,15 @@ export const EditSchedule = ({ route }) => {
           const day = item.toLocaleLowerCase();
           return (
             <View key={day} style={styles.schedule_container}>
-              <View
-                style={{
-                  justifyContent: "start",
-                  flex: 1,
-                }}
-              >
+              <View style={styles.dayIconContainer}>
                 <Day>{item}</Day>
 
-                {!updatedSchedule[day] ? (
-                  <IconButton
-                    onPress={() => {
-                      addSchedule(day);
-                    }}
-                  >
-                    <FontAwesome
-                      name="calendar-plus-o"
-                      size={24}
-                      color="black"
-                    />
-                  </IconButton>
-                ) : (
-                  <IconButton
-                    onPress={() => {
-                      removeSchedule(day);
-                    }}
-                  >
-                    <FontAwesome name="remove" size={24} color="black" />
-                  </IconButton>
-                )}
+                <ScheduleIcons
+                  day={day}
+                  updatedSchedule={updatedSchedule}
+                  addSchedule={addSchedule}
+                  removeSchedule={removeSchedule}
+                />
               </View>
               <View>
                 {updatedSchedule[day.toLowerCase()] ? (
@@ -206,13 +182,7 @@ export const EditSchedule = ({ route }) => {
                     );
                   })()
                 ) : (
-                  <View
-                    style={{
-                      justifyContent: "center",
-                      alignItems: "center",
-                      flex: 1,
-                    }}
-                  >
+                  <View style={styles.noSchedule}>
                     <Text>No Schedule</Text>
                   </View>
                 )}
@@ -273,5 +243,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 5,
+  },
+  dayIconContainer: {
+    justifyContent: "start",
+    flex: 1,
+  },
+  noSchedule: {
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
   },
 });
