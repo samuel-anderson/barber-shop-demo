@@ -10,7 +10,6 @@ import {
   Total,
   TotalContainer,
 } from "./appointment-card.styles";
-import { Text } from "../typography/text.component";
 
 const getOrderTotal = (service, addOns) => {
   const servicePrice = service ? service.price : 0;
