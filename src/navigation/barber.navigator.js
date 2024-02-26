@@ -13,6 +13,9 @@ import { AdminNavigator } from "./admin.navigator";
 import { useTheme } from "styled-components/native";
 import { Ionicons } from "@expo/vector-icons";
 import { ProfileNavigator } from "./profile.navigator";
+import Constants from "expo-constants";
+
+const { appFeatures } = Constants.expoConfig;
 
 const Tab = createBottomTabNavigator();
 
@@ -74,9 +77,11 @@ export const BarberNavigator = () => {
       <Tab.Screen name="Appointments" component={AppointmentsNavigator} />
 
       <Tab.Screen name="Profile" component={ProfileNavigator} />
-      <Tab.Screen name="Reports" component={Reports} />
+      {appFeatures.reporting && (
+        <Tab.Screen name="Reports" component={Reports} />
+      )}
       <Tab.Screen name="Settings" component={Settings} />
-      {currentUser && currentUser.role == "admin" && (
+      {currentUser && currentUser.role == "admin" && appFeatures.admin && (
         <Tab.Screen name="Admin" component={AdminNavigator} />
       )}
     </Tab.Navigator>

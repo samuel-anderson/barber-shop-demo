@@ -1,11 +1,7 @@
-import { Platform, View, StyleSheet, TouchableOpacity } from "react-native";
+import { Platform } from "react-native";
 import Constants from "expo-constants";
 import {
-  Background,
   CompactImage,
-  Container,
-  Touchable,
-  ButtonText,
   ErrorText,
   TextInputContainer,
   Pin,
@@ -17,9 +13,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { WithBackground } from "../components/with-background/with-background.component.component";
 import { CustomButton } from "../components/custom-button/custom-button.component";
 
-const {
-  appFeatures: { dashboard },
-} = Constants.expoConfig;
+const { appFeatures } = Constants.expoConfig;
 
 const isAndroid = Platform.OS === "android";
 
@@ -98,12 +92,15 @@ export const MainScreen = ({ navigation }) => {
               onPress: () => navigation.navigate("Choose a Barber"),
             }}
           />
-          {dashboard && (
+          {appFeatures.dashboard && (
             <CustomButton
               variant="transparent"
               text="Barber Access"
               buttonOptions={{
-                onPress: () => navigation.navigate("Access"),
+                onPress: () =>
+                  appFeatures.registration
+                    ? navigation.navigate("Access")
+                    : navigation.navigate("Login"),
               }}
             />
           )}

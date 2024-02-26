@@ -2,9 +2,11 @@ import { useTheme } from "styled-components/native";
 import { WithBackground } from "../../components/with-background/with-background.component.component";
 import { Spacer } from "../../components/spacer/spacer.component";
 import { CustomButton } from "../../components/custom-button/custom-button.component";
+import Constants from "expo-constants";
+
+const { appFeatures } = Constants.expoConfig;
 
 export const AccessScreen = ({ navigation }) => {
-  const theme = useTheme();
   return (
     <WithBackground>
       <CustomButton
@@ -15,13 +17,15 @@ export const AccessScreen = ({ navigation }) => {
         }}
       />
       <Spacer />
-      <CustomButton
-        variant="transparent"
-        text="Register"
-        buttonOptions={{
-          onPress: () => navigation.navigate("Register"),
-        }}
-      />
+      {appFeatures.registration && (
+        <CustomButton
+          variant="transparent"
+          text="Register"
+          buttonOptions={{
+            onPress: () => navigation.navigate("Register"),
+          }}
+        />
+      )}
     </WithBackground>
   );
 };
