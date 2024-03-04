@@ -37,3 +37,4 @@ Setting (account password email)
 Reports 
 Admin (all profiles, shop info, all appointments)
 
+eas update 
