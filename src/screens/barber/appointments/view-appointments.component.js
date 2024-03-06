@@ -4,6 +4,7 @@ import { Spacer } from "../../../components/spacer/spacer.component";
 import { AppointmentCardComponent } from "../../../components/appointment-card/appointment-card.component";
 import styled from "styled-components/native";
 import { FlatList, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 export const AppointmentCardList = styled(FlatList).attrs({
   contentContainerStyle: {
@@ -13,6 +14,7 @@ export const AppointmentCardList = styled(FlatList).attrs({
 
 export const ViewAppointments = () => {
   const route = useRoute();
+  const navigation = useNavigation();
   const { appointments } = route.params;
 
   return (
@@ -23,7 +25,7 @@ export const ViewAppointments = () => {
           return (
             <TouchableOpacity
               onPress={() => {
-                //navigation.navigate("View Appointment", { appointment: item });
+                navigation.navigate("View Appointment", { appointment: item });
               }}
             >
               <Spacer position="bottom" size="large">

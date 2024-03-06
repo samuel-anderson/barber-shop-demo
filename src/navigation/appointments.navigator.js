@@ -2,6 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ViewDates } from "../screens/barber/appointments/view-dates.component";
 import { ViewAppointments } from "../screens/barber/appointments/view-appointments.component";
+import { ViewAppointment } from "../screens/barber/appointments/view-appointment.component";
 
 const AppointmentsStack = createStackNavigator();
 
@@ -19,6 +20,10 @@ export const AppointmentsNavigator = () => {
       <AppointmentsStack.Screen
         name={"Select Appointment"}
         component={ViewAppointments}
+      />
+      <AppointmentsStack.Screen
+        name={"View Appointment"}
+        component={ViewAppointment}
       />
     </AppointmentsStack.Navigator>
   );
