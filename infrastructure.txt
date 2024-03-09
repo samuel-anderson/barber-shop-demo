@@ -31,10 +31,11 @@ Fonts
 
 ====================================
 
-Profile (images display name schedule)
-Appointments (create read update delete)
-Setting (account password email)
-Reports 
-Admin (all profiles, shop info, all appointments)
 
-eas update 
+update appointment status: pending, confirmed, cancelled (selector***)
+update appointment time: select another open time slot (reuse code****)
+filter out appointments that are cancelled****
+
+THEN ERROR: Sending `onAnimatedValueUpdate` with no listeners registered
+
+====================================

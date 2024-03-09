@@ -4,7 +4,7 @@ import { Text } from "../typography/text.component";
 import { View } from "react-native";
 
 export const AppointmentCard = styled(Card)`
-  background-color: ${(props) => props.theme.colors.bg.primary};
+  background-color: ${(props) => props.theme.colors.bg.tertiary};
   padding: 15px;
   position: relative;
 `;
@@ -33,29 +33,31 @@ export const Container = styled.View`
 `;
 
 export const CustomText = styled(Text)`
-  color: ${({ theme }) => theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.inverse};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   font-size: ${({ theme }) => theme.fontSizes.caption};
-  text-align: center;
 `;
 
 export const ServiceTitle = styled(Text)`
-  color: ${({ theme }) => theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.inverse};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   font-size: ${({ theme }) => theme.fontSizes.h5};
   text-align: center;
 `;
 
 export const Total = styled(Text)`
+  color: ${({ theme }) => theme.colors.text.inverse};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   font-size: ${({ theme }) => theme.fontSizes.caption};
 `;
 
-export const ClientName = styled(Text)`
-  font-size: ${({ theme }) => theme.fontSizes.body};
+export const AppointmentDetails = styled(Text)`
+  color: ${({ theme }) => theme.colors.text.inverse};
+  font-size: ${({ theme }) => theme.fontSizes.caption};
 `;
 
 export const Time = styled(Text)`
+  color: ${({ theme }) => theme.colors.text.inverse};
   font-size: ${({ theme }) => theme.fontSizes.h4};
 `;
 

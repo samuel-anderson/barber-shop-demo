@@ -3,12 +3,12 @@ import { View } from "react-native";
 import {
   AppointmentCard,
   CustomText,
-  ServiceTitle,
   Time,
   AppointmentStatus,
   AppointmentStatusContainer,
   Total,
   TotalContainer,
+  AppointmentDetails,
 } from "./appointment-card.styles";
 import { PhoneNumberComponent } from "../phone-number/phone-number.component";
 import { TextMessageComponent } from "../text-message/text-message.component";
@@ -66,18 +66,28 @@ export const AppointmentCardComponent = ({ item }) => {
           </Time>
         </TouchableOpacity>
       </View>
-      <View style={{ flexDirection: "row", justifyContent: "center" }}>
-        <ServiceTitle>{item.service.title}</ServiceTitle>
-      </View>
-      <View style={{ marginTop: 5 }}>
-        {item.addOns.map((addOn, idx) => (
-          <CustomText key={idx}>{addOn.title.toUpperCase()}</CustomText>
-        ))}
-      </View>
-      <View>
-        <Text>Client: {item.clientName}</Text>
-        <PhoneNumberComponent phoneNumber={item.clientPhoneNumber} />
-        <TextMessageComponent phoneNumber={item.clientPhoneNumber} />
+
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          marginTop: 15,
+        }}
+      >
+        <View>
+          <AppointmentDetails>Client: {item.clientName}</AppointmentDetails>
+          <AppointmentDetails>Service: {item.service.title}</AppointmentDetails>
+          <AppointmentDetails>Add Ons:</AppointmentDetails>
+          <View style={{ marginLeft: 15 }}>
+            {item.addOns.map((addOn, idx) => (
+              <CustomText key={idx}>{addOn.title.toUpperCase()}</CustomText>
+            ))}
+          </View>
+        </View>
+        <View>
+          <PhoneNumberComponent phoneNumber={item.clientPhoneNumber} />
+          <TextMessageComponent phoneNumber={item.clientPhoneNumber} />
+        </View>
       </View>
     </AppointmentCard>
   );

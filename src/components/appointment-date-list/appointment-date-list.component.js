@@ -55,6 +55,7 @@ export const AppointmentDateList = ({ appointments }) => {
                     style: { borderRadius: 10 },
                     onPress: () => {
                       navigation.navigate("Select Appointment", {
+                        date: date,
                         appointments: appointments[date],
                       });
                     },

@@ -17,7 +17,7 @@ export const PhoneNumberComponent = ({ phoneNumber }) => {
 
   return (
     <TouchableOpacity onPress={handlePress}>
-      <Text style={{ color: "blue", textDecorationLine: "underline" }}>
+      <Text style={{ color: "white", textDecorationLine: "underline" }}>
         Call: {phoneNumber}
       </Text>
     </TouchableOpacity>

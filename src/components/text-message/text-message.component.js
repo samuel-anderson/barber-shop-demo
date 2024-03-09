@@ -19,7 +19,7 @@ export const TextMessageComponent = ({ phoneNumber }) => {
     <TouchableOpacity onPress={handlePress}>
       <Text
         style={{
-          color: "blue",
+          color: "white",
           textDecorationLine: "underline",
         }}
       >
