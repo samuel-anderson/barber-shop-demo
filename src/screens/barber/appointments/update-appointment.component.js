@@ -5,7 +5,7 @@ import { PhoneNumberComponent } from "../../../components/phone-number/phone-num
 import { TextMessageComponent } from "../../../components/text-message/text-message.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 
-export const ViewAppointment = () => {
+export const UpdateAppointment = () => {
   const route = useRoute();
   const { appointment } = route.params;
   const {
@@ -21,23 +21,7 @@ export const ViewAppointment = () => {
   return (
     <SafeArea>
       <View>
-        <Text>{clientName}</Text>
-        <Text>
-          {startTime}-{endTime}
-        </Text>
-        <Text>{status}</Text>
-      </View>
-      <Spacer position="bottom" size="large" />
-      <View>
-        <Text>
-          {service.title} - ${service.price}
-        </Text>
-      </View>
-      <Spacer position="bottom" size="large" />
-
-      <View>
-        <PhoneNumberComponent phoneNumber={clientPhoneNumber} />
-        <TextMessageComponent phoneNumber={clientPhoneNumber} />
+        <Text>UPDATE APPOINTMENT SCREEN</Text>
       </View>
     </SafeArea>
   );

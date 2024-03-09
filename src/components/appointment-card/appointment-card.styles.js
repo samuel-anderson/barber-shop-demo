@@ -19,10 +19,10 @@ export const AppointmentStatus = styled(Text)`
 export const AppointmentStatusContainer = styled.View`
   background-color: ${({ $statusColor }) => $statusColor};
   padding: 5px;
-  border-radius: 10px;
+  border-radius: 5px;
   width: 75px;
   position: absolute;
-  bottom: 0;
+  top: 0;
   right: 0;
 `;
 
@@ -62,7 +62,7 @@ export const Time = styled(Text)`
 export const TotalContainer = styled.View`
   background-color: rgba(186, 186, 186, 0.3);
   padding: 5px;
-  border-radius: 10px;
+  border-radius: 5px;
   width: 50px;
   align-items: center;
   justify-content: center;
