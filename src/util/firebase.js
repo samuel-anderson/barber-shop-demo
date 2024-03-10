@@ -23,6 +23,7 @@ import {
   doc,
   getDoc,
   writeBatch,
+  where,
 } from "firebase/firestore";
 import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
@@ -150,6 +151,45 @@ export const updateProfessionalDocument = async (
     await setDoc(documentRef, dataToAdd, { merge: true });
   } catch (error) {
     console.error("Error updating document:", error);
+  }
+};
+
+export const updateAppointmentDocument = async (
+  collectionName,
+  documentId,
+  docFields
+) => {
+  try {
+    const docRef = doc(db, collectionName, documentId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      const { barberId, appointmentDate, newStatus } = docFields;
+      // Check if the barberId exists
+      if (
+        data.items &&
+        data.items[barberId] &&
+        data.items[barberId][appointmentDate]
+      ) {
+        // Update the status field for the specified appointment date
+
+        data.items[barberId][appointmentDate][0].status = newStatus;
+
+        await setDoc(docRef, data);
+        console.log("Status updated successfully!");
+      } else {
+        console.log(
+          "Barber or appointment date not found in the appointments collection."
+        );
+      }
+    } else {
+      console.log(
+        "Appointments document not found in the barbershop collection."
+      );
+    }
+  } catch (error) {
+    console.error("Error updating status:", error);
   }
 };
 

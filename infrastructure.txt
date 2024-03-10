@@ -38,4 +38,6 @@ filter out appointments that are cancelled****
 
 THEN ERROR: Sending `onAnimatedValueUpdate` with no listeners registered
 
+protect configurations // review
+
 ====================================

@@ -28,9 +28,8 @@ const Title = styled(Text)`
   font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
 
-export const SubmitAppointmentScreen = ({ navigation }) => {
+export const SubmitAppointmentScreen = () => {
   const dispatch = useDispatch();
-  const theme = useTheme();
 
   const cart = useSelector((state) => state.cart);
   const sms = useSelector((state) => state.sms);

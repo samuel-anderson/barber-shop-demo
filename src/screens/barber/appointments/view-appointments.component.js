@@ -26,10 +26,10 @@ export const ViewAppointments = () => {
       </View>
       <AppointmentCardList
         data={appointments}
-        renderItem={({ item }) => {
+        renderItem={({ item, index }) => {
           return (
             <Spacer position="bottom" size="large">
-              <AppointmentCardComponent item={item} />
+              <AppointmentCardComponent item={item} date={date} index={index} />
             </Spacer>
           );
         }}
