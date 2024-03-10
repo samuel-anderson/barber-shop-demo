@@ -25,7 +25,14 @@ export const ViewAppointments = () => {
         </Text>
       </View>
       <AppointmentCardList
-        data={appointments}
+        data={[...appointments].sort((a, b) => {
+          // Extract the start times from the objects
+          const timeA = a.startTime;
+          const timeB = b.startTime;
+
+          // Use Moment.js to parse the time strings and compare them
+          return moment(timeA, "h:mm A").diff(moment(timeB, "h:mm A"));
+        })}
         renderItem={({ item, index }) => {
           return (
             <Spacer position="bottom" size="large">

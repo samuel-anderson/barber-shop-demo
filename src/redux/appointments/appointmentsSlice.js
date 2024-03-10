@@ -36,6 +36,18 @@ const appointmentsSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
+    rescheduleAppointmentStart(state) {
+      state.loading = true;
+      state.error = null;
+    },
+    rescheduleAppointmentSuccess(state, _) {
+      state.loading = false;
+      state.error = null;
+    },
+    rescheduleAppointmentFailed(state, action) {
+      state.error = action.payload;
+      state.loading = false;
+    },
   },
 });
 
@@ -47,5 +59,8 @@ export const {
   editAppointmentStart,
   editAppointmentSuccess,
   editAppointmentFailed,
+  rescheduleAppointmentFailed,
+  rescheduleAppointmentStart,
+  rescheduleAppointmentSuccess,
 } = appointmentsSlice.actions;
 export default appointmentsSlice.reducer;

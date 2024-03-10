@@ -32,8 +32,9 @@ Fonts
 ====================================
 
 
-update appointment status: pending, confirmed, cancelled (selector***)
-update appointment time: select another open time slot (reuse code****)
+DONE update appointment status: pending, confirmed, cancelled (selector***)
+
+update appointment time: select another open time slot (reuse code****) <----------------
 filter out appointments that are cancelled****
 
 THEN ERROR: Sending `onAnimatedValueUpdate` with no listeners registered

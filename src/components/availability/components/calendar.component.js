@@ -17,13 +17,11 @@ import { setServiceDate, setStartTime } from "../../../redux/cart/cartSlice";
 import { TouchableOpacity, View } from "react-native";
 import { Spacer } from "../../spacer/spacer.component";
 
-export const Calendar = ({ clickHandler }) => {
+export const Calendar = ({ clickHandler, serviceDate }) => {
   const dispatch = useDispatch();
   const [displayDate, setDisplayedDate] = useState(
     moment().format("MMMM Do, YYYY")
   );
-
-  const serviceDate = useSelector((state) => state.cart.serviceDate);
 
   useEffect(() => {
     dispatch(setServiceDate(moment().format("YYYY-MM-DD"))); //Set to today's date

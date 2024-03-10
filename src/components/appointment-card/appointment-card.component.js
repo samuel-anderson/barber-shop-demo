@@ -31,7 +31,7 @@ const getOrderTotal = (service, addOns) => {
   return servicePrice + addOnPrice;
 };
 
-export const AppointmentCardComponent = ({ date, item, index }) => {
+export const AppointmentCardComponent = ({ date, item }) => {
   const navigation = useNavigation();
   const theme = useTheme();
   const currentUser = useSelector(selectBarberWithCurrentUser);
@@ -72,6 +72,7 @@ export const AppointmentCardComponent = ({ date, item, index }) => {
           barberId: currentUser.id,
           appointmentDate: date,
           newStatus: status,
+          startTime: item.startTime,
         })
       );
     } catch (e) {
@@ -119,6 +120,8 @@ export const AppointmentCardComponent = ({ date, item, index }) => {
           onPress={() => {
             navigation.navigate("Update Appointment", {
               appointment: item,
+              selectedProfessional: currentUser,
+              selectedDate: date,
             });
           }}
         >

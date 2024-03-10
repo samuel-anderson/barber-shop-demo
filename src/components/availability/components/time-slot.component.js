@@ -21,16 +21,22 @@ export const TotalAvailable = styled(Text)`
   font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
 
-export const TimeSlot = ({ schedule }) => {
+export const TimeSlot = ({
+  schedule,
+  professional,
+  serviceDate,
+  appointments,
+  estimatedDuration,
+}) => {
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
 
-  const appointments = useSelector((state) => state.appointments.appointments);
-  const professional = useSelector((state) => state.cart.professional);
-  const serviceDate = useSelector((state) => state.cart.serviceDate);
-  const estimatedDuration = useSelector(
-    (state) => state.cart.estimatedDuration
-  );
+  //const appointments = useSelector((state) => state.appointments.appointments);
+  // const professional = useSelector((state) => state.cart.professional);
+  // const serviceDate = useSelector((state) => state.cart.serviceDate);
+  // const estimatedDuration = useSelector(
+  //   (state) => state.cart.estimatedDuration
+  // );
   const scheduledAppointments =
     appointments?.[professional.id]?.[matchDatabaseDateFormat(serviceDate)] ||
     [];

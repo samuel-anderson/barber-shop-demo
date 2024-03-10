@@ -165,7 +165,8 @@ export const updateAppointmentDocument = async (
 
     if (docSnap.exists()) {
       const data = docSnap.data();
-      const { barberId, appointmentDate, newStatus } = docFields;
+      const { barberId, appointmentDate, newStatus, startTime } = docFields;
+
       // Check if the barberId exists
       if (
         data.items &&
@@ -174,7 +175,12 @@ export const updateAppointmentDocument = async (
       ) {
         // Update the status field for the specified appointment date
 
-        data.items[barberId][appointmentDate][0].status = newStatus;
+        data.items[barberId][appointmentDate].map((appointment) => {
+          console.log(appointment.startTime, startTime);
+          if (appointment.startTime == startTime) {
+            appointment.status = newStatus;
+          }
+        });
 
         await setDoc(docRef, data);
         console.log("Status updated successfully!");
