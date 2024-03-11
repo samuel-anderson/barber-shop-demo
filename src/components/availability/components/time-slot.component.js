@@ -31,12 +31,6 @@ export const TimeSlot = ({
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
 
-  //const appointments = useSelector((state) => state.appointments.appointments);
-  // const professional = useSelector((state) => state.cart.professional);
-  // const serviceDate = useSelector((state) => state.cart.serviceDate);
-  // const estimatedDuration = useSelector(
-  //   (state) => state.cart.estimatedDuration
-  // );
   const scheduledAppointments =
     appointments?.[professional.id]?.[matchDatabaseDateFormat(serviceDate)] ||
     [];
@@ -52,7 +46,11 @@ export const TimeSlot = ({
 
     let slot = moment(timeSlot, "h:mm A");
 
-    return isBetweenTimes(slot, scheduledAppointments, estimatedDuration);
+    return isBetweenTimes(
+      slot,
+      scheduledAppointments.filter((appt) => appt.status != "rescheduled"),
+      estimatedDuration
+    );
   };
 
   const availableSpots = generateTimeSlots(schedule.start, schedule.end).filter(

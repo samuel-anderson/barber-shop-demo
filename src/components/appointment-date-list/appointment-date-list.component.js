@@ -40,7 +40,19 @@ export const AppointmentDateList = ({ appointments }) => {
       </View>
       <ScrollView style={styles.scrollContainer}>
         {sortedDates
-          .filter((date) => (selectedValue ? selectedValue == date : true))
+          .filter((date) => {
+            return selectedValue ? selectedValue == date : true;
+          })
+          .filter((date) => {
+            if (appointments[date] && appointments[date].length > 0) {
+              let len = appointments[date].filter(
+                (apt) => apt.status != "rescheduled"
+              ).length;
+
+              return !(len == 0);
+            }
+            return true;
+          })
           .map((date, idx) => {
             const formattedDate = moment(date, "YYYY_MM_DD").format(
               "MMM. Do, YYYY"

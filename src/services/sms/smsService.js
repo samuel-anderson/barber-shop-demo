@@ -10,14 +10,15 @@ const showAddOns = (cart) => {
   else return ` with ${cart.addOns.length} addons`;
 };
 
-const insertBooking = (cart, clientInfo) => {
-  const { clientFirstName, clientLastName, clientPhoneNumber } = clientInfo;
+export const insertBooking = (cart, clientInfo) => {
+  const { clientFirstName, clientLastName, clientPhoneNumber, clientName } =
+    clientInfo;
 
   const updateObj = appointmentObjectToAdd(
     cart.professional.id,
     cart.serviceDate,
     {
-      clientName: `${clientFirstName} ${clientLastName}`,
+      clientName: clientName || `${clientFirstName} ${clientLastName}`,
       clientPhoneNumber: clientPhoneNumber,
       service: cart.service,
       addOns: cart.addOns,
@@ -28,7 +29,6 @@ const insertBooking = (cart, clientInfo) => {
       status: "pending",
     }
   );
-
   updateDocument("barber_shop", "appointments", updateObj);
 };
 

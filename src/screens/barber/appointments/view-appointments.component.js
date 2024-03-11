@@ -1,5 +1,5 @@
 import { SafeArea } from "../../../components/utility/safe-area.component";
-import { useRoute } from "@react-navigation/native";
+import { useIsFocused, useRoute } from "@react-navigation/native";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { AppointmentCardComponent } from "../../../components/appointment-card/appointment-card.component";
 import styled from "styled-components/native";
@@ -25,14 +25,16 @@ export const ViewAppointments = () => {
         </Text>
       </View>
       <AppointmentCardList
-        data={[...appointments].sort((a, b) => {
-          // Extract the start times from the objects
-          const timeA = a.startTime;
-          const timeB = b.startTime;
+        data={[...appointments]
+          .filter((appt) => appt.status != "rescheduled")
+          .sort((a, b) => {
+            // Extract the start times from the objects
+            const timeA = a.startTime;
+            const timeB = b.startTime;
 
-          // Use Moment.js to parse the time strings and compare them
-          return moment(timeA, "h:mm A").diff(moment(timeB, "h:mm A"));
-        })}
+            // Use Moment.js to parse the time strings and compare them
+            return moment(timeA, "h:mm A").diff(moment(timeB, "h:mm A"));
+          })}
         renderItem={({ item, index }) => {
           return (
             <Spacer position="bottom" size="large">

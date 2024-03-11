@@ -176,14 +176,12 @@ export const updateAppointmentDocument = async (
         // Update the status field for the specified appointment date
 
         data.items[barberId][appointmentDate].map((appointment) => {
-          console.log(appointment.startTime, startTime);
           if (appointment.startTime == startTime) {
             appointment.status = newStatus;
           }
         });
 
         await setDoc(docRef, data);
-        console.log("Status updated successfully!");
       } else {
         console.log(
           "Barber or appointment date not found in the appointments collection."

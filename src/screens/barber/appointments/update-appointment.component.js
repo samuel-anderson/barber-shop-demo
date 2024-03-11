@@ -6,12 +6,16 @@ import { useEffect } from "react";
 import { emptyCart } from "../../../redux/cart/cartSlice";
 import { CustomButton } from "../../../components/custom-button/custom-button.component";
 import { TouchableOpacity } from "react-native";
-import { rescheduleAppointmentStart } from "../../../redux/appointments/appointmentsSlice";
+import { insertBooking } from "../../../services/sms/smsService";
+import { editAppointmentStart } from "../../../redux/appointments/appointmentsSlice";
+import moment from "moment";
+import { useNavigation } from "@react-navigation/native";
 
 export const UpdateAppointment = () => {
   const route = useRoute();
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
+  const navigation = useNavigation();
 
   const { appointment, selectedDate, selectedProfessional } = route.params;
   const { startTime, estimatedDuration } = appointment;
@@ -27,19 +31,33 @@ export const UpdateAppointment = () => {
     }
   }, [isFocused]);
 
-  const updateAppointment = async () => {
+  const updateAppointment = () => {
     try {
-      //check for errors first
+      insertBooking(
+        {
+          professional: selectedProfessional,
+          ...appointment,
+          startTime: newStartTime,
+          serviceDate: newDate,
+          endTime: moment(newStartTime, "h:mm A")
+            .add(appointment.estimatedDuration, "minutes")
+            .format("h:mm A"),
+        },
+        {
+          clientName: appointment.clientName,
+          clientPhoneNumber: appointment.clientPhoneNumber,
+        }
+      );
 
       dispatch(
-        rescheduleAppointmentStart({
+        editAppointmentStart({
           barberId: selectedProfessional.id,
-          oldAppointmentDate: selectedDate,
-          oldStartTime: startTime,
-          newStartTime: newStartTime,
-          newDate: newDate,
+          appointmentDate: selectedDate,
+          newStatus: "rescheduled",
+          startTime: startTime,
         })
       );
+      navigation.navigate("Select Date");
     } catch (e) {
       console.error(e);
     }

@@ -7,9 +7,6 @@ import {
   editAppointmentStart,
   editAppointmentFailed,
   editAppointmentSuccess,
-  rescheduleAppointmentStart,
-  // rescheduleAppointmentFailed,
-  // rescheduleAppointmentSuccess,
 } from "./appointmentsSlice";
 
 import { firebaseService } from "../../services";
@@ -54,9 +51,6 @@ export function* editAppointment({ payload }) {
   }
 }
 
-export function* rescheduleAppointment({ payload }) {
-  console.log(payload);
-}
 export function* onFetchAppointments() {
   yield takeLatest(fetchAppointmentsStart.type, fetchAppointmentsWorker);
 }
@@ -72,15 +66,10 @@ export function* onEditAppointmentStart() {
   yield takeLatest(editAppointmentStart.type, editAppointment);
 }
 
-export function* onRescheduleAppointmentStart() {
-  yield takeLatest(rescheduleAppointmentStart.type, rescheduleAppointment);
-}
-
 export function* watchFetchAppointments() {
   yield all([
     call(onFetchAppointments),
     call(onFetchBarberAppointments),
     call(onEditAppointmentStart),
-    call(onRescheduleAppointmentStart),
   ]);
 }

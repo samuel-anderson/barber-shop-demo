@@ -37,8 +37,17 @@ DONE update appointment status: pending, confirmed, cancelled (selector***)
 update appointment time: select another open time slot (reuse code****) <----------------
 filter out appointments that are cancelled****
 
-THEN ERROR: Sending `onAnimatedValueUpdate` with no listeners registered
 
 protect configurations // review
 
+
+
+update appointment*************
+- delete old one 
+- create new one 
+- refresh appointment 
+
+THEN ERROR: Sending `onAnimatedValueUpdate` with no listeners registered
+
+THEN CLEAN CODE!
 ====================================
