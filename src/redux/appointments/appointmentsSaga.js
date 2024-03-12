@@ -9,10 +9,14 @@ import {
   editAppointmentSuccess,
   fetchBarberAppointmentsSuccess,
   fetchBarberAppointmentsFailure,
+  filterAppointmentStart,
 } from "./appointmentsSlice";
 
 import { firebaseService } from "../../services";
-import { updateAppointmentDoc } from "../../services/firebase/firebaseService";
+import {
+  updateAppointmentDoc,
+  filterAppointmentDoc,
+} from "../../services/firebase/firebaseService";
 
 function* fetchAppointmentsWorker() {
   try {
@@ -51,6 +55,16 @@ export function* editAppointment({ payload }) {
   }
 }
 
+export function* filterAppointment({ payload }) {
+  try {
+    yield call(filterAppointmentDoc, "barber_shop", "appointments", payload);
+    yield put(editAppointmentSuccess());
+    yield put(fetchShopDataStart());
+  } catch (error) {
+    yield put(editAppointmentFailed(error.code));
+  }
+}
+
 export function* onFetchAppointments() {
   yield takeLatest(fetchAppointmentsStart.type, fetchAppointmentsWorker);
 }
@@ -66,10 +80,15 @@ export function* onEditAppointmentStart() {
   yield takeLatest(editAppointmentStart.type, editAppointment);
 }
 
+export function* onFilterAppointmentStart() {
+  yield takeLatest(filterAppointmentStart.type, filterAppointment);
+}
+
 export function* watchFetchAppointments() {
   yield all([
     call(onFetchAppointments),
     call(onFetchBarberAppointments),
     call(onEditAppointmentStart),
+    call(onFilterAppointmentStart),
   ]);
 }

@@ -14,6 +14,7 @@ export const ViewDates = () => {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
   const dates = useSelector((state) => state.appointments.dates);
+
   const currentUser = useSelector(selectBarberWithCurrentUser);
 
   useEffect(() => {

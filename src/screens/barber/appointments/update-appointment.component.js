@@ -7,7 +7,10 @@ import { emptyCart } from "../../../redux/cart/cartSlice";
 import { CustomButton } from "../../../components/custom-button/custom-button.component";
 import { TouchableOpacity } from "react-native";
 import { insertBooking } from "../../../services/sms/smsService";
-import { editAppointmentStart } from "../../../redux/appointments/appointmentsSlice";
+import {
+  editAppointmentStart,
+  filterAppointmentStart,
+} from "../../../redux/appointments/appointmentsSlice";
 import moment from "moment";
 import { useNavigation } from "@react-navigation/native";
 import { selectBarberWithCurrentUser } from "../../../redux/professionals/professionalsSelector";
@@ -54,14 +57,13 @@ export const UpdateAppointment = () => {
         }
       );
 
-      // dispatch(
-      //   editAppointmentStart({
-      //     barberId: selectedProfessional.id,
-      //     appointmentDate: selectedDate,
-      //     newStatus: "rescheduled",
-      //     startTime: startTime,
-      //   })
-      // );
+      dispatch(
+        filterAppointmentStart({
+          barberId: selectedProfessional.id,
+          appointmentDate: selectedDate,
+          startTime: startTime,
+        })
+      );
       navigation.navigate("Select Date");
     } catch (e) {
       console.error(e);

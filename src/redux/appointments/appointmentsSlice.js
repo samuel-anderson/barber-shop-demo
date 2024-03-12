@@ -34,9 +34,11 @@ const appointmentsSlice = createSlice({
       state.appointments = action.payload;
     },
     fetchBarberAppointmentsSuccess: (state, action) => {
+      console.log("test 2: ", apts);
+      const apts = action.payload;
       state.loading = false;
-      state.barberAppointments = action.payload;
-      state.dates = Object.keys(action.payload);
+      state.barberAppointments = apts;
+      state.dates = Object.keys(apts).filter((date) => apts[date].length > 0);
     },
     fetchBarberAppointmentsFailure: (state, action) => {
       state.loading = false;
@@ -45,6 +47,10 @@ const appointmentsSlice = createSlice({
     fetchAppointmentsFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
+    },
+    filterAppointmentStart(state) {
+      state.loading = true;
+      state.error = null;
     },
     editAppointmentStart(state) {
       state.loading = true;
@@ -73,5 +79,6 @@ export const {
   editAppointmentFailed,
   setSelectedDate,
   setSelectedAppointment,
+  filterAppointmentStart,
 } = appointmentsSlice.actions;
 export default appointmentsSlice.reducer;

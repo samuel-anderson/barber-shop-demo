@@ -197,6 +197,43 @@ export const updateAppointmentDocument = async (
   }
 };
 
+export const filterAppointmentDocument = async (
+  collectionName,
+  documentId,
+  docFields
+) => {
+  try {
+    const docRef = doc(db, collectionName, documentId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      const { barberId, appointmentDate, startTime } = docFields;
+
+      // Check if the barberId exists
+      if (
+        data.items &&
+        data.items[barberId] &&
+        data.items[barberId][appointmentDate]
+      ) {
+        // Update the status field for the specified appointment date
+
+        data.items[barberId][appointmentDate] = data.items[barberId][
+          appointmentDate
+        ].filter((appointment) => appointment.startTime !== startTime);
+
+        await setDoc(docRef, data);
+      } else {
+        console.log("");
+      }
+    } else {
+      console.log("");
+    }
+  } catch (error) {
+    console.error("Error updating status:", error);
+  }
+};
+
 export const appointmentObjectToAdd = (
   barberId,
   appointmentDate,
