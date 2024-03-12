@@ -1,5 +1,5 @@
 import { SafeArea } from "../../../components/utility/safe-area.component";
-import { useIsFocused, useRoute } from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
 import { Availability } from "../../../components/availability/availability.component";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
@@ -10,20 +10,25 @@ import { insertBooking } from "../../../services/sms/smsService";
 import { editAppointmentStart } from "../../../redux/appointments/appointmentsSlice";
 import moment from "moment";
 import { useNavigation } from "@react-navigation/native";
+import { selectBarberWithCurrentUser } from "../../../redux/professionals/professionalsSelector";
 
 export const UpdateAppointment = () => {
-  const route = useRoute();
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
   const navigation = useNavigation();
 
-  const { appointment, selectedDate, selectedProfessional } = route.params;
-  const { startTime, estimatedDuration } = appointment;
+  const selectedProfessional = useSelector(selectBarberWithCurrentUser);
+  const selectedDate = useSelector((state) => state.appointments.selectedDate);
+  const selectedAppointment = useSelector(
+    (state) => state.appointments.selectedAppointment
+  );
+  const appointments = useSelector((state) => state.appointments.appointments);
+
+  const { startTime, estimatedDuration, clientName, clientPhoneNumber } =
+    selectedAppointment;
 
   const newDate = useSelector((state) => state.cart.serviceDate);
   const newStartTime = useSelector((state) => state.cart.startTime);
-
-  const appointments = useSelector((state) => state.appointments.appointments);
 
   useEffect(() => {
     if (isFocused) {
@@ -36,27 +41,27 @@ export const UpdateAppointment = () => {
       insertBooking(
         {
           professional: selectedProfessional,
-          ...appointment,
+          ...selectedAppointment,
           startTime: newStartTime,
           serviceDate: newDate,
           endTime: moment(newStartTime, "h:mm A")
-            .add(appointment.estimatedDuration, "minutes")
+            .add(estimatedDuration, "minutes")
             .format("h:mm A"),
         },
         {
-          clientName: appointment.clientName,
-          clientPhoneNumber: appointment.clientPhoneNumber,
+          clientName: clientName,
+          clientPhoneNumber: clientPhoneNumber,
         }
       );
 
-      dispatch(
-        editAppointmentStart({
-          barberId: selectedProfessional.id,
-          appointmentDate: selectedDate,
-          newStatus: "rescheduled",
-          startTime: startTime,
-        })
-      );
+      // dispatch(
+      //   editAppointmentStart({
+      //     barberId: selectedProfessional.id,
+      //     appointmentDate: selectedDate,
+      //     newStatus: "rescheduled",
+      //     startTime: startTime,
+      //   })
+      // );
       navigation.navigate("Select Date");
     } catch (e) {
       console.error(e);

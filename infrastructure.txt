@@ -50,4 +50,17 @@ update appointment*************
 THEN ERROR: Sending `onAnimatedValueUpdate` with no listeners registered
 
 THEN CLEAN CODE!
-====================================
+============================================================================================================
+
+UPDATE APPOINTMENT FEATURE
+
+Redux:
+- get appointment data, process it, and store it
+- list of appointment dates*
+    - select appointment date*
+    - select appointment*
+        - search another available slot 
+        - select the available 
+        -   insert new appointment*
+        -   remove the old appointment
+============================================================================================================

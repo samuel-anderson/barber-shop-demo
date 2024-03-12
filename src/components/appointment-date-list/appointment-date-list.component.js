@@ -6,12 +6,20 @@ import RNPickerSelect from "react-native-picker-select";
 import { CustomButton } from "../custom-button/custom-button.component";
 import { Spacer } from "../spacer/spacer.component";
 import { sortArrayOfDateStrings } from "../../util/date";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedDate } from "../../redux/appointments/appointmentsSlice";
 
-export const AppointmentDateList = ({ appointments }) => {
+export const AppointmentDateList = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const [selectedValue, setSelectedValue] = useState(null);
 
-  const sortedDates = Object.keys(appointments).sort(sortArrayOfDateStrings);
+  const dates = useSelector((state) => state.appointments.dates);
+  const appointments = useSelector(
+    (state) => state.appointments.barberAppointments
+  );
+
+  const sortedDates = [...dates].sort(sortArrayOfDateStrings);
 
   const placeholder = {
     label: "Filter",
@@ -27,6 +35,11 @@ export const AppointmentDateList = ({ appointments }) => {
 
     [sortedDates]
   );
+
+  const clickHandler = (selectedDate) => {
+    dispatch(setSelectedDate(selectedDate));
+    navigation.navigate("Select Appointment");
+  };
 
   return (
     <>
@@ -65,12 +78,7 @@ export const AppointmentDateList = ({ appointments }) => {
                   variant="dark"
                   buttonOptions={{
                     style: { borderRadius: 10 },
-                    onPress: () => {
-                      navigation.navigate("Select Appointment", {
-                        date: date,
-                        appointments: appointments[date],
-                      });
-                    },
+                    onPress: () => clickHandler(date),
                   }}
                 />
               </Spacer>

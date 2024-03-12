@@ -7,6 +7,8 @@ import {
   editAppointmentStart,
   editAppointmentFailed,
   editAppointmentSuccess,
+  fetchBarberAppointmentsSuccess,
+  fetchBarberAppointmentsFailure,
 } from "./appointmentsSlice";
 
 import { firebaseService } from "../../services";
@@ -19,7 +21,6 @@ function* fetchAppointmentsWorker() {
       "barber_shop",
       "appointments"
     );
-
     yield put(fetchAppointmentsSuccess(appointments[0].data.items));
   } catch (error) {
     yield put(fetchAppointmentsFailure(error.message));
@@ -34,10 +35,9 @@ function* fetchBarberAppointmentsWorker({ payload }) {
       "appointments",
       payload
     );
-
-    yield put(fetchAppointmentsSuccess(appointments[0].data));
+    yield put(fetchBarberAppointmentsSuccess(appointments[0].data));
   } catch (error) {
-    yield put(fetchAppointmentsFailure(error.message));
+    yield put(fetchBarberAppointmentsFailure(error.message));
   }
 }
 

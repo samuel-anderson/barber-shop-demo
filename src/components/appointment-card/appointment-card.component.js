@@ -19,7 +19,10 @@ import { useTheme } from "styled-components/native";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectBarberWithCurrentUser } from "../../redux/professionals/professionalsSelector";
-import { editAppointmentStart } from "../../redux/appointments/appointmentsSlice";
+import {
+  editAppointmentStart,
+  setSelectedAppointment,
+} from "../../redux/appointments/appointmentsSlice";
 
 const getOrderTotal = (service, addOns) => {
   const servicePrice = service ? service.price : 0;
@@ -31,11 +34,12 @@ const getOrderTotal = (service, addOns) => {
   return servicePrice + addOnPrice;
 };
 
-export const AppointmentCardComponent = ({ date, item }) => {
+export const AppointmentCardComponent = ({ item }) => {
   const navigation = useNavigation();
   const theme = useTheme();
   const currentUser = useSelector(selectBarberWithCurrentUser);
   const dispatch = useDispatch();
+  const selectedDate = useSelector((state) => state.appointments.selectedDate);
 
   const [status, setStatus] = useState(item.status);
 
@@ -70,7 +74,7 @@ export const AppointmentCardComponent = ({ date, item }) => {
       dispatch(
         editAppointmentStart({
           barberId: currentUser.id,
-          appointmentDate: date,
+          appointmentDate: selectedDate,
           newStatus: status,
           startTime: item.startTime,
         })
@@ -80,6 +84,10 @@ export const AppointmentCardComponent = ({ date, item }) => {
     }
   };
 
+  const clickHandler = () => {
+    dispatch(setSelectedAppointment(item));
+    navigation.navigate("Update Appointment");
+  };
   return (
     <AppointmentCard elevation={2}>
       <AppointmentStatusContainer $statusColor={statusColor()}>
@@ -116,15 +124,7 @@ export const AppointmentCardComponent = ({ date, item }) => {
         </Total>
       </TotalContainer>
       <View style={{ flexDirection: "row", justifyContent: "center" }}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("Update Appointment", {
-              appointment: item,
-              selectedProfessional: currentUser,
-              selectedDate: date,
-            });
-          }}
-        >
+        <TouchableOpacity onPress={clickHandler}>
           <Time>
             {item.startTime} - {item.endTime}
           </Time>

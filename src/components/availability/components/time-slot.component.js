@@ -46,11 +46,7 @@ export const TimeSlot = ({
 
     let slot = moment(timeSlot, "h:mm A");
 
-    return isBetweenTimes(
-      slot,
-      scheduledAppointments.filter((appt) => appt.status != "rescheduled"),
-      estimatedDuration
-    );
+    return isBetweenTimes(slot, scheduledAppointments, estimatedDuration);
   };
 
   const availableSpots = generateTimeSlots(schedule.start, schedule.end).filter(
