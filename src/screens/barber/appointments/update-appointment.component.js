@@ -1,24 +1,19 @@
 import { SafeArea } from "../../../components/utility/safe-area.component";
-import { useIsFocused } from "@react-navigation/native";
 import { Availability } from "../../../components/availability/availability.component";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { emptyCart } from "../../../redux/cart/cartSlice";
 import { CustomButton } from "../../../components/custom-button/custom-button.component";
 import { TouchableOpacity } from "react-native";
-import { insertBooking } from "../../../services/sms/smsService";
-import {
-  editAppointmentStart,
-  filterAppointmentStart,
-} from "../../../redux/appointments/appointmentsSlice";
+import { filterAppointmentStart } from "../../../redux/appointments/appointmentsSlice";
 import moment from "moment";
 import { useNavigation } from "@react-navigation/native";
 import { selectBarberWithCurrentUser } from "../../../redux/professionals/professionalsSelector";
 
 export const UpdateAppointment = () => {
   const dispatch = useDispatch();
-  const isFocused = useIsFocused();
   const navigation = useNavigation();
+  const [loading, setIsLoading] = useState(false);
 
   const selectedProfessional = useSelector(selectBarberWithCurrentUser);
   const selectedDate = useSelector((state) => state.appointments.selectedDate);
@@ -50,6 +45,7 @@ export const UpdateAppointment = () => {
   }, [filterSuccess]);
 
   const updateAppointment = () => {
+    setIsLoading(true);
     try {
       dispatch(
         filterAppointmentStart({
@@ -92,6 +88,7 @@ export const UpdateAppointment = () => {
           text="Update Appointment"
           variant="dark"
           buttonOptions={{
+            loading: loading,
             style: { borderRadius: 10, margin: 5 },
           }}
         />

@@ -9,6 +9,7 @@ const APPOINTMENTS_INITIAL_STATE = {
   error: null,
   loading: null,
   filterSuccess: false,
+  barberAptsLoading: false,
 };
 
 const appointmentsSlice = createSlice({
@@ -23,7 +24,7 @@ const appointmentsSlice = createSlice({
       state.selectedAppointment = action.payload;
     },
     fetchBarberAppointmentsStart: (state) => {
-      state.loading = true;
+      state.barberAptsLoading = true;
       state.error = null;
       state.filterSuccess = false;
     },
@@ -37,12 +38,12 @@ const appointmentsSlice = createSlice({
     },
     fetchBarberAppointmentsSuccess: (state, action) => {
       const apts = action.payload;
-      state.loading = false;
+      state.barberAptsLoading = false;
       state.barberAppointments = apts;
       state.dates = Object.keys(apts).filter((date) => apts[date].length > 0);
     },
     fetchBarberAppointmentsFailure: (state, action) => {
-      state.loading = false;
+      state.barberAptsLoading = false;
       state.error = action.payload;
     },
     fetchAppointmentsFailure: (state, action) => {

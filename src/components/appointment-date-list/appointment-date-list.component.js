@@ -9,15 +9,12 @@ import { sortArrayOfDateStrings } from "../../util/date";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedDate } from "../../redux/appointments/appointmentsSlice";
 
-export const AppointmentDateList = () => {
+export const AppointmentDateList = ({ appointments }) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [selectedValue, setSelectedValue] = useState(null);
 
   const dates = useSelector((state) => state.appointments.dates);
-  const appointments = useSelector(
-    (state) => state.appointments.barberAppointments
-  );
 
   const sortedDates = [...dates].sort(sortArrayOfDateStrings);
 
