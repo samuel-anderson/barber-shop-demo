@@ -33,6 +33,7 @@ export const TimeSlot = ({
 
   const scheduledAppointments =
     appointments?.[professional.id]?.[matchDatabaseDateFormat(serviceDate)] ||
+    appointments?.[matchDatabaseDateFormat(serviceDate)] ||
     [];
 
   useEffect(() => {
