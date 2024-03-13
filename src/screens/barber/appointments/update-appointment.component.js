@@ -25,7 +25,12 @@ export const UpdateAppointment = () => {
   const selectedAppointment = useSelector(
     (state) => state.appointments.selectedAppointment
   );
-  const appointments = useSelector((state) => state.appointments.appointments);
+  const appointments = useSelector(
+    (state) => state.appointments.barberAppointments
+  );
+  const filterSuccess = useSelector(
+    (state) => state.appointments.filterSuccess
+  );
 
   const { startTime, estimatedDuration, clientName, clientPhoneNumber } =
     selectedAppointment;
@@ -34,37 +39,38 @@ export const UpdateAppointment = () => {
   const newStartTime = useSelector((state) => state.cart.startTime);
 
   useEffect(() => {
-    if (isFocused) {
+    const unsubscribe = navigation.addListener("focus", () => {
       dispatch(emptyCart());
-    }
-  }, [isFocused]);
+    });
+    return unsubscribe;
+  }, [navigation, dispatch]);
+
+  useEffect(() => {
+    if (filterSuccess) navigation.navigate("Select Date");
+  }, [filterSuccess]);
 
   const updateAppointment = () => {
     try {
-      insertBooking(
-        {
-          professional: selectedProfessional,
-          ...selectedAppointment,
-          startTime: newStartTime,
-          serviceDate: newDate,
-          endTime: moment(newStartTime, "h:mm A")
-            .add(estimatedDuration, "minutes")
-            .format("h:mm A"),
-        },
-        {
-          clientName: clientName,
-          clientPhoneNumber: clientPhoneNumber,
-        }
-      );
-
       dispatch(
         filterAppointmentStart({
           barberId: selectedProfessional.id,
           appointmentDate: selectedDate,
           startTime: startTime,
+          cart: {
+            professional: selectedProfessional,
+            ...selectedAppointment,
+            startTime: newStartTime,
+            serviceDate: newDate,
+            endTime: moment(newStartTime, "h:mm A")
+              .add(estimatedDuration, "minutes")
+              .format("h:mm A"),
+          },
+          clientInfo: {
+            clientName: clientName,
+            clientPhoneNumber: clientPhoneNumber,
+          },
         })
       );
-      navigation.navigate("Select Date");
     } catch (e) {
       console.error(e);
     }

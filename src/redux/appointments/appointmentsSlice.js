@@ -8,6 +8,7 @@ const APPOINTMENTS_INITIAL_STATE = {
   selectedAppointment: null,
   error: null,
   loading: null,
+  filterSuccess: false,
 };
 
 const appointmentsSlice = createSlice({
@@ -24,6 +25,7 @@ const appointmentsSlice = createSlice({
     fetchBarberAppointmentsStart: (state) => {
       state.loading = true;
       state.error = null;
+      state.filterSuccess = false;
     },
     fetchAppointmentsStart: (state) => {
       state.loading = true;
@@ -34,7 +36,6 @@ const appointmentsSlice = createSlice({
       state.appointments = action.payload;
     },
     fetchBarberAppointmentsSuccess: (state, action) => {
-      console.log("test 2: ", apts);
       const apts = action.payload;
       state.loading = false;
       state.barberAppointments = apts;
@@ -51,6 +52,13 @@ const appointmentsSlice = createSlice({
     filterAppointmentStart(state) {
       state.loading = true;
       state.error = null;
+      state.filterSuccess = false;
+    },
+    filterAppointmentSuccess(state) {
+      state.filterSuccess = true;
+    },
+    filterAppointmentFailure(state) {
+      state.filterSuccess = false;
     },
     editAppointmentStart(state) {
       state.loading = true;
@@ -80,5 +88,7 @@ export const {
   setSelectedDate,
   setSelectedAppointment,
   filterAppointmentStart,
+  filterAppointmentSuccess,
+  filterAppointmentFailure,
 } = appointmentsSlice.actions;
 export default appointmentsSlice.reducer;

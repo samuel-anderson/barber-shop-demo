@@ -10,6 +10,8 @@ import {
   fetchBarberAppointmentsSuccess,
   fetchBarberAppointmentsFailure,
   filterAppointmentStart,
+  filterAppointmentSuccess,
+  filterAppointmentFailure,
 } from "./appointmentsSlice";
 
 import { firebaseService } from "../../services";
@@ -17,6 +19,7 @@ import {
   updateAppointmentDoc,
   filterAppointmentDoc,
 } from "../../services/firebase/firebaseService";
+import { insertBooking } from "../../services/sms/smsService";
 
 function* fetchAppointmentsWorker() {
   try {
@@ -58,10 +61,13 @@ export function* editAppointment({ payload }) {
 export function* filterAppointment({ payload }) {
   try {
     yield call(filterAppointmentDoc, "barber_shop", "appointments", payload);
-    yield put(editAppointmentSuccess());
-    yield put(fetchShopDataStart());
+
+    yield call(insertBooking, payload.cart, payload.clientInfo);
+    // yield put(fetchBarberAppointmentsWorker({ payload: payload.barberId }));
+    yield put(filterAppointmentSuccess());
   } catch (error) {
-    yield put(editAppointmentFailed(error.code));
+    console.log(error);
+    yield put(filterAppointmentFailure(error.code));
   }
 }
 

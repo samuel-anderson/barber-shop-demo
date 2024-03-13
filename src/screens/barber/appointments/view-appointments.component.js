@@ -30,7 +30,7 @@ export const ViewAppointments = () => {
       <AppointmentCardList
         data={
           selectedAppointments &&
-          selectedAppointments.sort((a, b) => {
+          [...selectedAppointments].sort((a, b) => {
             // Extract the start times from the objects
             const timeA = a.startTime;
             const timeB = b.startTime;

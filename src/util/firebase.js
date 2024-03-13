@@ -218,9 +218,18 @@ export const filterAppointmentDocument = async (
       ) {
         // Update the status field for the specified appointment date
 
-        data.items[barberId][appointmentDate] = data.items[barberId][
-          appointmentDate
-        ].filter((appointment) => appointment.startTime !== startTime);
+        let filteredApts = data.items[barberId][appointmentDate].filter(
+          (appointment) => {
+            return appointment.startTime !== startTime;
+          }
+        );
+
+        if (filteredApts.length > 0) {
+          data.items[barberId][appointmentDate] = filteredApts;
+        } else {
+          // Remove the appointmentDate property if no appointments left
+          delete data.items[barberId][appointmentDate];
+        }
 
         await setDoc(docRef, data);
       } else {

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useIsFocused } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import {
   fetchAppointmentsStart,
   fetchBarberAppointmentsStart,
@@ -12,16 +12,24 @@ import { AppointmentDateList } from "../../../components/appointment-date-list/a
 
 export const ViewDates = () => {
   const isFocused = useIsFocused();
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const dates = useSelector((state) => state.appointments.dates);
 
   const currentUser = useSelector(selectBarberWithCurrentUser);
 
   useEffect(() => {
-    if (isFocused && currentUser) {
+    const unsubscribe = navigation.addListener("focus", () => {
       dispatch(fetchBarberAppointmentsStart(currentUser.id));
-    }
-  }, [isFocused]);
+    });
+    return unsubscribe;
+  }, [navigation, dispatch]);
+
+  // useEffect(() => {
+  //   if (isFocused && currentUser) {
+  //     dispatch(fetchBarberAppointmentsStart(currentUser.id));
+  //   }
+  // }, [isFocused]);
 
   // const dispatch = useDispatch();
   // const isFocused = useIsFocused();
@@ -46,10 +54,13 @@ export const ViewDates = () => {
   //     }
   //   }
   // }, [isFocused]);
-
   return (
     <SafeArea style={{ flex: 1, alignItems: "center" }}>
-      {dates ? <AppointmentDateList /> : <Text>No Appointments</Text>}
+      {dates && dates.length > 0 ? (
+        <AppointmentDateList />
+      ) : (
+        <Text>No Appointments</Text>
+      )}
     </SafeArea>
   );
 };
