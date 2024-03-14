@@ -16,7 +16,7 @@ const appointmentsSlice = createSlice({
   name: "appointments",
   initialState: APPOINTMENTS_INITIAL_STATE,
   reducers: {
-    empty: (_) => APPOINTMENTS_INITIAL_STATE,
+    emptyAppointments: (_) => APPOINTMENTS_INITIAL_STATE,
     setSelectedDate: (state, action) => {
       state.selectedDate = action.payload;
     },
@@ -91,5 +91,6 @@ export const {
   filterAppointmentStart,
   filterAppointmentSuccess,
   filterAppointmentFailure,
+  emptyAppointments,
 } = appointmentsSlice.actions;
 export default appointmentsSlice.reducer;

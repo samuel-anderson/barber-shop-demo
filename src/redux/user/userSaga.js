@@ -24,6 +24,7 @@ import {
 } from "./userSlice";
 import { updateProfessionalDoc } from "../../services/firebase/firebaseService";
 import { fetchShopDataStart } from "../shop/shopSlice";
+import { emptyAppointments } from "../appointments/appointmentsSlice";
 
 const ERRORS = {
   "auth/email-already-in-use": "*Email already has a registered account*",
@@ -94,9 +95,8 @@ export function* signOut() {
   try {
     yield call(signOutUser);
     yield put(signOutSuccess());
+    yield put(emptyAppointments());
   } catch (error) {
-    console.log("Sign Out Failed");
-
     yield put(signOutFailed(error.code));
   }
 }

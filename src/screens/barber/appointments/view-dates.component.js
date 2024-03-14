@@ -19,7 +19,7 @@ export const ViewDates = () => {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
-      dispatch(fetchBarberAppointmentsStart(currentUser.id));
+      currentUser && dispatch(fetchBarberAppointmentsStart(currentUser.id));
     });
     return unsubscribe;
   }, [navigation, dispatch]);

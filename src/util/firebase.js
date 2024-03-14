@@ -255,6 +255,12 @@ export const appointmentObjectToAdd = (
   return objectUpdate;
 };
 
+export const barberObjectToAdd = (barberId, barberInfo) => {
+  const objectUpdate = {};
+  objectUpdate[`items.${barberId}`] = barberInfo;
+  return objectUpdate;
+};
+
 export const deleteDocument = async (collectionName, id) => {
   try {
     const _document = doc(db, collectionName, id);

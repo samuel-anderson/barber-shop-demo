@@ -5,6 +5,7 @@ import { watchFetchAppointments } from "./appointments/appointmentsSaga";
 import { watchSendSMS } from "./sms/smsSaga";
 import { watchUserSagas } from "./user/userSaga";
 import { watchFetchProfileImages } from "./profile-images/profileImagesSaga";
+import { watchFetchBarbers } from "./professionals/professionasSaga";
 
 export default function* rootSaga() {
   yield all([
@@ -13,5 +14,6 @@ export default function* rootSaga() {
     call(watchSendSMS),
     call(watchUserSagas),
     call(watchFetchProfileImages),
+    call(watchFetchBarbers),
   ]);
 }

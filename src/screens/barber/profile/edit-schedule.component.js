@@ -44,7 +44,8 @@ export const EditSchedule = ({ route }) => {
   const navigation = useNavigation();
 
   const { id, schedule } = route.params.user;
-  const [updatedSchedule, setUpdatedSchedule] = useState(schedule);
+  const barberSchedule = schedule || {};
+  const [updatedSchedule, setUpdatedSchedule] = useState(barberSchedule);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const [selectedDay, setSelectedDay] = useState(pickedDay);

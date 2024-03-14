@@ -2,12 +2,18 @@ import {
   sendSMS,
   appointmentObjectToAdd,
   updateDocument,
+  barberObjectToAdd,
 } from "../../util/firebase";
 
 const showAddOns = (cart) => {
   if (cart.addOns.length === 0) return "";
   else if (cart.addOns.length === 1) return ` with ${cart.addOns.length} addon`;
   else return ` with ${cart.addOns.length} addons`;
+};
+
+export const insertBarber = (barberId, barberInfo) => {
+  const updateObj = barberObjectToAdd(barberId, barberInfo);
+  updateDocument("barber_shop", "professionals", updateObj);
 };
 
 export const insertBooking = (cart, clientInfo) => {
