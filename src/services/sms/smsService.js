@@ -16,7 +16,7 @@ export const insertBarber = (barberId, barberInfo) => {
   updateDocument("barber_shop", "professionals", updateObj);
 };
 
-export const insertBooking = (cart, clientInfo) => {
+export const insertBooking = (cart, clientInfo, status = "pending") => {
   const { clientFirstName, clientLastName, clientPhoneNumber, clientName } =
     clientInfo;
 
@@ -32,7 +32,7 @@ export const insertBooking = (cart, clientInfo) => {
       startTime: cart.startTime,
       endTime: cart.endTime,
       estimatedDuration: cart.estimatedDuration,
-      status: "pending",
+      status: status,
     }
   );
   updateDocument("barber_shop", "appointments", updateObj);

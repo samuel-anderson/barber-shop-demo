@@ -62,7 +62,7 @@ export function* filterAppointment({ payload }) {
   try {
     yield call(filterAppointmentDoc, "barber_shop", "appointments", payload);
 
-    yield call(insertBooking, payload.cart, payload.clientInfo);
+    yield call(insertBooking, payload.cart, payload.clientInfo, "rescheduled");
     yield call(fetchBarberAppointmentsWorker, payload.barberId);
     yield put(filterAppointmentSuccess());
   } catch (error) {

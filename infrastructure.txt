@@ -72,16 +72,14 @@ eas-cli
 eas build:configure
 eas build --paltform ios
 
+DONE
 1. insert new barber ADMIN FEATURE 
 2. fetch barbers after insert REFRESH FEATURE
-
 3. enable new barbers to register with password (test with samuel.anderson27@yahoo.com) WORK FLOW
-
-4. default to fewer services for new barbers (BOOKING AND PROFILE) select only hair_cut and line_up***************
+4. default to fewer services for new barbers (BOOKING AND PROFILE) select only hair_cut and line_up
 5. empty session on logout (multiple barbers using same phone)****
 
 Send reset password link to email****** WORK FLOW
-
 
 UI**********************
 display name, first name, last name, phone number, email + submit button

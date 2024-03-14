@@ -50,7 +50,9 @@ export const AppointmentCardComponent = ({ item }) => {
       case "cancelled":
         return "red";
       case "confirmed":
-        return "lightgreen";
+        return "green";
+      case "rescheduled":
+        return "cyan";
       default:
         return "yellow";
     }

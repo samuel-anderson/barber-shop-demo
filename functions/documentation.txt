@@ -8,4 +8,5 @@ firebase deploy --only functions
 cd functions 
 eslint . --fix
 
+--Do manually in firebase
 firebase functions:config:set twilio.sid="" twilio.auth_token=""
