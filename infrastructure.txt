@@ -67,3 +67,7 @@ Redux:
 
 Firebase (authentication, database, storage, extensions and functions)
 Twlio Account
+
+eas-cli
+eas build:configure
+eas build --paltform ios
