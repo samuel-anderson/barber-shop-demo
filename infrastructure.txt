@@ -80,7 +80,11 @@ eas build --paltform ios
 4. default to fewer services for new barbers (BOOKING AND PROFILE) select only hair_cut and line_up***************
 5. empty session on logout (multiple barbers using same phone)****
 
-enable to add social media* LOW PRIOIRTY
+Send reset password link to email****** WORK FLOW
 
+
+UI**********************
+display name, first name, last name, phone number, email + submit button
+enable to add social media* LOW PRIOIRTY
 
 
