@@ -64,3 +64,6 @@ Redux:
         -   insert new appointment*
         -   remove the old appointment
 ============================================================================================================
+
+Firebase (authentication, database, storage, extensions and functions)
+Twlio Account

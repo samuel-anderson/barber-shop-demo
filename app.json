@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "barbershop-demo",
-    "slug": "barbershop-demo",
+    "name": "legacy-beta",
+    "slug": "legacy-beta",
     "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

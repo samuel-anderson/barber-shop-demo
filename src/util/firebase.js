@@ -5,7 +5,6 @@ import { firebaseConfig } from "../config/firebase";
 import {
   signInWithEmailAndPassword,
   signOut,
-  getAuth,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   getReactNativePersistence,
@@ -30,8 +29,7 @@ import Constants from "expo-constants";
 
 import moment from "moment";
 
-const { REACT_APP_FIREBASE_DB, REACT_APP_FIREBASE_SMS_URL } =
-  Constants.expoConfig;
+const { REACT_APP_FIREBASE_SMS_URL } = Constants.expoConfig;
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
