@@ -24,7 +24,6 @@ export const EditServices = ({ route }) => {
   const serviceList = Object.values(servicesData);
 
   const { id, services } = route.params.user;
-  console.log(servicesData);
   const [updatedServices, setUpdatedServices] = useState(services || {});
   const [isModalVisible, setIsModalVisible] = useState(false);
 

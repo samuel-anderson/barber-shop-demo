@@ -78,7 +78,7 @@ export const Main = () => {
               lastName: lastName,
               displayName: firstName + " " + lastName,
               phoneNumber: "+1" + phoneNumber,
-              email: email,
+              email: email.toLocaleLowerCase(),
               services: {
                 ["haircut"]: servicesData["haircut"],
                 ["lineup_neck"]: servicesData["lineup_neck"],
