@@ -13,8 +13,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { WithBackground } from "../components/with-background/with-background.component.component";
 import { CustomButton } from "../components/custom-button/custom-button.component";
 
-const { appFeatures } = Constants.expoConfig;
-
 const isAndroid = Platform.OS === "android";
 
 export const MainScreen = ({ navigation }) => {
@@ -33,7 +31,9 @@ export const MainScreen = ({ navigation }) => {
 
         if (value !== null) {
           const { pin: pin } = JSON.parse(value);
+
           pin === shop.accessCode && setIsAuthenticated(true);
+          pin !== shop.accessCode && setIsAuthenticated(false);
         } else setIsAuthenticated(false);
       } catch (e) {
         console.log("error storing", e);
@@ -92,13 +92,13 @@ export const MainScreen = ({ navigation }) => {
               onPress: () => navigation.navigate("Choose a Barber"),
             }}
           />
-          {appFeatures.dashboard && (
+          {shop?.appFeatures?.dashboard && (
             <CustomButton
               variant="transparent"
               text="Barber Access"
               buttonOptions={{
                 onPress: () =>
-                  appFeatures.registration
+                  shop?.appFeatures?.registration
                     ? navigation.navigate("Access")
                     : navigation.navigate("Login"),
               }}

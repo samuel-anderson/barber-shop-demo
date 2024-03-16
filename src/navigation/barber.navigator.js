@@ -30,6 +30,8 @@ export const BarberNavigator = () => {
   const theme = useTheme();
   const currentUser = useSelector(selectBarberWithCurrentUser);
 
+  const shop = useSelector((state) => state.shop.info);
+
   //Abstract icon based on route name
   const createScreenOptions = ({ route }) => {
     const iconName = TAB_ICON[route.name];
@@ -75,13 +77,15 @@ export const BarberNavigator = () => {
       <Tab.Screen name="Appointments" component={AppointmentsNavigator} />
 
       <Tab.Screen name="Profile" component={ProfileNavigator} />
-      {appFeatures.reporting && (
+      {shop?.appFeatures?.reporting && (
         <Tab.Screen name="Reports" component={Reports} />
       )}
       <Tab.Screen name="Settings" component={Settings} />
-      {currentUser && currentUser.role == "admin" && appFeatures.admin && (
-        <Tab.Screen name="Admin" component={AdminNavigator} />
-      )}
+      {currentUser &&
+        currentUser.role == "admin" &&
+        shop?.appFeatures?.admin && (
+          <Tab.Screen name="Admin" component={AdminNavigator} />
+        )}
     </Tab.Navigator>
   );
 };

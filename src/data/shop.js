@@ -4,7 +4,21 @@ export const shop = {
   address: "4690 W. Ann Rd.  Suite 1 North Las Vegas",
   timeZone: "PST",
   accessCode: "5510",
-  eventNotes:
-    "Appointments must be cancelled 24 hours before scheduled appointment.",
   appointmentStatuses: ["pending", "paid", "cancelled"],
+  eventDetails: {
+    title: "Legacy Barbershop Appointment",
+    timeZone: "PST",
+    location: "4690 W. Ann Rd.  Suite 1 North Las Vegas",
+    notes:
+      "Check us out on social media! Appointments must be cancelled 24 hours before scheduled appointment.",
+  },
+  appFeatures: {
+    booking: true,
+    dashboard: true,
+    //Advanced Features
+    payment: false,
+    registration: true,
+    reporting: false,
+    admin: true,
+  },
 };

@@ -62,7 +62,7 @@ export const SummaryModal = () => {
       endDate,
       timeZone: shop.timeZone, // Adjust based on your event's time zone
       location: shop.address,
-      notes: shop.eventNotes,
+      notes: shop.eventDetails?.notes,
       //set alarms
     };
 
