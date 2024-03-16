@@ -24,7 +24,7 @@ export const Settings = () => {
     <SafeArea
       style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
     >
-      <View style={{ width: 75, position: "absolute", top: 0, right: 0 }}>
+      <View style={{ position: "absolute", top: 0, right: 0 }}>
         <TouchableOpacity onPress={() => dispatch(signOutStart())}>
           <View
             style={{
