@@ -24,7 +24,9 @@ export const EditServices = ({ route }) => {
   const serviceList = Object.values(servicesData);
 
   const { id, services } = route.params.user;
-  const [updatedServices, setUpdatedServices] = useState(services || {});
+  const [updatedServices, setUpdatedServices] = useState(
+    services || servicesData || {}
+  );
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const placeholder = {
