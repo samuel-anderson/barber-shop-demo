@@ -25,11 +25,9 @@ import {
   where,
 } from "firebase/firestore";
 import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
-import Constants from "expo-constants";
+import { REACT_APP_FIREBASE_SMS_URL } from "@env";
 
 import moment from "moment";
-
-const { REACT_APP_FIREBASE_SMS_URL } = Constants.expoConfig;
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

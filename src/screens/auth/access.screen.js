@@ -1,10 +1,7 @@
-import { useTheme } from "styled-components/native";
 import { WithBackground } from "../../components/with-background/with-background.component.component";
 import { Spacer } from "../../components/spacer/spacer.component";
 import { CustomButton } from "../../components/custom-button/custom-button.component";
-import Constants from "expo-constants";
-
-const { appFeatures } = Constants.expoConfig;
+import { appFeatures } from "@env";
 
 export const AccessScreen = ({ navigation }) => {
   return (

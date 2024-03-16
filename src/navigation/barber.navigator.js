@@ -13,9 +13,7 @@ import { AdminNavigator } from "./admin.navigator";
 import { useTheme } from "styled-components/native";
 import { Ionicons } from "@expo/vector-icons";
 import { ProfileNavigator } from "./profile.navigator";
-import Constants from "expo-constants";
-
-const { appFeatures } = Constants.expoConfig;
+import { appFeatures } from "@env";
 
 const Tab = createBottomTabNavigator();
 
