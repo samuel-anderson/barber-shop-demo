@@ -36,6 +36,6 @@ yarn-error.*
 
 .env
 app.config.js
-app.js
+app.json
 
 infrastructure.txt
