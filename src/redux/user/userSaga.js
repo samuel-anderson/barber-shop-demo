@@ -25,6 +25,10 @@ import {
 import { updateProfessionalDoc } from "../../services/firebase/firebaseService";
 import { fetchShopDataStart } from "../shop/shopSlice";
 import { emptyAppointments } from "../appointments/appointmentsSlice";
+import {
+  REACT_APP_FIREBASE_DB,
+  REACT_APP_FIREBASE_PROFESSIONALS_DOC,
+} from "@env";
 
 const ERRORS = {
   "auth/email-already-in-use": "*Email already has a registered account*",
@@ -103,7 +107,12 @@ export function* signOut() {
 
 export function* editProfile({ payload }) {
   try {
-    yield call(updateProfessionalDoc, "barber_shop", "professionals", payload);
+    yield call(
+      updateProfessionalDoc,
+      REACT_APP_FIREBASE_DB,
+      REACT_APP_FIREBASE_PROFESSIONALS_DOC,
+      payload
+    );
     yield put(editProfileSuccess());
     yield put(fetchShopDataStart());
   } catch (error) {

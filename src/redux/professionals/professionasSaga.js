@@ -8,13 +8,17 @@ import {
   fetchBarbersStart,
 } from "./professionalsSlice";
 import { firebaseService } from "../../services";
+import {
+  REACT_APP_FIREBASE_DB,
+  REACT_APP_FIREBASE_PROFESSIONALS_DOC,
+} from "@env";
 
 function* fetchBarberWorker() {
   try {
     const barbers = yield call(
       firebaseService.getCollection,
-      "barber_shop",
-      "professionals"
+      REACT_APP_FIREBASE_DB,
+      REACT_APP_FIREBASE_PROFESSIONALS_DOC
     );
     yield put(fetchBarberSuccess(barbers[0].data.items));
   } catch (error) {

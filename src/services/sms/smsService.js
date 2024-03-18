@@ -4,6 +4,10 @@ import {
   updateDocument,
   barberObjectToAdd,
 } from "../../util/firebase";
+import {
+  REACT_APP_FIREBASE_DB,
+  REACT_APP_FIREBASE_PROFESSIONALS_DOC,
+} from "@env";
 
 const showAddOns = (cart) => {
   if (cart.addOns.length === 0) return "";
@@ -13,7 +17,11 @@ const showAddOns = (cart) => {
 
 export const insertBarber = (barberId, barberInfo) => {
   const updateObj = barberObjectToAdd(barberId, barberInfo);
-  updateDocument("barber_shop", "professionals", updateObj);
+  updateDocument(
+    REACT_APP_FIREBASE_DB,
+    REACT_APP_FIREBASE_PROFESSIONALS_DOC,
+    updateObj
+  );
 };
 
 export const insertBooking = (cart, clientInfo, status = "pending") => {
@@ -35,7 +43,11 @@ export const insertBooking = (cart, clientInfo, status = "pending") => {
       status: status,
     }
   );
-  updateDocument("barber_shop", "appointments", updateObj);
+  updateDocument(
+    REACT_APP_FIREBASE_DB,
+    REACT_APP_FIREBASE_APPOINTMENTS_DOC,
+    updateObj
+  );
 };
 
 export const submitBooking = (cart, clientInfo) => {

@@ -20,13 +20,17 @@ import {
   filterAppointmentDoc,
 } from "../../services/firebase/firebaseService";
 import { insertBooking } from "../../services/sms/smsService";
+import {
+  REACT_APP_FIREBASE_DB,
+  REACT_APP_FIREBASE_APPOINTMENTS_DOC,
+} from "@env";
 
 function* fetchAppointmentsWorker() {
   try {
     const appointments = yield call(
       firebaseService.getCollection,
-      "barber_shop",
-      "appointments"
+      REACT_APP_FIREBASE_DB,
+      REACT_APP_FIREBASE_APPOINTMENTS_DOC
     );
     yield put(fetchAppointmentsSuccess(appointments[0].data.items));
   } catch (error) {
@@ -38,8 +42,8 @@ function* fetchBarberAppointmentsWorker({ payload }) {
   try {
     const appointments = yield call(
       firebaseService.getDocObject,
-      "barber_shop",
-      "appointments",
+      REACT_APP_FIREBASE_DB,
+      REACT_APP_FIREBASE_APPOINTMENTS_DOC,
       payload
     );
     yield put(fetchBarberAppointmentsSuccess(appointments[0].data));
@@ -50,7 +54,12 @@ function* fetchBarberAppointmentsWorker({ payload }) {
 
 export function* editAppointment({ payload }) {
   try {
-    yield call(updateAppointmentDoc, "barber_shop", "appointments", payload);
+    yield call(
+      updateAppointmentDoc,
+      REACT_APP_FIREBASE_DB,
+      REACT_APP_FIREBASE_APPOINTMENTS_DOC,
+      payload
+    );
     yield put(editAppointmentSuccess());
     yield put(fetchShopDataStart());
   } catch (error) {
@@ -60,7 +69,12 @@ export function* editAppointment({ payload }) {
 
 export function* filterAppointment({ payload }) {
   try {
-    yield call(filterAppointmentDoc, "barber_shop", "appointments", payload);
+    yield call(
+      filterAppointmentDoc,
+      REACT_APP_FIREBASE_DB,
+      REACT_APP_FIREBASE_APPOINTMENTS_DOC,
+      payload
+    );
 
     yield call(insertBooking, payload.cart, payload.clientInfo, "rescheduled");
     yield call(fetchBarberAppointmentsWorker, payload.barberId);

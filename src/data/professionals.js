@@ -1,7 +1,6 @@
 export const professionals = {
   george_mena: {
     id: "george_mena",
-    //name: "George Mena",
     firstName: "George",
     lastName: "Mena",
     displayName: "George Mena",
@@ -26,7 +25,6 @@ export const professionals = {
   },
   kari_anderson: {
     id: "kari_anderson",
-    //name: "Kari Anderson",
     firstName: "Kari",
     lastName: "Anderson",
     displayName: "Kari Anderson",
@@ -41,7 +39,6 @@ export const professionals = {
   },
   samuel_anderson: {
     id: "samuel_anderson",
-    //name: "Samuel Anderson",
     firstName: "Samuel",
     lastName: "Anderson",
     displayName: "Samuel Anderson",

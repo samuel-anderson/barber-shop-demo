@@ -5,13 +5,14 @@ import {
   fetchServicesFailure,
 } from "./servicesSlice";
 import { firebaseService } from "../../services";
+import { REACT_APP_FIREBASE_DB, REACT_APP_FIREBASE_SERVICES_DOC } from "@env";
 
 function* fetchServicesWorker() {
   try {
     const services = yield call(
       firebaseService.getCollection,
-      "barber_shop",
-      "services"
+      REACT_APP_FIREBASE_DB,
+      REACT_APP_FIREBASE_SERVICES_DOC
     );
     yield put(fetchServicesSuccess(services));
   } catch (error) {
