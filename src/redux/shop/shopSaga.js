@@ -16,6 +16,7 @@ import {
   REACT_APP_FIREBASE_PROFESSIONALS_DOC,
   REACT_APP_FIREBASE_SERVICES_DOC,
 } from "@env";
+import { BARBER_SHOP_DATA } from "../../data";
 
 function* fetchShopWorker() {
   try {
@@ -24,6 +25,29 @@ function* fetchShopWorker() {
       REACT_APP_FIREBASE_DB
     );
 
+    if (shop_data.length === 0) {
+      yield call(createShop);
+    } else {
+      yield call(parseCollection, shop_data);
+    }
+  } catch (error) {
+    yield put(fetchShopDataFailure(error.message));
+  }
+}
+
+function* createShop() {
+  try {
+    yield call(
+      firebaseService.createDocument,
+      REACT_APP_FIREBASE_DB,
+      BARBER_SHOP_DATA
+    );
+    yield call(fetchShopWorker);
+  } catch (e) {}
+}
+
+function* parseCollection(shop_data) {
+  try {
     const shopInfo = shop_data.find((document) => {
       return document.id === REACT_APP_FIREBASE_SHOP_DOC;
     });
@@ -43,9 +67,7 @@ function* fetchShopWorker() {
     yield put(fetchProfileImagesStart(professionals.data.items));
 
     yield put(setServices(services.data.items));
-  } catch (error) {
-    yield put(fetchShopDataFailure(error.message));
-  }
+  } catch (e) {}
 }
 
 export function* watchFetchShop() {

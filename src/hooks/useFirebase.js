@@ -5,7 +5,7 @@ import { REACT_APP_FIREBASE_DB } from "@env";
 
 const useFirebase = () => {
   useEffect(() => {
-    firebaseService.createDocument(REACT_APP_FIREBASE_DB, BARBER_SHOP_DATA);
+    //firebaseService.createDocument(REACT_APP_FIREBASE_DB, BARBER_SHOP_DATA);
   });
 
   return {};

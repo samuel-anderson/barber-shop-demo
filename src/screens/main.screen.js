@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { WithBackground } from "../components/with-background/with-background.component.component";
 import { CustomButton } from "../components/custom-button/custom-button.component";
+import { APP_FEATURE_DASHBOARD, APP_FEATURE_REGISTRATION } from "@env";
 
 const isAndroid = Platform.OS === "android";
 
@@ -92,13 +93,13 @@ export const MainScreen = ({ navigation }) => {
               onPress: () => navigation.navigate("Choose a Barber"),
             }}
           />
-          {shop?.appFeatures?.dashboard && (
+          {APP_FEATURE_DASHBOARD && (
             <CustomButton
               variant="transparent"
               text="Barber Access"
               buttonOptions={{
                 onPress: () =>
-                  shop?.appFeatures?.registration
+                  APP_FEATURE_REGISTRATION
                     ? navigation.navigate("Access")
                     : navigation.navigate("Login"),
               }}

@@ -12,13 +12,4 @@ export const shop = {
     notes:
       "Check us out on social media! Appointments must be cancelled 24 hours before scheduled appointment.",
   },
-  appFeatures: {
-    booking: true,
-    dashboard: true,
-    //Advanced Features
-    payment: false,
-    registration: true,
-    reporting: false,
-    admin: true,
-  },
 };

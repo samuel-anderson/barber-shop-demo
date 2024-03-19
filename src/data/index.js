@@ -3,16 +3,20 @@ import { professionals } from "./professionals";
 import { shop } from "./shop";
 
 export const BARBER_SHOP_DATA = [
-  // {
-  //   title: "shop",
-  //   items: shop,
-  // },
-  // {
-  //   title: "professionals",
-  //   items: professionals,
-  // },
-  // {
-  //   title: "services",
-  //   items: services,
-  // },
+  {
+    title: "shop",
+    items: {},
+  },
+  {
+    title: "professionals",
+    items: {},
+  },
+  {
+    title: "services",
+    items: {},
+  },
+  {
+    title: "appointments",
+    items: {},
+  },
 ];
