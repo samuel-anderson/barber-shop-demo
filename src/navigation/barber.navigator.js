@@ -4,16 +4,15 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Settings } from "../screens/barber/settings.component";
 import { Text } from "../components/typography/text.component";
 import { useSelector } from "react-redux";
-import { Profile } from "../screens/barber/profile/profile.component";
 import { Reports } from "../screens/barber/reports.component";
-
 import { selectBarberWithCurrentUser } from "../redux/professionals/professionalsSelector";
 import { AppointmentsNavigator } from "./appointments.navigator";
 import { AdminNavigator } from "./admin.navigator";
 import { useTheme } from "styled-components/native";
 import { Ionicons } from "@expo/vector-icons";
 import { ProfileNavigator } from "./profile.navigator";
-import { appFeatures } from "@env";
+
+import { APP_FEATURE_REPORTING, APP_FEATURE_ADMIN } from "@env";
 
 const Tab = createBottomTabNavigator();
 
@@ -29,8 +28,6 @@ const TAB_ICON = {
 export const BarberNavigator = () => {
   const theme = useTheme();
   const currentUser = useSelector(selectBarberWithCurrentUser);
-
-  const shop = useSelector((state) => state.shop.info);
 
   //Abstract icon based on route name
   const createScreenOptions = ({ route }) => {
@@ -72,20 +69,20 @@ export const BarberNavigator = () => {
     };
   };
 
+  console.log(APP_FEATURE_REPORTING);
+
   return (
     <Tab.Navigator screenOptions={createScreenOptions}>
       <Tab.Screen name="Appointments" component={AppointmentsNavigator} />
 
       <Tab.Screen name="Profile" component={ProfileNavigator} />
-      {shop?.appFeatures?.reporting && (
+      {APP_FEATURE_REPORTING && (
         <Tab.Screen name="Reports" component={Reports} />
       )}
       <Tab.Screen name="Settings" component={Settings} />
-      {currentUser &&
-        currentUser.role == "admin" &&
-        shop?.appFeatures?.admin && (
-          <Tab.Screen name="Admin" component={AdminNavigator} />
-        )}
+      {currentUser && currentUser.role == "admin" && APP_FEATURE_ADMIN && (
+        <Tab.Screen name="Admin" component={AdminNavigator} />
+      )}
     </Tab.Navigator>
   );
 };

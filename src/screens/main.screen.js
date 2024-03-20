@@ -22,6 +22,12 @@ export const MainScreen = ({ navigation }) => {
 
   const Image = isAndroid ? CompactWebview : CompactImage;
   const shop = useSelector((state) => state.shop.info);
+  const professionals = useSelector((state) => state.professionals.barbers);
+  const services = useSelector((state) => state.services.services);
+
+  const hasServices = Object.entries(services).length > 0;
+  const hasProfessionals = professionals.length !== 0;
+
   const [pin, setPin] = useState("");
 
   useEffect(() => {
@@ -88,16 +94,22 @@ export const MainScreen = ({ navigation }) => {
         <>
           <CustomButton
             variant="transparent"
-            text="Book Appointment"
+            text={
+              hasProfessionals && hasServices
+                ? "Book Appointment"
+                : "Coming Soon"
+            }
             buttonOptions={{
+              disabled: !hasProfessionals || !hasServices,
               onPress: () => navigation.navigate("Choose a Barber"),
             }}
           />
           {APP_FEATURE_DASHBOARD && (
             <CustomButton
               variant="transparent"
-              text="Barber Access"
+              text={hasProfessionals ? "Barber Access" : "Coming Soon"}
               buttonOptions={{
+                disabled: !hasProfessionals,
                 onPress: () =>
                   APP_FEATURE_REGISTRATION
                     ? navigation.navigate("Access")

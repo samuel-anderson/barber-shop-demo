@@ -1,11 +1,9 @@
 import { WithBackground } from "../../components/with-background/with-background.component.component";
 import { Spacer } from "../../components/spacer/spacer.component";
 import { CustomButton } from "../../components/custom-button/custom-button.component";
-import { useSelector } from "react-redux";
+import { APP_FEATURE_REGISTRATION } from "@env";
 
 export const AccessScreen = ({ navigation }) => {
-  const shop = useSelector((state) => state.shop.info);
-
   return (
     <WithBackground>
       <CustomButton
@@ -16,7 +14,7 @@ export const AccessScreen = ({ navigation }) => {
         }}
       />
       <Spacer />
-      {shop?.appFeatures?.registration && (
+      {APP_FEATURE_REGISTRATION && (
         <CustomButton
           variant="transparent"
           text="Register"

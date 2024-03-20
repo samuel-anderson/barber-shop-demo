@@ -35,12 +35,18 @@ export const ServiceList = ({ services }) => {
     return filteredServices;
   };
 
-  const serviceList =
-    selectedProfessional && selectedProfessional.services
-      ? filterServiceByBarber(selectedProfessional)
-      : services;
+  const getServiceList = () => {
+    if (selectedProfessional && selectedProfessional.services) {
+      if (Object.entries(selectedProfessional.services).length > 0)
+        return filterServiceByBarber(selectedProfessional);
+    }
 
-  const filteredList = serviceList.filter((service) => {
+    return services.filter(
+      (service) => service.id == "haircut" || service.id == "lineup_neck"
+    );
+  };
+
+  const filteredList = getServiceList().filter((service) => {
     if (!selectedService) return true;
     return service.id !== selectedService.id;
   });

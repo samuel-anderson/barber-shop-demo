@@ -7,6 +7,7 @@ import {
 import {
   REACT_APP_FIREBASE_DB,
   REACT_APP_FIREBASE_PROFESSIONALS_DOC,
+  REACT_APP_FIREBASE_APPOINTMENTS_DOC,
 } from "@env";
 
 const showAddOns = (cart) => {
