@@ -69,20 +69,20 @@ export const BarberNavigator = () => {
     };
   };
 
-  console.log(APP_FEATURE_REPORTING);
-
   return (
     <Tab.Navigator screenOptions={createScreenOptions}>
       <Tab.Screen name="Appointments" component={AppointmentsNavigator} />
 
       <Tab.Screen name="Profile" component={ProfileNavigator} />
-      {APP_FEATURE_REPORTING && (
+      {APP_FEATURE_REPORTING === "true" && (
         <Tab.Screen name="Reports" component={Reports} />
       )}
       <Tab.Screen name="Settings" component={Settings} />
-      {currentUser && currentUser.role == "admin" && APP_FEATURE_ADMIN && (
-        <Tab.Screen name="Admin" component={AdminNavigator} />
-      )}
+      {currentUser &&
+        currentUser.role == "admin" &&
+        APP_FEATURE_ADMIN === "true" && (
+          <Tab.Screen name="Admin" component={AdminNavigator} />
+        )}
     </Tab.Navigator>
   );
 };

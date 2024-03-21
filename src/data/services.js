@@ -1,4 +1,4 @@
-export const services = {
+export const defaultServices = {
   haircut: {
     id: "haircut",
     title: "Haircut",

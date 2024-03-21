@@ -1,19 +1,19 @@
-import { services } from "./services";
-import { professionals } from "./professionals";
-import { shop } from "./shop";
+import { defaultShop } from "./shop";
+import { defaultServices } from "./services";
+import { defaultProfessional } from "./professionals";
 
 export const BARBER_SHOP_DATA = [
   {
     title: "shop",
-    items: {},
+    items: defaultShop,
   },
   {
     title: "professionals",
-    items: {},
+    items: defaultProfessional,
   },
   {
     title: "services",
-    items: {},
+    items: defaultServices,
   },
   {
     title: "appointments",
