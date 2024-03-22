@@ -9,6 +9,7 @@
     "web": "expo start --web",
     "lint": "eslint . --ext .js",
     "prebuild": "npx expo prebuild --platform ios --clean",
+    "update": "eas update",
     "build": "eas build --platform ios "
   },
   "dependencies": {
