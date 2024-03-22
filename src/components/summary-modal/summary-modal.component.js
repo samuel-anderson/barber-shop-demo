@@ -34,8 +34,6 @@ export const SummaryModal = () => {
   const requestAccessToCalendar = async () => {
     const { status } = await Calendar.requestCalendarPermissionsAsync();
 
-    alert(status);
-
     if (status === "granted") {
       addToCalendar();
     } else closeModal();
@@ -75,7 +73,9 @@ export const SummaryModal = () => {
       );
 
       setIsAppointmentAdded(response);
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const handleNavigation = () => {
