@@ -31,7 +31,7 @@ export const EditServices = ({ route }) => {
 
   const placeholder = {
     label: "Add Service",
-    value: null,
+    value: "default",
   };
 
   const durationPlaceholder = {
@@ -64,7 +64,7 @@ export const EditServices = ({ route }) => {
   };
 
   const addService = (service) => {
-    if (!service) return;
+    if (service === "default") return;
 
     if (!updatedServices[service]) {
       setUpdatedServices({
