@@ -25,11 +25,11 @@ export default {
           "This app needs access to your calendar to add appointments.",
       },
     },
-    // extra: {
-    //   eas: {
-    //     projectId: "c207def8-09b6-4cc0-a2ad-0edde7378ab8",
-    //   },
-    // },
+    extra: {
+      eas: {
+        projectId: "c207def8-09b6-4cc0-a2ad-0edde7378ab8",
+      },
+    },
     android: {
       adaptiveIcon: {
         foregroundImage: "./assets/adaptive-icon.png",
