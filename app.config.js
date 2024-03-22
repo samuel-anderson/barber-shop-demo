@@ -2,8 +2,8 @@ export default {
   expo: {
     name: "Legacy Barbershop",
     slug: "barbershop-demo",
-    version: "1.0.10",
-    runtimeVersion: "1.0.10",
+    version: "1.0.11",
+    runtimeVersion: "1.0.11",
     projectId: "c207def8-09b6-4cc0-a2ad-0edde7378ab8",
     orientation: "portrait",
     icon: "./assets/icon-1024.png",

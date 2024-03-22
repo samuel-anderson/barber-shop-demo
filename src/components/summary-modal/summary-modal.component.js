@@ -34,6 +34,8 @@ export const SummaryModal = () => {
   const requestAccessToCalendar = async () => {
     const { status } = await Calendar.requestCalendarPermissionsAsync();
 
+    alert(status);
+
     if (status === "granted") {
       addToCalendar();
     } else closeModal();

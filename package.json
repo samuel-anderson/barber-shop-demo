@@ -1,6 +1,6 @@
 {
   "name": "barbershop-demo",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start --clear",
@@ -10,7 +10,7 @@
     "lint": "eslint . --ext .js",
     "prebuild": "npx expo prebuild --platform ios --clean",
     "update": "eas update",
-    "build": "eas build --platform ios"
+    "build:ios": "eas build --platform ios"
   },
   "dependencies": {
     "@expo-google-fonts/lato": "^0.2.3",
