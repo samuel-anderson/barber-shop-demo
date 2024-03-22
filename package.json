@@ -10,7 +10,7 @@
     "lint": "eslint . --ext .js",
     "prebuild": "npx expo prebuild --platform ios --clean",
     "update": "eas update",
-    "build": "eas build --platform ios "
+    "build": "eas build --platform ios"
   },
   "dependencies": {
     "@expo-google-fonts/lato": "^0.2.3",
