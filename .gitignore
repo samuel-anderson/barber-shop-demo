@@ -35,7 +35,7 @@ yarn-error.*
 *.tsbuildinfo
 
 .env
-app.config.js
-app.json
+#app.config.js
+#app.json
 
 infrastructure.txt
