@@ -23,6 +23,8 @@ export default {
       infoPlist: {
         NSCalendarUsageDescription:
           "This app needs access to your calendar to add appointments.",
+        NSCameraUsageDescription:
+          "This app needs access to your camera to add profile photos.",
       },
     },
     extra: {
